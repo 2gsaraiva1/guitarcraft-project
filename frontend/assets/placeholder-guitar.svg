@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#142037"/>
+      <stop offset="100%" stop-color="#1f2f4f"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <g fill="none" stroke="#89a7de" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M220 330c-40-30-35-90 5-115l60-35c55-32 116-37 164-13l24 12 61-52c24-21 57-18 74 6 16 23 10 55-14 73l-56 43 9 26c16 48-9 105-57 127-47 22-95 9-130-17l-54-39c-22-16-60-14-86-16z"/>
+    <path d="M515 143l69-55"/>
+    <circle cx="352" cy="269" r="9" fill="#89a7de"/>
+    <circle cx="388" cy="250" r="9" fill="#89a7de"/>
+    <circle cx="425" cy="271" r="9" fill="#89a7de"/>
+  </g>
+  <text x="400" y="460" font-family="Segoe UI, Arial, sans-serif" font-size="28" text-anchor="middle" fill="#c8d9ff">No Preview Available</text>
+</svg>

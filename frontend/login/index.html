@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GuitarCraft - Login</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body data-auth-mode="login">
+  <nav></nav>
+
+  <main>
+    <div id="auth-app"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">GuitarCraft</div>
+    <div class="footer-links">
+      <a href="/shop.html">Shop</a>
+      <a href="/guitar-builder.html">Builder</a>
+      <a href="/about.html">About</a>
+      <a href="/about.html#contact">Contact</a>
+    </div>
+    <p class="footer-copy">Copyright (c) 2026 GuitarCraft. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="/auth-context.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/nav-auth.js"></script>
+  <script type="text/babel" src="/auth-pages.js"></script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+/* Builder page layout */
+.builder-page {
+  max-width: 1400px;
+  margin: 20px auto;
+  padding: 0 16px 24px;
+}
+
+/* Main 2-column layout: controls left, preview right */
+.builder-shell {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 18px;
+  min-height: 75vh;
+}
+
+/* Left customization panel */
+.builder-controls {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  background: #12151c;
+  border: 1px solid #232938;
+  border-radius: 12px;
+  padding: 14px;
+  color: #e7ecf7;
+  overflow: auto;
+  max-height: 80vh;
+}
+
+.builder-title {
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+/* Collapsible section styles */
+.builder-section {
+  border: 1px solid #2a3244;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background: #161b24;
+}
+
+.builder-section summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px;
+  font-weight: 700;
+  border-bottom: 1px solid #273044;
+}
+
+.builder-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.builder-section summary::after {
+  content: "+";
+  float: right;
+  color: #95a3c8;
+}
+
+.builder-section[open] summary::after {
+  content: "-";
+}
+
+.builder-section-body {
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+/* Form controls */
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 0.85rem;
+  color: #bac6e3;
+}
+
+.field select,
+.field input {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid #303a51;
+  background: #0f131b;
+  color: #edf2ff;
+  outline: none;
+}
+
+.field select:focus,
+.field input:focus {
+  border-color: #4c7dff;
+}
+
+/* Right preview + pricing panel */
+.builder-preview {
+  grid-column: 2;
+  grid-row: 1;
+  background: #0f131b;
+  border: 1px solid #232938;
+  border-radius: 12px;
+  color: #e7ecf7;
+  padding: 14px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+}
+
+/* Front/Back header controls */
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.preview-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.builder-price-wrap {
+  grid-column: 2;
+}
+
+.builder-saved-wrap {
+  grid-column: 2;
+}
+
+.preview-toggle-row {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.toggle-group {
+  display: flex;
+  gap: 8px;
+}
+
+.toggle-btn {
+  border: 1px solid #32405e;
+  background: #171f2e;
+  color: #dbe6ff;
+  border-radius: 8px;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+
+.toggle-btn.active {
+  background: #3158d1;
+  border-color: #3158d1;
+}
+
+/* Layered preview stage */
+.preview-stage {
+  position: relative;
+  border-radius: 12px;
+  border: 1px solid #273044;
+  background: radial-gradient(circle at 20% 20%, #222c40, #111722 45%, #0c1018 80%);
+  min-height: 520px;
+  overflow: hidden;
+}
+
+/* Each guitar part is one transparent PNG layer */
+.preview-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.preview-layer.fade-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* Price area */
+.price-box {
+  border: 1px solid #273044;
+  background: #131a26;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.price-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.price-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.9rem;
+  padding: 4px 0;
+  border-bottom: 1px dashed #2a3244;
+}
+
+.price-line:last-child {
+  border-bottom: 0;
+}
+
+.price-total {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #32405e;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #8ec5ff;
+}
+
+/* Responsive */
+@media (max-width: 1060px) {
+  .builder-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 12px;
+  }
+
+  .builder-controls {
+    grid-column: 1;
+    grid-row: 2;
+    max-height: 52vh;
+    overflow: auto;
+  }
+
+  .builder-price-wrap {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .builder-saved-wrap {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .preview-stage {
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 760px) {
+  .builder-page {
+    margin: 12px auto;
+    padding: 0 10px 20px;
+  }
+
+  .builder-controls,
+  .builder-preview {
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .preview-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .toggle-group {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .toggle-btn {
+    min-height: 40px;
+  }
+
+  .preview-stage {
+    min-height: 280px;
+  }
+
+  .builder-section summary {
+    padding: 10px;
+  }
+
+  .builder-section-body {
+    padding: 10px;
+  }
+
+  .builder-action-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
