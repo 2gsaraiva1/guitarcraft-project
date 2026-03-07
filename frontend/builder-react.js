@@ -212,7 +212,7 @@ function BuilderApp() {
     view: "front",
     selections: { ...GuitarConfig.DEFAULT_SELECTIONS }
   });
-  const requestedEditSavedId = useMemo(() => getEditSavedIdFromUrl(), []);
+  const [requestedEditSavedId, setRequestedEditSavedId] = useState(() => getEditSavedIdFromUrl());
   const [status, setStatus] = useState("");
   const [buildName, setBuildName] = useState("Custom Build");
   const [editingSavedId, setEditingSavedId] = useState(requestedEditSavedId);
@@ -225,6 +225,7 @@ function BuilderApp() {
     dispatch({ type: "LOAD_SELECTIONS", selections: { ...GuitarConfig.DEFAULT_SELECTIONS } });
     setBuildName("Custom Build");
     setEditingSavedId("");
+    setRequestedEditSavedId("");
     loadedEditRef.current = "";
     localStorage.removeItem(BUILDER_EDIT_DRAFT_KEY);
     if (window.history && typeof window.history.replaceState === "function") {
