@@ -220,6 +220,18 @@ function BuilderApp() {
   const { currentUser } = useAuth();
   const loadedEditRef = useRef("");
 
+  function resetBuilderToDefault() {
+    dispatch({ type: "SET_VIEW", view: "front" });
+    dispatch({ type: "LOAD_SELECTIONS", selections: { ...GuitarConfig.DEFAULT_SELECTIONS } });
+    setBuildName("Custom Build");
+    setEditingSavedId("");
+    loadedEditRef.current = "";
+    localStorage.removeItem(BUILDER_EDIT_DRAFT_KEY);
+    if (window.history && typeof window.history.replaceState === "function") {
+      window.history.replaceState({}, "", "/guitar-builder.html");
+    }
+  }
+
   /* Recomputed price rows and total keep the builder pricing live */
   const priceLines = useMemo(() => GuitarConfig.getPriceLines(state.selections), [state.selections]);
   const totalPrice = useMemo(() => GuitarConfig.getTotalPrice(state.selections), [state.selections]);
@@ -307,6 +319,7 @@ function BuilderApp() {
           }
         }
         setStatus("Build changes saved.");
+        resetBuilderToDefault();
       } else {
         await saveCustomBuild(state.selections, imagePreview, safeLabel);
         setStatus("Build saved.");
