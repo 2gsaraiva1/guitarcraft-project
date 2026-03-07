@@ -33,7 +33,7 @@ function readBuilderEditDraft() {
 // --------------------------------------------------
 function getEditSavedIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  const fromQuery = String(params.get("editSavedId") || "").trim();
+  const fromQuery = String(params.get("editSavedId") || params.get("buildId") || "").trim();
   if (fromQuery) return fromQuery;
   const draft = readBuilderEditDraft();
   return String((draft && draft.savedId) || "").trim();
@@ -174,7 +174,7 @@ function SavedBuildsPanel() {
                       selections: build.selections || {}
                     })
                   );
-                  window.location.href = `/guitar-builder?editSavedId=${encodeURIComponent(build.savedId)}`;
+                  window.location.href = `/guitar-builder.html?editSavedId=${encodeURIComponent(build.savedId)}`;
                 }}
               >
                 Edit Build
