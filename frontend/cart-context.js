@@ -259,7 +259,13 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
       // --------------------------------------------------
       async function updateSavedBuild(savedId, updates = {}) {
         if (!currentUser) throw new Error("Login required.");
-        const existing = savedBuilds.find((build) => build.savedId === savedId);
+        let existing = savedBuilds.find((build) => build.savedId === savedId);
+        if (!existing) {
+          const remote = await fetchJson(`${SAVED_API}/${encodeURIComponent(currentUser.username)}`, { method: "GET" }).catch(() => []);
+          if (Array.isArray(remote)) {
+            existing = remote.find((build) => build.savedId === savedId);
+          }
+        }
         if (!existing) throw new Error("Saved build not found.");
 
         const nextSelections = updates.selections || existing.selections || {};

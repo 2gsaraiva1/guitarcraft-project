@@ -293,11 +293,19 @@ function BuilderApp() {
       const imagePreview = getCustomPreviewImage(state.selections);
       const safeLabel = String(buildName || "").trim() || "Custom Build";
       if (isEditingSavedBuild) {
-        await updateSavedBuild(editingSavedId, {
-          label: safeLabel,
-          selections: state.selections,
-          imagePreview
-        });
+        try {
+          await updateSavedBuild(editingSavedId, {
+            label: safeLabel,
+            selections: state.selections,
+            imagePreview
+          });
+        } catch (error) {
+          if (String(error && error.message || "").toLowerCase().includes("not found")) {
+            await saveCustomBuild(state.selections, imagePreview, safeLabel, editingSavedId);
+          } else {
+            throw error;
+          }
+        }
         setStatus("Build changes saved.");
       } else {
         await saveCustomBuild(state.selections, imagePreview, safeLabel);

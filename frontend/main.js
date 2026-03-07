@@ -163,7 +163,7 @@ function renderFeaturedGuitars(guitars) {
         <p><strong>Status:</strong> <span class="${stock.className}">${stock.label}</span></p>
         ${stock.restockText ? `<p class="muted">${stock.restockText}</p>` : ""}
         <div class="feature-actions">
-          <a class="cta-btn cta-secondary" href="/product/${encodeURIComponent(guitar.id)}">View Details</a>
+          <a class="cta-btn cta-secondary" href="/product/?id=${encodeURIComponent(guitar.id)}">View Details</a>
         </div>
       </article>
     `;
