@@ -245,7 +245,7 @@ Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de ses
           <img src="${item.image || item.imagePreview || PLACEHOLDER}" alt="${item.label}" />
           <div>
             <p class="gc-cart-item-name">${item.label}</p>
-            <p class="gc-cart-item-meta">${t("cart.qty")} ${Number(item.quantity || 1)} Ãƒâ€šÃ‚Â· $${itemPrice(item).toFixed(2)}</p>
+            <p class="gc-cart-item-meta">${t("cart.qty")} ${Number(item.quantity || 1)} &middot; $${itemPrice(item).toFixed(2)}</p>
           </div>
         `;
         row.querySelector("img").addEventListener("error", (e) => {
