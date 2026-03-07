@@ -1,21 +1,21 @@
 /*
-Este módulo controla a página de produto (galeria, stock, reviews e carrinho).
+Este mÃƒÂ³dulo controla a pÃƒÂ¡gina de produto (galeria, stock, reviews e carrinho).
 */
 
-ï»¿/* global React, ReactDOM, GuitarAuth, GuitarCart */
+/* global React, ReactDOM, GuitarAuth, GuitarCart */
 const { useEffect, useMemo, useRef, useState } = React;
 const { AuthProvider, useAuth } = GuitarAuth;
 const { CartProvider, useCart } = GuitarCart;
 
-const PREBUILT_API = "http://localhost:3000/api/prebuilt";
+const PREBUILT_API = "/api/prebuilt";
 const PLACEHOLDER_IMAGE = "/assets/placeholder-guitar.svg";
 const i18n = window.GuitarI18n;
 
 // --------------------------------------------------
-// Função: t
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: key, vars = {}.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: t
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: key, vars = {}.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function t(key, vars = {}) {
   if (i18n && typeof i18n.t === "function") return i18n.t(key, vars);
@@ -23,10 +23,10 @@ function t(key, vars = {}) {
 }
 
 // --------------------------------------------------
-// Função: localizeDescription
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: guitar, type.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: localizeDescription
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: guitar, type.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function localizeDescription(guitar, type) {
   if (i18n && typeof i18n.localizeDescription === "function") return i18n.localizeDescription(guitar, type);
@@ -34,10 +34,10 @@ function localizeDescription(guitar, type) {
 }
 
 // --------------------------------------------------
-// Função: getProductIdFromUrl
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: getProductIdFromUrl
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function getProductIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -51,10 +51,10 @@ function getProductIdFromUrl() {
 }
 
 // --------------------------------------------------
-// Função: renderStars
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: value.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: renderStars
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: value.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function renderStars(value) {
   const rating = Math.max(0, Math.min(5, Number(value || 0)));
@@ -63,10 +63,10 @@ function renderStars(value) {
 }
 
 // --------------------------------------------------
-// Função: formatRatingValue
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: value.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: formatRatingValue
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: value.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function formatRatingValue(value) {
   const rating = Number(value || 0);
@@ -75,10 +75,10 @@ function formatRatingValue(value) {
 }
 
 // --------------------------------------------------
-// Função: prettyCategory
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: value.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: prettyCategory
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: value.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function prettyCategory(value) {
   const raw = String(value || "").trim().toLowerCase();
@@ -89,10 +89,10 @@ function prettyCategory(value) {
 }
 
 // --------------------------------------------------
-// Função: prettySeries
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: value.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: prettySeries
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: value.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function prettySeries(value) {
   const raw = String(value || "").trim();
@@ -101,10 +101,10 @@ function prettySeries(value) {
 }
 
 // --------------------------------------------------
-// Função: getStockMeta
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: guitar.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: getStockMeta
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: guitar.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function getStockMeta(guitar) {
   const status = String(guitar.stockStatus || "in_stock");
@@ -162,10 +162,10 @@ function getStockMeta(guitar) {
 }
 
 // --------------------------------------------------
-// Função: StockBadge
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: { guitar }.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: StockBadge
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: { guitar }.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function StockBadge({ guitar }) {
   const meta = getStockMeta(guitar);
@@ -173,10 +173,10 @@ function StockBadge({ guitar }) {
 }
 
 // --------------------------------------------------
-// Função: ReviewSection
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: { productId, currentUser }.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: ReviewSection
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: { productId, currentUser }.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function ReviewSection({ productId, currentUser }) {
   const [loading, setLoading] = useState(true);
@@ -189,14 +189,14 @@ function ReviewSection({ productId, currentUser }) {
   const [isEditingMine, setIsEditingMine] = useState(false);
 
   // --------------------------------------------------
-  // Função: loadReviews
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: loadReviews
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   async function loadReviews() {
     try {
-      // Chamada à API: comunica com o backend para sincronizar estado no frontend.
+      // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
       const response = await fetch(`${PREBUILT_API}/${encodeURIComponent(productId)}/reviews`);
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.error || "Failed to load reviews.");
@@ -233,10 +233,10 @@ function ReviewSection({ productId, currentUser }) {
   }, [myReview, isEditingMine]);
 
   // --------------------------------------------------
-  // Função: submitReview
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: e.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: submitReview
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: e.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   async function submitReview(e) {
     e.preventDefault();
@@ -255,7 +255,7 @@ function ReviewSection({ productId, currentUser }) {
     try {
       const endpoint = `${PREBUILT_API}/${encodeURIComponent(productId)}/review`;
       const method = hasReviewed ? "PUT" : "POST";
-      // Chamada à API: comunica com o backend para sincronizar estado no frontend.
+      // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
       const response = await fetch(endpoint, {
         method,
         headers: { "Content-Type": "application/json" },
@@ -279,17 +279,17 @@ function ReviewSection({ productId, currentUser }) {
   }
 
   // --------------------------------------------------
-  // Função: deleteReview
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: review.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: deleteReview
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: review.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   async function deleteReview(review) {
     if (!currentUser || currentUser.role !== "admin") return;
     const reviewUserId = review.userId ? String(review.userId) : "username";
     const query = review.username ? `?reviewUsername=${encodeURIComponent(review.username)}` : "";
     try {
-      // Chamada à API: comunica com o backend para sincronizar estado no frontend.
+      // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
       const response = await fetch(`${PREBUILT_API}/${encodeURIComponent(productId)}/review/${encodeURIComponent(reviewUserId)}${query}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -389,10 +389,10 @@ function ReviewSection({ productId, currentUser }) {
 }
 
 // --------------------------------------------------
-// Função: ProductPage
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: ProductPage
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function ProductPage() {
   const { addPrebuiltToCart, items } = useCart();
@@ -413,10 +413,10 @@ function ProductPage() {
 
   useEffect(() => {
     // --------------------------------------------------
-    // Função: loadProduct
-    // O que faz: executa uma parte da lógica deste módulo.
-    // Parâmetros: nenhum parâmetro.
-    // Retorna: o resultado da operação (ou Promise, quando aplicável).
+    // FunÃƒÂ§ÃƒÂ£o: loadProduct
+    // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+    // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+    // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
     // --------------------------------------------------
     async function loadProduct() {
       if (!productId) {
@@ -426,7 +426,7 @@ function ProductPage() {
       }
 
       try {
-        // Chamada à API: comunica com o backend para sincronizar estado no frontend.
+        // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
         const response = await fetch(`${PREBUILT_API}/${encodeURIComponent(productId)}`);
         const data = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(data.error || "Product not found.");
@@ -455,10 +455,10 @@ function ProductPage() {
 
   useEffect(() => {
     // --------------------------------------------------
-    // Função: onLangChange
-    // O que faz: executa uma parte da lógica deste módulo.
-    // Parâmetros: nenhum parâmetro.
-    // Retorna: o resultado da operação (ou Promise, quando aplicável).
+    // FunÃƒÂ§ÃƒÂ£o: onLangChange
+    // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+    // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+    // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
     // --------------------------------------------------
     function onLangChange() {
       setLangTick((v) => v + 1);
@@ -468,10 +468,10 @@ function ProductPage() {
   }, []);
 
   // --------------------------------------------------
-  // Função: onAddToCart
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: onAddToCart
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   async function onAddToCart() {
     if (!guitar) return;
@@ -498,10 +498,10 @@ function ProductPage() {
   const disableAdd = !stock.canAdd;
 
   // --------------------------------------------------
-  // Função: onTouchStart
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: e.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: onTouchStart
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: e.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function onTouchStart(e) {
     touchStartX.current = e.touches && e.touches[0] ? e.touches[0].clientX : 0;
@@ -509,10 +509,10 @@ function ProductPage() {
   }
 
   // --------------------------------------------------
-  // Função: onTouchMove
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: e.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: onTouchMove
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: e.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function onTouchMove(e) {
     const x = e.touches && e.touches[0] ? e.touches[0].clientX : touchStartX.current;
@@ -520,10 +520,10 @@ function ProductPage() {
   }
 
   // --------------------------------------------------
-  // Função: onTouchEnd
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: onTouchEnd
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function onTouchEnd() {
     if (images.length < 2) return;
@@ -648,10 +648,10 @@ function ProductPage() {
 }
 
 // --------------------------------------------------
-// Função: ProductRoot
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: ProductRoot
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function ProductRoot() {
   return (

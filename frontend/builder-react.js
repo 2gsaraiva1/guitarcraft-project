@@ -1,5 +1,5 @@
 /*
-Este módulo implementa o Guitar Builder (opções, preview, preço, guardar e carrinho).
+Este mÃƒÂ³dulo implementa o Guitar Builder (opÃƒÂ§ÃƒÂµes, preview, preÃƒÂ§o, guardar e carrinho).
 */
 
 /* global React, ReactDOM, GuitarConfig, GuitarCart, GuitarAuth */
@@ -8,13 +8,13 @@ const { useEffect, useMemo, useReducer, useRef, useState } = React;
 const { CartProvider, useCart } = GuitarCart;
 const { AuthProvider, useAuth } = GuitarAuth;
 const BUILDER_EDIT_DRAFT_KEY = "guitarcraft_builder_edit_v1";
-const SAVED_API = "http://localhost:3000/api/saved-builds";
+const SAVED_API = "/api/saved-builds";
 
 // --------------------------------------------------
-// Função: readBuilderEditDraft
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: readBuilderEditDraft
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function readBuilderEditDraft() {
   try {
@@ -26,10 +26,10 @@ function readBuilderEditDraft() {
 }
 
 // --------------------------------------------------
-// Função: getEditSavedIdFromUrl
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: getEditSavedIdFromUrl
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function getEditSavedIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -94,10 +94,10 @@ function getLayers(view, selections) {
 }
 
 // --------------------------------------------------
-// Função: getCustomPreviewImage
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: selections.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: getCustomPreviewImage
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: selections.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function getCustomPreviewImage(selections) {
   const root = "assets/layers/front/body-shape";
@@ -202,10 +202,10 @@ function SavedBuildsPanel() {
 }
 
 // --------------------------------------------------
-// Função: BuilderApp
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: BuilderApp
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function BuilderApp() {
   const [state, dispatch] = useReducer(builderReducer, {
@@ -232,10 +232,10 @@ function BuilderApp() {
     if (loadedEditRef.current === editSavedId) return;
 
     // --------------------------------------------------
-    // Função: applyBuild
-    // O que faz: executa uma parte da lógica deste módulo.
-    // Parâmetros: build.
-    // Retorna: o resultado da operação (ou Promise, quando aplicável).
+    // FunÃƒÂ§ÃƒÂ£o: applyBuild
+    // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+    // ParÃƒÂ¢metros: build.
+    // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
     // --------------------------------------------------
     function applyBuild(build) {
       dispatch({ type: "LOAD_SELECTIONS", selections: build.selections || {} });
@@ -247,10 +247,10 @@ function BuilderApp() {
     }
 
     // --------------------------------------------------
-    // Função: loadEditBuild
-    // O que faz: executa uma parte da lógica deste módulo.
-    // Parâmetros: nenhum parâmetro.
-    // Retorna: o resultado da operação (ou Promise, quando aplicável).
+    // FunÃƒÂ§ÃƒÂ£o: loadEditBuild
+    // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+    // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+    // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
     // --------------------------------------------------
     async function loadEditBuild() {
       let found = null;
@@ -266,7 +266,7 @@ function BuilderApp() {
 
       if (!found && currentUser && currentUser.username) {
         try {
-          // Chamada à API: comunica com o backend para sincronizar estado no frontend.
+          // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
           const response = await fetch(`${SAVED_API}/${encodeURIComponent(currentUser.username)}`);
           const data = await response.json().catch(() => []);
           if (response.ok && Array.isArray(data)) {

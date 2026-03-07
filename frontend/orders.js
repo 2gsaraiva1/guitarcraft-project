@@ -1,5 +1,5 @@
 /*
-Este módulo gere a UI de histórico de encomendas e cancelamento.
+Este mÃƒÂ³dulo gere a UI de histÃƒÂ³rico de encomendas e cancelamento.
 */
 
 /* global React, ReactDOM, GuitarAuth, GuitarCart */
@@ -7,10 +7,10 @@ const { AuthProvider } = GuitarAuth;
 const { CartProvider, useCart } = GuitarCart;
 
 // --------------------------------------------------
-// Função: OrdersPage
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: OrdersPage
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function OrdersPage() {
   const { orders, loadUserData } = useCart();
@@ -70,8 +70,8 @@ function OrdersPage() {
               <button
                 onClick={async () => {
                   try {
-                    // Chamada à API: comunica com o backend para sincronizar estado no frontend.
-                    const response = await fetch(`http://localhost:3000/api/orders/${encodeURIComponent(username)}/${encodeURIComponent(order.orderId)}/cancel`, {
+                    // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
+                    const response = await fetch(`/api/orders/${encodeURIComponent(username)}/${encodeURIComponent(order.orderId)}/cancel`, {
                       method: "PUT"
                     });
                     const data = await response.json().catch(() => ({}));
@@ -95,10 +95,10 @@ function OrdersPage() {
 }
 
 // --------------------------------------------------
-// Função: OrdersRoot
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: OrdersRoot
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function OrdersRoot() {
   return (

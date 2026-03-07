@@ -1,5 +1,5 @@
 /*
-Este módulo gere o fluxo de checkout e validação de dados de pagamento.
+Este mÃƒÂ³dulo gere o fluxo de checkout e validaÃƒÂ§ÃƒÂ£o de dados de pagamento.
 */
 
 /* global React, ReactDOM, GuitarAuth, GuitarCart */
@@ -7,10 +7,10 @@ const { AuthProvider } = GuitarAuth;
 const { CartProvider, useCart } = GuitarCart;
 
 // --------------------------------------------------
-// Função: CheckoutView
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: CheckoutView
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function CheckoutView() {
   const { items, checkoutCartItems } = useCart();
@@ -67,20 +67,20 @@ function CheckoutView() {
   );
 
   // --------------------------------------------------
-  // Função: onField
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: key, value.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: onField
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: key, value.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function onField(key, value) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
   // --------------------------------------------------
-  // Função: formatExpiry
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: value.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: formatExpiry
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: value.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function formatExpiry(value) {
     const digits = String(value || "").replace(/[^\d]/g, "").slice(0, 4);
@@ -89,10 +89,10 @@ function CheckoutView() {
   }
 
   // --------------------------------------------------
-  // Função: validate
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: validate
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function validate() {
     if (!form.fullName.trim()) return "Full name is required.";
@@ -111,10 +111,10 @@ function CheckoutView() {
   }
 
   // --------------------------------------------------
-  // Função: onCompletePurchase
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: onCompletePurchase
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   async function onCompletePurchase() {
     setError("");
@@ -274,10 +274,10 @@ function CheckoutView() {
 }
 
 // --------------------------------------------------
-// Função: CheckoutRoot
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: CheckoutRoot
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 function CheckoutRoot() {
   return (

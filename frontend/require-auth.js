@@ -1,9 +1,9 @@
 /*
-Este módulo valida no cliente se a rota atual exige utilizador autenticado.
+Este mÃƒÂ³dulo valida no cliente se a rota atual exige utilizador autenticado.
 */
 
 (function protectPage() {
-  const API_BASE = "http://localhost:3000/api/auth";
+  const API_BASE = "/api/auth";
   let session = null;
   try {
     const sessionRaw = localStorage.getItem("guitarcraft_session_v1");
@@ -17,7 +17,7 @@ Este módulo valida no cliente se a rota atual exige utilizador autenticado.
     return;
   }
 
-  // Validação no backend para garantir que o utilizador da sessão existe na base de dados.
+  // ValidaÃƒÂ§ÃƒÂ£o no backend para garantir que o utilizador da sessÃƒÂ£o existe na base de dados.
   (async () => {
     try {
       const response = await fetch(`${API_BASE}/session/${encodeURIComponent(session.username)}`);

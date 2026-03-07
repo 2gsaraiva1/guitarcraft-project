@@ -23,6 +23,9 @@ const frontendPath = path.join(__dirname, "../frontend");
 app.use(cors());
 app.use(express.json());
 
+// Serve os ficheiros estáticos do frontend em produção/deploy.
+app.use(express.static(frontendPath));
+
 app.use("/api/guitars", guitarRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/prebuilt", prebuiltRoutes);
@@ -30,9 +33,6 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/saved-builds", savedBuildRoutes);
 app.use("/api/site-media", siteMediaRoutes);
 app.use("/api/orders", ordersRoutes);
-
-// Serve os ficheiros estáticos do frontend em produção/deploy.
-app.use(express.static(frontendPath));
 
 app.get("/", (req, res) => {
   const indexPath = path.join(frontendPath, "index.html");

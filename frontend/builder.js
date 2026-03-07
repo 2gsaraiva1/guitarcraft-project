@@ -1,20 +1,20 @@
 /*
-Este módulo contém lógica auxiliar legada do builder e integração com API.
+Este mÃƒÂ³dulo contÃƒÂ©m lÃƒÂ³gica auxiliar legada do builder e integraÃƒÂ§ÃƒÂ£o com API.
 */
 
-const API_URL = "http://localhost:3000/api/guitars";
+const API_URL = "/api/guitars";
 
 const form = document.getElementById("builder-form");
 const guitarList = document.getElementById("builder-guitar-list");
 
 // --------------------------------------------------
-// Função: fetchGuitars
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// FunÃƒÂ§ÃƒÂ£o: fetchGuitars
+// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
 // --------------------------------------------------
 async function fetchGuitars() {
-  // Chamada à API: comunica com o backend para sincronizar estado no frontend.
+  // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
   const response = await fetch(API_URL);
   const guitars = await response.json();
 
@@ -59,7 +59,7 @@ form.addEventListener("submit", async (e) => {
     bridge_style: document.getElementById("bridge_style").value
   };
 
-  // Chamada à API: comunica com o backend para sincronizar estado no frontend.
+  // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
   await fetch(API_URL, {
     method: "POST",
     headers: {

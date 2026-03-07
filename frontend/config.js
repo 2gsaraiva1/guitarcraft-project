@@ -1,5 +1,5 @@
 /*
-Este módulo centraliza configurações do builder, opções e cálculo de preços.
+Este mÃƒÂ³dulo centraliza configuraÃƒÂ§ÃƒÂµes do builder, opÃƒÂ§ÃƒÂµes e cÃƒÂ¡lculo de preÃƒÂ§os.
 */
 
 /* Shared configuration for builder/shop/cart pricing and labels */
@@ -89,10 +89,10 @@ Este módulo centraliza configurações do builder, opções e cálculo de preç
   });
 
   // --------------------------------------------------
-  // Função: getOptionPrice
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: fieldKey, selectedValue.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: getOptionPrice
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: fieldKey, selectedValue.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function getOptionPrice(fieldKey, selectedValue) {
     const field = FIELD_MAP[fieldKey];
@@ -102,10 +102,10 @@ Este módulo centraliza configurações do builder, opções e cálculo de preç
   }
 
   // --------------------------------------------------
-  // Função: getPriceLines
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: selections.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: getPriceLines
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: selections.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function getPriceLines(selections) {
     const lines = [];
@@ -124,10 +124,10 @@ Este módulo centraliza configurações do builder, opções e cálculo de preç
   }
 
   // --------------------------------------------------
-  // Função: getTotalPrice
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: selections.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: getTotalPrice
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: selections.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function getTotalPrice(selections) {
     const optionsTotal = getPriceLines(selections).reduce((sum, line) => sum + line.amount, 0);
@@ -135,10 +135,10 @@ Este módulo centraliza configurações do builder, opções e cálculo de preç
   }
 
   // --------------------------------------------------
-  // Função: formatLabel
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: key.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: formatLabel
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: key.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function formatLabel(key) {
     return String(key)

@@ -1,9 +1,9 @@
 /*
-Este módulo aplica imagens dinâmicas do site definidas no backend.
+Este mÃƒÂ³dulo aplica imagens dinÃƒÂ¢micas do site definidas no backend.
 */
 
 (function applySiteMedia() {
-  const API_URL = "http://localhost:3000/api/site-media";
+  const API_URL = "/api/site-media";
   const KEY_TO_VAR = {
     home_hero: "--home-hero-image",
     home_classic_series: "--home-classic-image",
@@ -13,10 +13,10 @@ Este módulo aplica imagens dinâmicas do site definidas no backend.
   };
 
   // --------------------------------------------------
-  // Função: toCssUrl
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: url.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: toCssUrl
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: url.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function toCssUrl(url) {
     return `url("${String(url).replace(/"/g, '\\"')}")`;

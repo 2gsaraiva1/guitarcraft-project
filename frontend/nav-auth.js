@@ -1,12 +1,12 @@
 /*
-Este módulo renderiza a navbar dinâmica, dropdowns e estado de sessão/carrinho.
+Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de sessÃƒÂ£o/carrinho.
 */
 
-ï»¿(function renderNav() {
+(function renderNav() {
   const nav = document.querySelector("nav");
   if (!nav) return;
 
-  const CART_API = "http://localhost:3000/api/cart";
+  const CART_API = "/api/cart";
   const PLACEHOLDER = "/assets/placeholder-guitar.svg";
   const i18n = window.GuitarI18n;
 
@@ -34,10 +34,10 @@ Este módulo renderiza a navbar dinâmica, dropdowns e estado de sessão/carrinh
   };
 
   // --------------------------------------------------
-  // Função: t
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: key, vars.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: t
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: key, vars.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function t(key, vars) {
     if (i18n && typeof i18n.t === "function") return i18n.t(key, vars);
@@ -47,10 +47,10 @@ Este módulo renderiza a navbar dinâmica, dropdowns e estado de sessão/carrinh
   }
 
   // --------------------------------------------------
-  // Função: readSession
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: readSession
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function readSession() {
     try {
@@ -62,10 +62,10 @@ Este módulo renderiza a navbar dinâmica, dropdowns e estado de sessão/carrinh
   }
 
   // --------------------------------------------------
-  // Função: ensureLucide
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: ensureLucide
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   async function ensureLucide() {
     if (window.lucide) return;
@@ -79,10 +79,10 @@ Este módulo renderiza a navbar dinâmica, dropdowns e estado de sessão/carrinh
   }
 
   // --------------------------------------------------
-  // Função: totalFromItems
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: items.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: totalFromItems
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: items.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function totalFromItems(items) {
     return (items || []).reduce((sum, item) => {
@@ -95,10 +95,10 @@ Este módulo renderiza a navbar dinâmica, dropdowns e estado de sessão/carrinh
   }
 
   // --------------------------------------------------
-  // Função: itemPrice
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: item.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: itemPrice
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: item.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function itemPrice(item) {
     const type = item.type || item.itemType;
@@ -109,10 +109,10 @@ Este módulo renderiza a navbar dinâmica, dropdowns e estado de sessão/carrinh
   }
 
   // --------------------------------------------------
-  // Função: createDropdown
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: title, items.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: createDropdown
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: title, items.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function createDropdown(title, items) {
     const wrap = document.createElement("div");
@@ -147,15 +147,15 @@ Este módulo renderiza a navbar dinâmica, dropdowns e estado de sessão/carrinh
   }
 
   // --------------------------------------------------
-  // Função: loadCartPreview
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: username.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: loadCartPreview
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: username.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   async function loadCartPreview(username) {
     if (!username) return [];
     try {
-      // Chamada à API: comunica com o backend para sincronizar estado no frontend.
+      // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
       const response = await fetch(`${CART_API}/${encodeURIComponent(username)}`);
       if (!response.ok) return [];
       const data = await response.json();
@@ -166,10 +166,10 @@ Este módulo renderiza a navbar dinâmica, dropdowns e estado de sessão/carrinh
   }
 
   // --------------------------------------------------
-  // Função: render
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: render
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   async function render() {
     const session = readSession();
@@ -245,7 +245,7 @@ Este módulo renderiza a navbar dinâmica, dropdowns e estado de sessão/carrinh
           <img src="${item.image || item.imagePreview || PLACEHOLDER}" alt="${item.label}" />
           <div>
             <p class="gc-cart-item-name">${item.label}</p>
-            <p class="gc-cart-item-meta">${t("cart.qty")} ${Number(item.quantity || 1)} Â· $${itemPrice(item).toFixed(2)}</p>
+            <p class="gc-cart-item-meta">${t("cart.qty")} ${Number(item.quantity || 1)} Ãƒâ€šÃ‚Â· $${itemPrice(item).toFixed(2)}</p>
           </div>
         `;
         row.querySelector("img").addEventListener("error", (e) => {

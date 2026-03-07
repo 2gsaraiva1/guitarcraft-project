@@ -1,8 +1,8 @@
 /*
-Este módulo gere internacionalização (EN/PT), tradução de texto e persistência de idioma.
+Este mÃƒÂ³dulo gere internacionalizaÃƒÂ§ÃƒÂ£o (EN/PT), traduÃƒÂ§ÃƒÂ£o de texto e persistÃƒÂªncia de idioma.
 */
 
-ï»¿(function initI18n(global) {
+(function initI18n(global) {
   const LANG_KEY = "guitarcraft_lang_v1";
   const DEFAULT_LANG = "en";
   const SUPPORTED = ["en", "pt-pt"];
@@ -378,10 +378,10 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   let rafId = 0;
 
   // --------------------------------------------------
-  // Função: normalizeLang
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: lang.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: normalizeLang
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: lang.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function normalizeLang(lang) {
     const key = String(lang || "").toLowerCase();
@@ -389,20 +389,20 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   }
 
   // --------------------------------------------------
-  // Função: getLang
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: getLang
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function getLang() {
     return normalizeLang(localStorage.getItem(LANG_KEY) || DEFAULT_LANG);
   }
 
   // --------------------------------------------------
-  // Função: setLang
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: lang.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: setLang
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: lang.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function setLang(lang) {
     const next = normalizeLang(lang);
@@ -412,10 +412,10 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   }
 
   // --------------------------------------------------
-  // Função: normalizeText
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: value.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: normalizeText
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: value.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function normalizeText(value) {
     return String(value || "")
@@ -426,20 +426,20 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   }
 
   // --------------------------------------------------
-  // Função: normalizeKey
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: value.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: normalizeKey
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: value.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function normalizeKey(value) {
     return normalizeText(value).replace(/[.!?]+$/g, "").toLowerCase();
   }
 
   // --------------------------------------------------
-  // Função: t
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: key, vars = {}.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: t
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: key, vars = {}.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function t(key, vars = {}) {
     const lang = getLang();
@@ -449,170 +449,170 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   }
 
   // --------------------------------------------------
-  // Função: ptAccents
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: text.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: ptAccents
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: text.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function ptAccents(text) {
     let out = String(text || "");
     const rules = [
-      [/\bInicio\b/g, "InÃ­cio"],
-      [/\binicio\b/g, "inÃ­cio"],
-      [/\bComecar\b/g, "ComeÃ§ar"],
-      [/\bcomecar\b/g, "comeÃ§ar"],
-      [/\bComeca\b/g, "ComeÃ§a"],
-      [/\bcomeca\b/g, "comeÃ§a"],
-      [/\bSerie\b/g, "SÃ©rie"],
-      [/\bserie\b/g, "sÃ©rie"],
-      [/\bSeries\b/g, "SÃ©ries"],
-      [/\bseries\b/g, "sÃ©ries"],
-      [/\bConstruida\b/g, "ConstruÃ­da"],
-      [/\bconstruida\b/g, "construÃ­da"],
-      [/\bConstruidas\b/g, "ConstruÃ­das"],
-      [/\bconstruidas\b/g, "construÃ­das"],
-      [/\bDescricao\b/g, "DescriÃ§Ã£o"],
-      [/\bdescricao\b/g, "descriÃ§Ã£o"],
-      [/\bDescricoes\b/g, "DescriÃ§Ãµes"],
-      [/\bdescricoes\b/g, "descriÃ§Ãµes"],
-      [/\bEspecificacoes\b/g, "EspecificaÃ§Ãµes"],
-      [/\bespecificacoes\b/g, "especificaÃ§Ãµes"],
-      [/\bComparacao\b/g, "ComparaÃ§Ã£o"],
-      [/\bcomparacao\b/g, "comparaÃ§Ã£o"],
-      [/\bEstrategia\b/g, "EstratÃ©gia"],
-      [/\bestrategia\b/g, "estratÃ©gia"],
-      [/\bRelacoes\b/g, "RelaÃ§Ãµes"],
-      [/\brelacoes\b/g, "relaÃ§Ãµes"],
-      [/\bInformacoes\b/g, "InformaÃ§Ãµes"],
-      [/\binformacoes\b/g, "informaÃ§Ãµes"],
-      [/\bconfirmacao\b/g, "confirmaÃ§Ã£o"],
-      [/\bConfirmacao\b/g, "ConfirmaÃ§Ã£o"],
-      [/\bconclusao\b/g, "conclusÃ£o"],
-      [/\bConclusao\b/g, "ConclusÃ£o"],
-      [/\bobrigatoria\b/g, "obrigatÃ³ria"],
-      [/\bObrigatoria\b/g, "ObrigatÃ³ria"],
-      [/\bobrigatorio\b/g, "obrigatÃ³rio"],
-      [/\bObrigatorio\b/g, "ObrigatÃ³rio"],
-      [/\binvalido\b/g, "invÃ¡lido"],
-      [/\bInvalido\b/g, "InvÃ¡lido"],
-      [/\bpagina\b/g, "pÃ¡gina"],
-      [/\bPagina\b/g, "PÃ¡gina"],
-      [/\bemail valido\b/g, "email vÃ¡lido"],
-      [/\bEmail valido\b/g, "Email vÃ¡lido"],
+      [/\bInicio\b/g, "InÃƒÆ’Ã‚Â­cio"],
+      [/\binicio\b/g, "inÃƒÆ’Ã‚Â­cio"],
+      [/\bComecar\b/g, "ComeÃƒÆ’Ã‚Â§ar"],
+      [/\bcomecar\b/g, "comeÃƒÆ’Ã‚Â§ar"],
+      [/\bComeca\b/g, "ComeÃƒÆ’Ã‚Â§a"],
+      [/\bcomeca\b/g, "comeÃƒÆ’Ã‚Â§a"],
+      [/\bSerie\b/g, "SÃƒÆ’Ã‚Â©rie"],
+      [/\bserie\b/g, "sÃƒÆ’Ã‚Â©rie"],
+      [/\bSeries\b/g, "SÃƒÆ’Ã‚Â©ries"],
+      [/\bseries\b/g, "sÃƒÆ’Ã‚Â©ries"],
+      [/\bConstruida\b/g, "ConstruÃƒÆ’Ã‚Â­da"],
+      [/\bconstruida\b/g, "construÃƒÆ’Ã‚Â­da"],
+      [/\bConstruidas\b/g, "ConstruÃƒÆ’Ã‚Â­das"],
+      [/\bconstruidas\b/g, "construÃƒÆ’Ã‚Â­das"],
+      [/\bDescricao\b/g, "DescriÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bdescricao\b/g, "descriÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bDescricoes\b/g, "DescriÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bdescricoes\b/g, "descriÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bEspecificacoes\b/g, "EspecificaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bespecificacoes\b/g, "especificaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bComparacao\b/g, "ComparaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bcomparacao\b/g, "comparaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bEstrategia\b/g, "EstratÃƒÆ’Ã‚Â©gia"],
+      [/\bestrategia\b/g, "estratÃƒÆ’Ã‚Â©gia"],
+      [/\bRelacoes\b/g, "RelaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\brelacoes\b/g, "relaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bInformacoes\b/g, "InformaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\binformacoes\b/g, "informaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bconfirmacao\b/g, "confirmaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bConfirmacao\b/g, "ConfirmaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bconclusao\b/g, "conclusÃƒÆ’Ã‚Â£o"],
+      [/\bConclusao\b/g, "ConclusÃƒÆ’Ã‚Â£o"],
+      [/\bobrigatoria\b/g, "obrigatÃƒÆ’Ã‚Â³ria"],
+      [/\bObrigatoria\b/g, "ObrigatÃƒÆ’Ã‚Â³ria"],
+      [/\bobrigatorio\b/g, "obrigatÃƒÆ’Ã‚Â³rio"],
+      [/\bObrigatorio\b/g, "ObrigatÃƒÆ’Ã‚Â³rio"],
+      [/\binvalido\b/g, "invÃƒÆ’Ã‚Â¡lido"],
+      [/\bInvalido\b/g, "InvÃƒÆ’Ã‚Â¡lido"],
+      [/\bpagina\b/g, "pÃƒÆ’Ã‚Â¡gina"],
+      [/\bPagina\b/g, "PÃƒÆ’Ã‚Â¡gina"],
+      [/\bemail valido\b/g, "email vÃƒÆ’Ã‚Â¡lido"],
+      [/\bEmail valido\b/g, "Email vÃƒÆ’Ã‚Â¡lido"],
       [/\bdetalhes de checkout\b/g, "detalhes de checkout"],
-      [/\bacaoes\b/g, "aÃ§Ãµes"],
-      [/\bAcoes\b/g, "AÃ§Ãµes"],
-      [/\bSelecao\b/g, "SeleÃ§Ã£o"],
-      [/\bselecao\b/g, "seleÃ§Ã£o"],
-      [/\bSelecoes\b/g, "SeleÃ§Ãµes"],
-      [/\bselecoes\b/g, "seleÃ§Ãµes"],
-      [/\bArticulacao\b/g, "ArticulaÃ§Ã£o"],
-      [/\barticulacao\b/g, "articulaÃ§Ã£o"],
-      [/\bElevacao\b/g, "ElevaÃ§Ã£o"],
-      [/\belevacao\b/g, "elevaÃ§Ã£o"],
-      [/\bpresenca\b/g, "presenÃ§a"],
-      [/\bPresenca\b/g, "PresenÃ§a"],
-      [/\bharmonica\b/g, "harmÃ³nica"],
-      [/\bHarmonica\b/g, "HarmÃ³nica"],
-      [/\bclassica\b/g, "clÃ¡ssica"],
-      [/\bClassica\b/g, "ClÃ¡ssica"],
-      [/\bclassico\b/g, "clÃ¡ssico"],
-      [/\bClassico\b/g, "ClÃ¡ssico"],
+      [/\bacaoes\b/g, "aÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bAcoes\b/g, "AÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bSelecao\b/g, "SeleÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bselecao\b/g, "seleÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bSelecoes\b/g, "SeleÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bselecoes\b/g, "seleÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bArticulacao\b/g, "ArticulaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\barticulacao\b/g, "articulaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bElevacao\b/g, "ElevaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\belevacao\b/g, "elevaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bpresenca\b/g, "presenÃƒÆ’Ã‚Â§a"],
+      [/\bPresenca\b/g, "PresenÃƒÆ’Ã‚Â§a"],
+      [/\bharmonica\b/g, "harmÃƒÆ’Ã‚Â³nica"],
+      [/\bHarmonica\b/g, "HarmÃƒÆ’Ã‚Â³nica"],
+      [/\bclassica\b/g, "clÃƒÆ’Ã‚Â¡ssica"],
+      [/\bClassica\b/g, "ClÃƒÆ’Ã‚Â¡ssica"],
+      [/\bclassico\b/g, "clÃƒÆ’Ã‚Â¡ssico"],
+      [/\bClassico\b/g, "ClÃƒÆ’Ã‚Â¡ssico"],
       [/\btradicional\b/g, "tradicional"],
-      [/\bmusica\b/g, "mÃºsica"],
-      [/\bMusica\b/g, "MÃºsica"],
-      [/\bestudio\b/g, "estÃºdio"],
-      [/\bEstudio\b/g, "EstÃºdio"],
+      [/\bmusica\b/g, "mÃƒÆ’Ã‚Âºsica"],
+      [/\bMusica\b/g, "MÃƒÆ’Ã‚Âºsica"],
+      [/\bestudio\b/g, "estÃƒÆ’Ã‚Âºdio"],
+      [/\bEstudio\b/g, "EstÃƒÆ’Ã‚Âºdio"],
       [/\bprogressivos\b/g, "progressivos"],
-      [/\bNao ha\b/g, "NÃ£o hÃ¡"],
-      [/\bnao ha\b/g, "nÃ£o hÃ¡"],
-      [/\bJa\b/g, "JÃ¡"],
-      [/\bja\b/g, "jÃ¡"],
-      [/\bvoce\b/g, "vocÃª"],
-      [/\bVoce\b/g, "VocÃª"],
+      [/\bNao ha\b/g, "NÃƒÆ’Ã‚Â£o hÃƒÆ’Ã‚Â¡"],
+      [/\bnao ha\b/g, "nÃƒÆ’Ã‚Â£o hÃƒÆ’Ã‚Â¡"],
+      [/\bJa\b/g, "JÃƒÆ’Ã‚Â¡"],
+      [/\bja\b/g, "jÃƒÆ’Ã‚Â¡"],
+      [/\bvoce\b/g, "vocÃƒÆ’Ã‚Âª"],
+      [/\bVoce\b/g, "VocÃƒÆ’Ã‚Âª"],
       [/\bteu\b/g, "teu"],
       [/\bteus\b/g, "teus"],
-      [/\bAte\b/g, "AtÃ©"],
-      [/\bate\b/g, "atÃ©"],
-      [/\bmetodo\b/g, "mÃ©todo"],
-      [/\bMetodo\b/g, "MÃ©todo"],
-      [/\bmedias\b/g, "mÃ©dias"],
-      [/\bMedias\b/g, "MÃ©dias"],
-      [/\bminimo\b/g, "mÃ­nimo"],
-      [/\bMinimo\b/g, "MÃ­nimo"],
-      [/\bmaximo\b/g, "mÃ¡ximo"],
-      [/\bMaximo\b/g, "MÃ¡ximo"],
-      [/\bperiodo\b/g, "perÃ­odo"],
-      [/\bPeriodo\b/g, "PerÃ­odo"],
-      [/\btecnica\b/g, "tÃ©cnica"],
-      [/\bTecnica\b/g, "TÃ©cnica"],
-      [/\bunico\b/g, "Ãºnico"],
-      [/\bUnico\b/g, "Ãšnico"],
-      [/\bpublico\b/g, "pÃºblico"],
-      [/\bPublico\b/g, "PÃºblico"],
-      [/\bdominio\b/g, "domÃ­nio"],
-      [/\bDominio\b/g, "DomÃ­nio"],
-      [/\bestetica\b/g, "estÃ©tica"],
-      [/\bEstetica\b/g, "EstÃ©tica"],
+      [/\bAte\b/g, "AtÃƒÆ’Ã‚Â©"],
+      [/\bate\b/g, "atÃƒÆ’Ã‚Â©"],
+      [/\bmetodo\b/g, "mÃƒÆ’Ã‚Â©todo"],
+      [/\bMetodo\b/g, "MÃƒÆ’Ã‚Â©todo"],
+      [/\bmedias\b/g, "mÃƒÆ’Ã‚Â©dias"],
+      [/\bMedias\b/g, "MÃƒÆ’Ã‚Â©dias"],
+      [/\bminimo\b/g, "mÃƒÆ’Ã‚Â­nimo"],
+      [/\bMinimo\b/g, "MÃƒÆ’Ã‚Â­nimo"],
+      [/\bmaximo\b/g, "mÃƒÆ’Ã‚Â¡ximo"],
+      [/\bMaximo\b/g, "MÃƒÆ’Ã‚Â¡ximo"],
+      [/\bperiodo\b/g, "perÃƒÆ’Ã‚Â­odo"],
+      [/\bPeriodo\b/g, "PerÃƒÆ’Ã‚Â­odo"],
+      [/\btecnica\b/g, "tÃƒÆ’Ã‚Â©cnica"],
+      [/\bTecnica\b/g, "TÃƒÆ’Ã‚Â©cnica"],
+      [/\bunico\b/g, "ÃƒÆ’Ã‚Âºnico"],
+      [/\bUnico\b/g, "ÃƒÆ’Ã…Â¡nico"],
+      [/\bpublico\b/g, "pÃƒÆ’Ã‚Âºblico"],
+      [/\bPublico\b/g, "PÃƒÆ’Ã‚Âºblico"],
+      [/\bdominio\b/g, "domÃƒÆ’Ã‚Â­nio"],
+      [/\bDominio\b/g, "DomÃƒÆ’Ã‚Â­nio"],
+      [/\bestetica\b/g, "estÃƒÆ’Ã‚Â©tica"],
+      [/\bEstetica\b/g, "EstÃƒÆ’Ã‚Â©tica"],
       [/\bcore\b/g, "core"],
-      [/\bSessao\b/g, "SessÃ£o"],
-      [/\bsessao\b/g, "sessÃ£o"],
-      [/\bDefinicoes\b/g, "DefiniÃ§Ãµes"],
-      [/\bdefinicoes\b/g, "definiÃ§Ãµes"],
-      [/\bAvaliacao\b/g, "AvaliaÃ§Ã£o"],
-      [/\bavaliacao\b/g, "avaliaÃ§Ã£o"],
-      [/\bAvaliacoes\b/g, "AvaliaÃ§Ãµes"],
-      [/\bavaliacoes\b/g, "avaliaÃ§Ãµes"],
-      [/\bAlteracoes\b/g, "AlteraÃ§Ãµes"],
-      [/\balteracoes\b/g, "alteraÃ§Ãµes"],
-      [/\bInformacao\b/g, "InformaÃ§Ã£o"],
-      [/\binformacao\b/g, "informaÃ§Ã£o"],
-      [/\bConfiguracao\b/g, "ConfiguraÃ§Ã£o"],
-      [/\bconfiguracao\b/g, "configuraÃ§Ã£o"],
-      [/\bConfiguracoes\b/g, "ConfiguraÃ§Ãµes"],
-      [/\bconfiguracoes\b/g, "configuraÃ§Ãµes"],
-      [/\bReposicao\b/g, "ReposiÃ§Ã£o"],
-      [/\breposicao\b/g, "reposiÃ§Ã£o"],
-      [/\bColecao\b/g, "ColeÃ§Ã£o"],
-      [/\bcolecao\b/g, "coleÃ§Ã£o"],
-      [/\bEletronica\b/g, "EletrÃ³nica"],
-      [/\beletronica\b/g, "eletrÃ³nica"],
-      [/\bHistoria\b/g, "HistÃ³ria"],
-      [/\bhistoria\b/g, "histÃ³ria"],
-      [/\bmusicos\b/g, "mÃºsicos"],
-      [/\bMusicos\b/g, "MÃºsicos"],
-      [/\bnao\b/g, "nÃ£o"],
-      [/\bNao\b/g, "NÃ£o"],
-      [/\bestao\b/g, "estÃ£o"],
-      [/\bEstao\b/g, "EstÃ£o"],
-      [/\bindisponivel\b/g, "indisponÃ­vel"],
-      [/\bdisponivel\b/g, "disponÃ­vel"],
+      [/\bSessao\b/g, "SessÃƒÆ’Ã‚Â£o"],
+      [/\bsessao\b/g, "sessÃƒÆ’Ã‚Â£o"],
+      [/\bDefinicoes\b/g, "DefiniÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bdefinicoes\b/g, "definiÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bAvaliacao\b/g, "AvaliaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bavaliacao\b/g, "avaliaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bAvaliacoes\b/g, "AvaliaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bavaliacoes\b/g, "avaliaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bAlteracoes\b/g, "AlteraÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\balteracoes\b/g, "alteraÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bInformacao\b/g, "InformaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\binformacao\b/g, "informaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bConfiguracao\b/g, "ConfiguraÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bconfiguracao\b/g, "configuraÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bConfiguracoes\b/g, "ConfiguraÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bconfiguracoes\b/g, "configuraÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bReposicao\b/g, "ReposiÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\breposicao\b/g, "reposiÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bColecao\b/g, "ColeÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bcolecao\b/g, "coleÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bEletronica\b/g, "EletrÃƒÆ’Ã‚Â³nica"],
+      [/\beletronica\b/g, "eletrÃƒÆ’Ã‚Â³nica"],
+      [/\bHistoria\b/g, "HistÃƒÆ’Ã‚Â³ria"],
+      [/\bhistoria\b/g, "histÃƒÆ’Ã‚Â³ria"],
+      [/\bmusicos\b/g, "mÃƒÆ’Ã‚Âºsicos"],
+      [/\bMusicos\b/g, "MÃƒÆ’Ã‚Âºsicos"],
+      [/\bnao\b/g, "nÃƒÆ’Ã‚Â£o"],
+      [/\bNao\b/g, "NÃƒÆ’Ã‚Â£o"],
+      [/\bestao\b/g, "estÃƒÆ’Ã‚Â£o"],
+      [/\bEstao\b/g, "EstÃƒÆ’Ã‚Â£o"],
+      [/\bindisponivel\b/g, "indisponÃƒÆ’Ã‚Â­vel"],
+      [/\bdisponivel\b/g, "disponÃƒÆ’Ã‚Â­vel"],
       [/\benvio\b/g, "envio"],
-      [/\bcodigo\b/g, "cÃ³digo"],
-      [/\bCodigo\b/g, "CÃ³digo"],
-      [/\bregiao\b/g, "regiÃ£o"],
-      [/\bRegiao\b/g, "RegiÃ£o"],
-      [/\bpais\b/g, "paÃ­s"],
-      [/\bPais\b/g, "PaÃ­s"],
-      [/\bacao\b/g, "aÃ§Ã£o"],
-      [/\bAcoes\b/g, "AÃ§Ãµes"],
-      [/\bacoes\b/g, "aÃ§Ãµes"],
-      [/\bprecisao\b/g, "precisÃ£o"],
-      [/\bPrecisao\b/g, "PrecisÃ£o"],
-      [/\bintencao\b/g, "intenÃ§Ã£o"],
-      [/\bIntencao\b/g, "IntenÃ§Ã£o"],
-      [/\bcartao\b/g, "cartÃ£o"],
-      [/\bCartao\b/g, "CartÃ£o"],
+      [/\bcodigo\b/g, "cÃƒÆ’Ã‚Â³digo"],
+      [/\bCodigo\b/g, "CÃƒÆ’Ã‚Â³digo"],
+      [/\bregiao\b/g, "regiÃƒÆ’Ã‚Â£o"],
+      [/\bRegiao\b/g, "RegiÃƒÆ’Ã‚Â£o"],
+      [/\bpais\b/g, "paÃƒÆ’Ã‚Â­s"],
+      [/\bPais\b/g, "PaÃƒÆ’Ã‚Â­s"],
+      [/\bacao\b/g, "aÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bAcoes\b/g, "AÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bacoes\b/g, "aÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bprecisao\b/g, "precisÃƒÆ’Ã‚Â£o"],
+      [/\bPrecisao\b/g, "PrecisÃƒÆ’Ã‚Â£o"],
+      [/\bintencao\b/g, "intenÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bIntencao\b/g, "IntenÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bcartao\b/g, "cartÃƒÆ’Ã‚Â£o"],
+      [/\bCartao\b/g, "CartÃƒÆ’Ã‚Â£o"],
       [/\bregisto\b/g, "registo"],
       [/\bRegisto\b/g, "Registo"],
-      [/\bfuncoes\b/g, "funÃ§Ãµes"],
-      [/\bFuncoes\b/g, "FunÃ§Ãµes"],
-      [/\btransicao\b/g, "transiÃ§Ã£o"],
-      [/\bTransicao\b/g, "TransiÃ§Ã£o"],
-      [/\boperacao\b/g, "operaÃ§Ã£o"],
-      [/\bOperacao\b/g, "OperaÃ§Ã£o"],
-      [/\bgestao\b/g, "gestÃ£o"],
-      [/\bGestao\b/g, "GestÃ£o"]
+      [/\bfuncoes\b/g, "funÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\bFuncoes\b/g, "FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes"],
+      [/\btransicao\b/g, "transiÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bTransicao\b/g, "TransiÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\boperacao\b/g, "operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bOperacao\b/g, "OperaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o"],
+      [/\bgestao\b/g, "gestÃƒÆ’Ã‚Â£o"],
+      [/\bGestao\b/g, "GestÃƒÆ’Ã‚Â£o"]
     ];
     rules.forEach(([pattern, replacement]) => {
       out = out.replace(pattern, replacement);
@@ -621,10 +621,10 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   }
 
   // --------------------------------------------------
-  // Função: translateText
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: original.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: translateText
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: original.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function translateText(original) {
     const lang = getLang();
@@ -648,10 +648,10 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   }
 
   // --------------------------------------------------
-  // Função: localizeDescription
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: guitar, type = "short".
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: localizeDescription
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: guitar, type = "short".
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function localizeDescription(guitar, type = "short") {
     const model = guitar || {};
@@ -674,10 +674,10 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   }
 
   // --------------------------------------------------
-  // Função: shouldSkipTextNode
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: node.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: shouldSkipTextNode
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: node.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function shouldSkipTextNode(node) {
     const parent = node.parentElement;
@@ -689,10 +689,10 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   }
 
   // --------------------------------------------------
-  // Função: applyPhraseTranslations
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: root = document.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: applyPhraseTranslations
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: root = document.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function applyPhraseTranslations(root = document) {
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
@@ -712,10 +712,10 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   }
 
   // --------------------------------------------------
-  // Função: applyToDocument
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: root = document.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: applyToDocument
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: root = document.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function applyToDocument(root = document) {
     isApplying = true;
@@ -728,10 +728,10 @@ Este módulo gere internacionalização (EN/PT), tradução de texto e persistê
   });
 
   // --------------------------------------------------
-  // Função: startObserver
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: startObserver
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function startObserver() {
     if (observer) observer.disconnect();

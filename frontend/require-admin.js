@@ -1,9 +1,9 @@
 /*
-Este módulo valida no cliente se a rota atual exige perfil de administrador.
+Este mÃƒÂ³dulo valida no cliente se a rota atual exige perfil de administrador.
 */
 
 (function protectAdminPage() {
-  const API_BASE = "http://localhost:3000/api/auth";
+  const API_BASE = "/api/auth";
   let session = null;
   try {
     session = JSON.parse(localStorage.getItem("guitarcraft_session_v1") || "null");
@@ -16,7 +16,7 @@ Este módulo valida no cliente se a rota atual exige perfil de administrador.
     return;
   }
 
-  // Validação no backend para confirmar role real do utilizador na base de dados.
+  // ValidaÃƒÂ§ÃƒÂ£o no backend para confirmar role real do utilizador na base de dados.
   (async () => {
     try {
       const response = await fetch(`${API_BASE}/session/${encodeURIComponent(session.username)}`);

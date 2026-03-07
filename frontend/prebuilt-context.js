@@ -1,5 +1,5 @@
 /*
-Este módulo mantém estado global das guitarras pre-built e operações CRUD.
+Este mÃƒÂ³dulo mantÃƒÂ©m estado global das guitarras pre-built e operaÃƒÂ§ÃƒÂµes CRUD.
 */
 
 /* global React, GuitarAuth */
@@ -7,17 +7,17 @@ Este módulo mantém estado global das guitarras pre-built e operações CRUD.
   const { createContext, useContext, useEffect, useMemo, useState } = React;
   const { useAuth } = GuitarAuth;
 
-  const API_BASE = "http://localhost:3000/api/prebuilt";
+  const API_BASE = "/api/prebuilt";
   const PrebuiltContext = createContext(null);
 
   // --------------------------------------------------
-  // Função: fetchJson
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: url, options.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: fetchJson
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: url, options.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   async function fetchJson(url, options) {
-    // Chamada à API: comunica com o backend para sincronizar estado no frontend.
+    // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
     const response = await fetch(url, options);
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
@@ -27,10 +27,10 @@ Este módulo mantém estado global das guitarras pre-built e operações CRUD.
   }
 
   // --------------------------------------------------
-  // Função: validateGuitar
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: guitar.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: validateGuitar
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: guitar.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function validateGuitar(guitar) {
     const errors = [];
@@ -57,20 +57,20 @@ Este módulo mantém estado global das guitarras pre-built e operações CRUD.
   }
 
   // --------------------------------------------------
-  // Função: PrebuiltProvider
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: { children }.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: PrebuiltProvider
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: { children }.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function PrebuiltProvider({ children }) {
     const { currentUser } = useAuth();
     const [guitars, setGuitars] = useState([]);
 
     // --------------------------------------------------
-    // Função: loadGuitars
-    // O que faz: executa uma parte da lógica deste módulo.
-    // Parâmetros: nenhum parâmetro.
-    // Retorna: o resultado da operação (ou Promise, quando aplicável).
+    // FunÃƒÂ§ÃƒÂ£o: loadGuitars
+    // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+    // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+    // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
     // --------------------------------------------------
     async function loadGuitars() {
       const data = await fetchJson(API_BASE, { method: "GET" });
@@ -83,10 +83,10 @@ Este módulo mantém estado global das guitarras pre-built e operações CRUD.
 
     useEffect(() => {
       // --------------------------------------------------
-      // Função: onUpdated
-      // O que faz: executa uma parte da lógica deste módulo.
-      // Parâmetros: nenhum parâmetro.
-      // Retorna: o resultado da operação (ou Promise, quando aplicável).
+      // FunÃƒÂ§ÃƒÂ£o: onUpdated
+      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+      // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
       // --------------------------------------------------
       function onUpdated() {
         loadGuitars().catch(() => {});
@@ -97,10 +97,10 @@ Este módulo mantém estado global das guitarras pre-built e operações CRUD.
 
     const value = useMemo(() => {
       // --------------------------------------------------
-      // Função: addGuitar
-      // O que faz: executa uma parte da lógica deste módulo.
-      // Parâmetros: input.
-      // Retorna: o resultado da operação (ou Promise, quando aplicável).
+      // FunÃƒÂ§ÃƒÂ£o: addGuitar
+      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+      // ParÃƒÂ¢metros: input.
+      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
       // --------------------------------------------------
       async function addGuitar(input) {
         if (!currentUser || currentUser.role !== "admin") {
@@ -144,10 +144,10 @@ Este módulo mantém estado global das guitarras pre-built e operações CRUD.
       }
 
       // --------------------------------------------------
-      // Função: updateGuitar
-      // O que faz: executa uma parte da lógica deste módulo.
-      // Parâmetros: id, input.
-      // Retorna: o resultado da operação (ou Promise, quando aplicável).
+      // FunÃƒÂ§ÃƒÂ£o: updateGuitar
+      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+      // ParÃƒÂ¢metros: id, input.
+      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
       // --------------------------------------------------
       async function updateGuitar(id, input) {
         if (!currentUser || currentUser.role !== "admin") {
@@ -191,10 +191,10 @@ Este módulo mantém estado global das guitarras pre-built e operações CRUD.
       }
 
       // --------------------------------------------------
-      // Função: deleteGuitar
-      // O que faz: executa uma parte da lógica deste módulo.
-      // Parâmetros: id.
-      // Retorna: o resultado da operação (ou Promise, quando aplicável).
+      // FunÃƒÂ§ÃƒÂ£o: deleteGuitar
+      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+      // ParÃƒÂ¢metros: id.
+      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
       // --------------------------------------------------
       async function deleteGuitar(id) {
         if (!currentUser || currentUser.role !== "admin") {
@@ -222,10 +222,10 @@ Este módulo mantém estado global das guitarras pre-built e operações CRUD.
   }
 
   // --------------------------------------------------
-  // Função: usePrebuilt
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // FunÃƒÂ§ÃƒÂ£o: usePrebuilt
+  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
+  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
+  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
   // --------------------------------------------------
   function usePrebuilt() {
     const value = useContext(PrebuiltContext);
