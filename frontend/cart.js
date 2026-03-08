@@ -1,5 +1,5 @@
-/*
-Este mdulo gere a UI da pgina do carrinho e aes de quantidade/remoo/checkout.
+﻿/*
+Este modulo gere a UI da pagina do carrinho e aes de quantidade/remocao/checkout.
 */
 
 /* global React, ReactDOM, GuitarConfig, GuitarCart, GuitarAuth */
@@ -7,10 +7,10 @@ const { CartProvider, useCart } = GuitarCart;
 const { AuthProvider, useAuth } = GuitarAuth;
 
 // --------------------------------------------------
-// Funo: CartApp
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: CartApp
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function CartApp() {
   const { items, cartTotal, removeFromCart, updateCartQuantity } = useCart();
@@ -42,10 +42,10 @@ function CartApp() {
   );
 
   // --------------------------------------------------
-  // Funo: toggleSelected
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: cartId, checked.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: toggleSelected
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: cartId, checked.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function toggleSelected(cartId, checked) {
     setSelected((prev) => ({ ...prev, [cartId]: checked }));
@@ -133,7 +133,7 @@ function CartApp() {
                 </div>
 
                 <div className="cart-breakdown">
-                  <p><strong>Price Breakdown</strong></p>
+                  <p><strong>Price breakdown</strong></p>
                   {(item.priceBreakdown || [])
                     .filter((line) => Number(line.amount) > 0)
                     .map((line) => (
@@ -158,7 +158,7 @@ function CartApp() {
                 </div>
 
                 <div className="cart-breakdown">
-                  <p><strong>Price Breakdown</strong></p>
+                  <p><strong>Price breakdown</strong></p>
                   <p>Base Guitar: ${GuitarConfig.BASE_PRICE.toFixed(2)}</p>
                   {(item.priceBreakdown || [])
                     .filter((line) => Number(line.amount) > 0)
@@ -209,10 +209,10 @@ function CartApp() {
 }
 
 // --------------------------------------------------
-// Funo: CartRoot
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: CartRoot
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function CartRoot() {
   return (

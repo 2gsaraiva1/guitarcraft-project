@@ -1,5 +1,5 @@
-/*
-Este mdulo centraliza configuraes do builder, opes e clculo de preos.
+﻿/*
+Este modulo centraliza configuraes do builder, opes e clculo de preos.
 */
 
 /* Shared configuration for builder/shop/cart pricing and labels */
@@ -89,10 +89,10 @@ Este mdulo centraliza configuraes do builder, opes e clculo de preos.
   });
 
   // --------------------------------------------------
-  // Funo: getOptionPrice
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: fieldKey, selectedValue.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: getOptionPrice
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: fieldKey, selectedValue.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function getOptionPrice(fieldKey, selectedValue) {
     const field = FIELD_MAP[fieldKey];
@@ -102,10 +102,10 @@ Este mdulo centraliza configuraes do builder, opes e clculo de preos.
   }
 
   // --------------------------------------------------
-  // Funo: getPriceLines
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: selections.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: getPriceLines
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: selections.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function getPriceLines(selections) {
     const lines = [];
@@ -124,10 +124,10 @@ Este mdulo centraliza configuraes do builder, opes e clculo de preos.
   }
 
   // --------------------------------------------------
-  // Funo: getTotalPrice
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: selections.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: getTotalPrice
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: selections.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function getTotalPrice(selections) {
     const optionsTotal = getPriceLines(selections).reduce((sum, line) => sum + line.amount, 0);
@@ -135,10 +135,10 @@ Este mdulo centraliza configuraes do builder, opes e clculo de preos.
   }
 
   // --------------------------------------------------
-  // Funo: formatLabel
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: key.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: formatLabel
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: key.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function formatLabel(key) {
     return String(key)

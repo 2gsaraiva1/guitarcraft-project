@@ -1,5 +1,5 @@
-/*
-Este mdulo controla a pgina de conta, dados do utilizador e definies de perfil.
+﻿/*
+Este modulo controla a pagina de conta, dados do utilizador e definicoes de perfil.
 */
 
 /* global React, ReactDOM, GuitarAuth, GuitarCart */
@@ -7,10 +7,10 @@ const { AuthProvider, useAuth } = GuitarAuth;
 const { CartProvider, useCart } = GuitarCart;
 
 // --------------------------------------------------
-// Funo: AccountView
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: AccountView
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function AccountView() {
   const { currentUser, updateSettings } = useAuth();
@@ -30,20 +30,20 @@ function AccountView() {
   const email = `${String(currentUser.username).toLowerCase()}@guitarcrafttone.com`;
 
   // --------------------------------------------------
-  // Funo: onSettingsField
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: key, value.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: onSettingsField
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: key, value.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function onSettingsField(key, value) {
     setSettingsForm((prev) => ({ ...prev, [key]: value }));
   }
 
   // --------------------------------------------------
-  // Funo: onSaveSettings
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: e.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: onSaveSettings
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: e.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   async function onSaveSettings(e) {
     e.preventDefault();
@@ -153,7 +153,7 @@ function AccountView() {
             {visibleOrders.slice(0, 8).map((order) => (
               <p key={order.orderId}>
                 <strong>{order.orderId}</strong>
-                {" "} - {new Date(order.createdAt).toLocaleString()} - ${Number(order.totalPrice || 0).toFixed(2)} - {order.status}
+                {" "} - {new Date(order.CREATEdAt).toLocaleString()} - ${Number(order.totalPrice || 0).toFixed(2)} - {order.status}
               </p>
             ))}
             <p style={{ marginTop: "10px" }}>
@@ -167,10 +167,10 @@ function AccountView() {
 }
 
 // --------------------------------------------------
-// Funo: AccountRoot
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: AccountRoot
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function AccountRoot() {
   return (

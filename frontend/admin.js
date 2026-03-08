@@ -1,5 +1,5 @@
-/*
-Este mdulo controla o painel de administrao para gerir guitarras e media do site.
+﻿/*
+Este modulo controla o painel de administrao para gerir guitarras e media do site.
 */
 
 /* global React, ReactDOM, GuitarAuth, GuitarPrebuilt */
@@ -18,10 +18,10 @@ const SITE_MEDIA_FIELDS = [
 ];
 
 // --------------------------------------------------
-// Funo: emptyMediaForm
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: emptyMediaForm
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function emptyMediaForm() {
   return SITE_MEDIA_FIELDS.reduce((acc, field) => {
@@ -31,10 +31,10 @@ function emptyMediaForm() {
 }
 
 // --------------------------------------------------
-// Funo: fetchJson
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: url, options.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: fetchJson
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: url, options.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 async function fetchJson(url, options) {
   // Chamada  API: comunica com o backend para sincronizar estado no frontend.
@@ -47,10 +47,10 @@ async function fetchJson(url, options) {
 }
 
 // --------------------------------------------------
-// Funo: emptyForm
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: emptyForm
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function emptyForm() {
   return {
@@ -72,10 +72,10 @@ function emptyForm() {
 }
 
 // --------------------------------------------------
-// Funo: toForm
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: guitar.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: toForm
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: guitar.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function toForm(guitar) {
   const shortPt = guitar && guitar.shortDescriptionI18n ? (guitar.shortDescriptionI18n["pt-pt"] || guitar.shortDescriptionI18n.pt || "") : "";
@@ -101,10 +101,10 @@ function toForm(guitar) {
 }
 
 // --------------------------------------------------
-// Funo: localizeDescription
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: guitar, type.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: localizeDescription
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: guitar, type.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function localizeDescription(guitar, type) {
   if (!i18n || typeof i18n.localizeDescription !== "function") {
@@ -114,10 +114,10 @@ function localizeDescription(guitar, type) {
 }
 
 // --------------------------------------------------
-// Funo: parseSpecs
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: text.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: parseSpecs
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: text.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function parseSpecs(text) {
   return String(text || "")
@@ -127,10 +127,10 @@ function parseSpecs(text) {
 }
 
 // --------------------------------------------------
-// Funo: parseImages
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: text.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: parseImages
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: text.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function parseImages(text) {
   return String(text || "")
@@ -140,10 +140,10 @@ function parseImages(text) {
 }
 
 // --------------------------------------------------
-// Funo: prettyCategory
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: value.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: prettyCategory
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: value.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function prettyCategory(value) {
   const raw = String(value || "").trim().toLowerCase();
@@ -154,10 +154,10 @@ function prettyCategory(value) {
 }
 
 // --------------------------------------------------
-// Funo: prettySeries
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: value.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: prettySeries
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: value.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function prettySeries(value) {
   const raw = String(value || "").trim();
@@ -166,10 +166,10 @@ function prettySeries(value) {
 }
 
 // --------------------------------------------------
-// Funo: AdminDashboard
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: AdminDashboard
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function AdminDashboard() {
   const { currentUser } = useAuth();
@@ -195,10 +195,10 @@ function AdminDashboard() {
   }, [guitars]);
 
   // --------------------------------------------------
-  // Funo: openCreate
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: nenhum parmetro.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: openCreate
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function openCreate() {
     setEditingId(null);
@@ -208,10 +208,10 @@ function AdminDashboard() {
   }
 
   // --------------------------------------------------
-  // Funo: openEdit
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: guitar.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: openEdit
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: guitar.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function openEdit(guitar) {
     setEditingId(guitar.id);
@@ -221,10 +221,10 @@ function AdminDashboard() {
   }
 
   // --------------------------------------------------
-  // Funo: closeModal
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: nenhum parmetro.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: closeModal
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function closeModal() {
     setOpen(false);
@@ -234,20 +234,20 @@ function AdminDashboard() {
   }
 
   // --------------------------------------------------
-  // Funo: onChange
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: key, value.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: onChange
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: key, value.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function onChange(key, value) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
   // --------------------------------------------------
-  // Funo: onMediaChange
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: key, value.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: onMediaChange
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: key, value.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function onMediaChange(key, value) {
     setMediaValues((prev) => ({ ...prev, [key]: value }));
@@ -272,10 +272,10 @@ function AdminDashboard() {
 
   useEffect(() => {
     // --------------------------------------------------
-    // Funo: onLangChange
-    // O que faz: executa uma parte da lgica deste mdulo.
-    // Parmetros: nenhum parmetro.
-    // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+    // Funcao: onLangChange
+    // O que faz: executa uma parte da logica deste modulo.
+    // Parametros: nenhum parametro.
+    // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
     // --------------------------------------------------
     function onLangChange() {
       setLangTick((v) => v + 1);
@@ -285,10 +285,10 @@ function AdminDashboard() {
   }, []);
 
   // --------------------------------------------------
-  // Funo: onSaveSiteMedia
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: nenhum parmetro.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: onSaveSiteMedia
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   async function onSaveSiteMedia() {
     setMediaStatus("");
@@ -308,10 +308,10 @@ function AdminDashboard() {
   }
 
   // --------------------------------------------------
-  // Funo: onSubmit
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: e.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: onSubmit
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: e.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   async function onSubmit(e) {
     e.preventDefault();
@@ -360,10 +360,10 @@ function AdminDashboard() {
   }
 
   // --------------------------------------------------
-  // Funo: onDelete
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: id.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: onDelete
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: id.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   async function onDelete(id) {
     const confirmDelete = window.confirm("Delete this guitar?");
@@ -488,7 +488,7 @@ function AdminDashboard() {
 
               {error ? <p className="auth-error">{error}</p> : null}
               <div className="modal-actions">
-                <button type="submit">{isEditing ? "Save Changes" : "Create Guitar"}</button>
+                <button type="submit">{isEditing ? "Save Changes" : "CREATE Guitar"}</button>
                 <button type="button" onClick={closeModal}>Cancel</button>
               </div>
             </form>
@@ -500,10 +500,10 @@ function AdminDashboard() {
 }
 
 // --------------------------------------------------
-// Funo: AdminRoot
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: AdminRoot
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function AdminRoot() {
   return (

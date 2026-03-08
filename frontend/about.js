@@ -1,19 +1,19 @@
-/*
-Este mdulo controla o comportamento visual da pgina About.
-Aplica animao de entrada (reveal) quando as seces ficam visveis no ecr.
+﻿/*
+Este modulo controla o comportamento visual da pagina About.
+Aplica animao de entrada (reveal) quando as secoes ficam visveis no ecra.
 */
 
 // --------------------------------------------------
-// Funo: setupAboutReveal
+// Funcao: setupAboutReveal
 // O que faz: observa elementos com classe "reveal" e ativa animao quando entram no viewport.
-// Parmetros: nenhum.
+// Parametros: nenhum.
 // Retorna: nada (void).
 // --------------------------------------------------
 function setupAboutReveal() {
   const nodes = document.querySelectorAll(".reveal");
   if (!nodes.length) return;
 
-  // Lgica de UI: observer para transio suave quando o utilizador faz scroll.
+  // logica de UI: observer para transicao suave quando o utilizador faz scroll.
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -30,5 +30,5 @@ function setupAboutReveal() {
   nodes.forEach((node) => observer.observe(node));
 }
 
-// Inicializao do mdulo na carga da pgina About.
+// Inicializao do modulo na carga da pagina About.
 setupAboutReveal();

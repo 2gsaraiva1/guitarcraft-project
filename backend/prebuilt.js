@@ -1,5 +1,5 @@
-/*
-Este ficheiro gere as guitarras pre-built, reviews e respetivas validaes.
+﻿/*
+Este ficheiro gere as guitarras pre-built, reviews e respetivas validacoes.
 */
 
 const express = require("express");
@@ -197,9 +197,9 @@ function toApiModel(row) {
       username: review.username,
       rating: Number(review.rating || 0),
       comment: String(review.comment || ""),
-      createdAt: review.createdAt || new Date(0).toISOString()
+      CREATEdAt: review.CREATEdAt || new Date(0).toISOString()
     }))
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    .sort((a, b) => new Date(b.CREATEdAt).getTime() - new Date(a.CREATEdAt).getTime());
   const { totalReviews, averageRating } = getReviewSummary(reviews);
 
   const stockStatus = normalizeStockStatus(row.stock_status || row.status);
@@ -335,13 +335,13 @@ router.post("/:id/review", async (req, res) => {
       username: user.username,
       rating,
       comment,
-      createdAt: new Date().toISOString()
+      CREATEdAt: new Date().toISOString()
     };
     const nextReviews = [nextReview, ...reviews];
 
     await runSql("UPDATE prebuilt_guitars SET reviews_json = ? WHERE id = ?", [JSON.stringify(nextReviews), String(req.params.id)]);
 
-    const sorted = nextReviews.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    const sorted = nextReviews.sort((a, b) => new Date(b.CREATEdAt).getTime() - new Date(a.CREATEdAt).getTime());
     const summary = getReviewSummary(sorted);
     res.status(201).json({
       message: "Review added.",
@@ -385,10 +385,10 @@ router.put("/:id/review", async (req, res) => {
       username: user.username,
       rating,
       comment,
-      createdAt: new Date().toISOString()
+      CREATEdAt: new Date().toISOString()
     };
     reviews[index] = updated;
-    const sorted = reviews.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    const sorted = reviews.sort((a, b) => new Date(b.CREATEdAt).getTime() - new Date(a.CREATEdAt).getTime());
 
     await runSql("UPDATE prebuilt_guitars SET reviews_json = ? WHERE id = ?", [JSON.stringify(sorted), String(req.params.id)]);
     const summary = getReviewSummary(sorted);
@@ -430,7 +430,7 @@ router.delete("/:id/review/:reviewUserId", async (req, res) => {
       return res.status(404).json({ error: "Review not found." });
     }
 
-    const sorted = nextReviews.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    const sorted = nextReviews.sort((a, b) => new Date(b.CREATEdAt).getTime() - new Date(a.CREATEdAt).getTime());
     await runSql("UPDATE prebuilt_guitars SET reviews_json = ? WHERE id = ?", [JSON.stringify(sorted), String(req.params.id)]);
     const summary = getReviewSummary(sorted);
     res.json({
@@ -503,9 +503,9 @@ router.post("/", async (req, res) => {
       ]
     );
 
-    res.status(201).json({ message: "Pre-built guitar created." });
+    res.status(201).json({ message: "Pre-built guitar CREATEd." });
   } catch (error) {
-    res.status(500).json({ error: "Failed to create pre-built guitar." });
+    res.status(500).json({ error: "Failed to CREATE pre-built guitar." });
   }
 });
 

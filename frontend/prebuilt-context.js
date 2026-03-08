@@ -1,5 +1,5 @@
-/*
-Este mdulo mantm estado global das guitarras pre-built e operaes CRUD.
+﻿/*
+Este modulo mantm estado global das guitarras pre-built e operacoes CRUD.
 */
 
 /* global React, GuitarAuth */
@@ -11,10 +11,10 @@ Este mdulo mantm estado global das guitarras pre-built e operaes CRUD.
   const PrebuiltContext = createContext(null);
 
   // --------------------------------------------------
-  // Funo: fetchJson
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: url, options.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: fetchJson
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: url, options.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   async function fetchJson(url, options) {
     // Chamada  API: comunica com o backend para sincronizar estado no frontend.
@@ -27,10 +27,10 @@ Este mdulo mantm estado global das guitarras pre-built e operaes CRUD.
   }
 
   // --------------------------------------------------
-  // Funo: validateGuitar
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: guitar.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: validateGuitar
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: guitar.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function validateGuitar(guitar) {
     const errors = [];
@@ -57,20 +57,20 @@ Este mdulo mantm estado global das guitarras pre-built e operaes CRUD.
   }
 
   // --------------------------------------------------
-  // Funo: PrebuiltProvider
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: { children }.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: PrebuiltProvider
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: { children }.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function PrebuiltProvider({ children }) {
     const { currentUser } = useAuth();
     const [guitars, setGuitars] = useState([]);
 
     // --------------------------------------------------
-    // Funo: loadGuitars
-    // O que faz: executa uma parte da lgica deste mdulo.
-    // Parmetros: nenhum parmetro.
-    // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+    // Funcao: loadGuitars
+    // O que faz: executa uma parte da logica deste modulo.
+    // Parametros: nenhum parametro.
+    // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
     // --------------------------------------------------
     async function loadGuitars() {
       const data = await fetchJson(API_BASE, { method: "GET" });
@@ -83,10 +83,10 @@ Este mdulo mantm estado global das guitarras pre-built e operaes CRUD.
 
     useEffect(() => {
       // --------------------------------------------------
-      // Funo: onUpdated
-      // O que faz: executa uma parte da lgica deste mdulo.
-      // Parmetros: nenhum parmetro.
-      // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+      // Funcao: onUpdated
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: nenhum parametro.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       function onUpdated() {
         loadGuitars().catch(() => {});
@@ -97,10 +97,10 @@ Este mdulo mantm estado global das guitarras pre-built e operaes CRUD.
 
     const value = useMemo(() => {
       // --------------------------------------------------
-      // Funo: addGuitar
-      // O que faz: executa uma parte da lgica deste mdulo.
-      // Parmetros: input.
-      // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+      // Funcao: addGuitar
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: input.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function addGuitar(input) {
         if (!currentUser || currentUser.role !== "admin") {
@@ -144,10 +144,10 @@ Este mdulo mantm estado global das guitarras pre-built e operaes CRUD.
       }
 
       // --------------------------------------------------
-      // Funo: updateGuitar
-      // O que faz: executa uma parte da lgica deste mdulo.
-      // Parmetros: id, input.
-      // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+      // Funcao: updateGuitar
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: id, input.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function updateGuitar(id, input) {
         if (!currentUser || currentUser.role !== "admin") {
@@ -191,10 +191,10 @@ Este mdulo mantm estado global das guitarras pre-built e operaes CRUD.
       }
 
       // --------------------------------------------------
-      // Funo: deleteGuitar
-      // O que faz: executa uma parte da lgica deste mdulo.
-      // Parmetros: id.
-      // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+      // Funcao: deleteGuitar
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: id.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function deleteGuitar(id) {
         if (!currentUser || currentUser.role !== "admin") {
@@ -222,10 +222,10 @@ Este mdulo mantm estado global das guitarras pre-built e operaes CRUD.
   }
 
   // --------------------------------------------------
-  // Funo: usePrebuilt
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: nenhum parmetro.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: usePrebuilt
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function usePrebuilt() {
     const value = useContext(PrebuiltContext);

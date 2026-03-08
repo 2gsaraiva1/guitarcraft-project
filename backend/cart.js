@@ -1,4 +1,4 @@
-/*
+﻿/*
 Este ficheiro gere as operacoes do carrinho no backend (adicionar, atualizar, remover e listar).
 */
 

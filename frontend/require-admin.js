@@ -1,5 +1,5 @@
-/*
-Este mdulo valida no cliente se a rota atual exige perfil de administrador.
+﻿/*
+Este modulo valida no cliente se a rota atual exige perfil de administrador.
 */
 
 (function protectAdminPage() {
@@ -16,7 +16,7 @@ Este mdulo valida no cliente se a rota atual exige perfil de administrador.
     return;
   }
 
-  // Validao no backend para confirmar role real do utilizador na base de dados.
+  // validacao no backend para confirmar role REAL do utilizador na base de dados.
   (async () => {
     try {
       const response = await fetch(`${API_BASE}/session/${encodeURIComponent(session.username)}`);

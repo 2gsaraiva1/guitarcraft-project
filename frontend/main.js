@@ -1,5 +1,5 @@
-/*
-Este mdulo controla a home page (reveal, destaque de produtos e estado de stock).
+﻿/*
+Este modulo controla a home page (reveal, destaque de produtos e estado de stock).
 */
 
 const PREBUILT_API = "/api/prebuilt";
@@ -7,20 +7,20 @@ const PLACEHOLDER_IMAGE = "/assets/placeholder-guitar.svg";
 let lastFeaturedData = [];
 
 // --------------------------------------------------
-// Funo: getI18n
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: getI18n
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function getI18n() {
   return window.GuitarI18n || null;
 }
 
 // --------------------------------------------------
-// Funo: setupScrollReveal
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: setupScrollReveal
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function setupScrollReveal() {
   const nodes = document.querySelectorAll(".reveal");
@@ -42,20 +42,20 @@ function setupScrollReveal() {
 }
 
 // --------------------------------------------------
-// Funo: formatMoney
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: value.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: formatMoney
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: value.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function formatMoney(value) {
   return Number(value || 0).toFixed(2);
 }
 
 // --------------------------------------------------
-// Funo: pickRandomGuitars
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: guitars, count = 4.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: pickRandomGuitars
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: guitars, count = 4.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function pickRandomGuitars(guitars, count = 4) {
   const list = Array.isArray(guitars) ? guitars : [];
@@ -65,10 +65,10 @@ function pickRandomGuitars(guitars, count = 4) {
 }
 
 // --------------------------------------------------
-// Funo: getHomeStockMeta
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: guitar.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: getHomeStockMeta
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: guitar.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function getHomeStockMeta(guitar) {
   const status = String(guitar.stockStatus || "in_stock");
@@ -128,10 +128,10 @@ function getHomeStockMeta(guitar) {
 }
 
 // --------------------------------------------------
-// Funo: renderFeaturedGuitars
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: guitars.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: renderFeaturedGuitars
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: guitars.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function renderFeaturedGuitars(guitars) {
   const host = document.getElementById("featured-guitars");
@@ -171,10 +171,10 @@ function renderFeaturedGuitars(guitars) {
 }
 
 // --------------------------------------------------
-// Funo: loadFeaturedGuitars
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: loadFeaturedGuitars
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 async function loadFeaturedGuitars() {
   const host = document.getElementById("featured-guitars");

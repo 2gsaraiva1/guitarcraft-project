@@ -1,5 +1,5 @@
-/*
-Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idioma.
+﻿/*
+Este modulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idioma.
 */
 
 (function initI18n(global) {
@@ -127,7 +127,7 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
     "Authentication failed.": "Falha na autenticacao.",
     "Username": "Nome de utilizador",
     "Password": "Palavra-passe",
-    "Create Account": "Criar Conta",
+    "CREATE Account": "Criar Conta",
     "Need an account?": "Precisas de conta?",
     "Already have an account?": "Ja tens conta?",
     "User Info": "Informacao do Utilizador",
@@ -182,7 +182,7 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
     "FRONT": "FRENTE",
     "BACK": "TRAS",
     "Build Name": "Nome da Build",
-    "Price Breakdown": "Detalhe de Preco",
+    "Price breakdown": "Detalhe de Preco",
     "Base Guitar": "Guitarra Base",
     "Total": "Total",
     "Save Build": "Guardar Build",
@@ -203,7 +203,7 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
     "Processing...": "A processar...",
     "Back to Cart": "Voltar ao Carrinho",
     "Secure Checkout": "Checkout Seguro",
-    "This is a demo checkout flow for GuitarCraft. No real payment is processed.": "Este e um fluxo demo de checkout da GuitarCraft. Nenhum pagamento real e processado.",
+    "This is a demo checkout flow for GuitarCraft. No REAL payment is processed.": "Este e um fluxo demo de checkout da GuitarCraft. Nenhum pagamento REAL e processado.",
     "Order Confirmed": "Encomenda Confirmada",
     "View Orders": "Ver Encomendas",
     "Continue Shopping": "Continuar Compras",
@@ -230,7 +230,7 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
     "Stock Status": "Estado de Stock",
     "Stock Quantity": "Quantidade em Stock",
     "Estimated Restock Date": "Data Estimada de Reposicao",
-    "Create Guitar": "Criar Guitarra",
+    "CREATE Guitar": "Criar Guitarra",
     "Cancel": "Cancelar",
     "Delete": "Eliminar",
     "Rename": "Renomear",
@@ -378,10 +378,10 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
   let rafId = 0;
 
   // --------------------------------------------------
-  // Funo: normalizeLang
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: lang.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: normalizeLang
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: lang.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function normalizeLang(lang) {
     const key = String(lang || "").toLowerCase();
@@ -389,20 +389,20 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
   }
 
   // --------------------------------------------------
-  // Funo: getLang
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: nenhum parmetro.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: getLang
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function getLang() {
     return normalizeLang(localStorage.getItem(LANG_KEY) || DEFAULT_LANG);
   }
 
   // --------------------------------------------------
-  // Funo: setLang
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: lang.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: setLang
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: lang.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function setLang(lang) {
     const next = normalizeLang(lang);
@@ -412,10 +412,10 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
   }
 
   // --------------------------------------------------
-  // Funo: normalizeText
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: value.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: normalizeText
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: value.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function normalizeText(value) {
     return String(value || "")
@@ -426,20 +426,20 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
   }
 
   // --------------------------------------------------
-  // Funo: normalizeKey
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: value.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: normalizeKey
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: value.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function normalizeKey(value) {
     return normalizeText(value).replace(/[.!?]+$/g, "").toLowerCase();
   }
 
   // --------------------------------------------------
-  // Funo: t
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: key, vars = {}.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: t
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: key, vars = {}.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function t(key, vars = {}) {
     const lang = getLang();
@@ -449,81 +449,81 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
   }
 
   // --------------------------------------------------
-  // Funo: ptAccents
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: text.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: ptAccents
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: text.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function ptAccents(text) {
     let out = String(text || "");
     const rules = [
-      [/\bInicio\b/g, "In�cio"],
-      [/\binicio\b/g, "in�cio"],
-      [/\bComecar\b/g, "Come�ar"],
-      [/\bcomecar\b/g, "come�ar"],
-      [/\bComeca\b/g, "Come�a"],
-      [/\bcomeca\b/g, "come�a"],
-      [/\bSerie\b/g, "S�rie"],
-      [/\bserie\b/g, "s�rie"],
-      [/\bSeries\b/g, "S�ries"],
-      [/\bseries\b/g, "s�ries"],
-      [/\bDescricao\b/g, "Descri��o"],
-      [/\bdescricao\b/g, "descri��o"],
-      [/\bDescricoes\b/g, "Descri��es"],
-      [/\bdescricoes\b/g, "descri��es"],
-      [/\bEspecificacoes\b/g, "Especifica��es"],
-      [/\bespecificacoes\b/g, "especifica��es"],
-      [/\bSessao\b/g, "Sess�o"],
-      [/\bsessao\b/g, "sess�o"],
-      [/\bDefinicoes\b/g, "Defini��es"],
-      [/\bdefinicoes\b/g, "defini��es"],
-      [/\bAvaliacao\b/g, "Avalia��o"],
-      [/\bavaliacao\b/g, "avalia��o"],
-      [/\bAvaliacoes\b/g, "Avalia��es"],
-      [/\bavaliacoes\b/g, "avalia��es"],
-      [/\bAlteracoes\b/g, "Altera��es"],
-      [/\balteracoes\b/g, "altera��es"],
-      [/\bInformacao\b/g, "Informa��o"],
-      [/\binformacao\b/g, "informa��o"],
-      [/\bConfiguracao\b/g, "Configura��o"],
-      [/\bconfiguracao\b/g, "configura��o"],
-      [/\bConfiguracoes\b/g, "Configura��es"],
-      [/\bconfiguracoes\b/g, "configura��es"],
-      [/\bReposicao\b/g, "Reposi��o"],
-      [/\breposicao\b/g, "reposi��o"],
-      [/\bColecao\b/g, "Cole��o"],
-      [/\bcolecao\b/g, "cole��o"],
-      [/\bEletronica\b/g, "Eletr�nica"],
-      [/\beletronica\b/g, "eletr�nica"],
-      [/\bHistoria\b/g, "Hist�ria"],
-      [/\bhistoria\b/g, "hist�ria"],
-      [/\bMusicos\b/g, "M�sicos"],
-      [/\bmusicos\b/g, "m�sicos"],
-      [/\bNao\b/g, "N�o"],
-      [/\bnao\b/g, "n�o"],
-      [/\bEstao\b/g, "Est�o"],
-      [/\bestao\b/g, "est�o"],
-      [/\bregiao\b/g, "regi�o"],
-      [/\bRegiao\b/g, "Regi�o"],
-      [/\bpais\b/g, "pa�s"],
-      [/\bPais\b/g, "Pa�s"],
-      [/\bcodigo\b/g, "c�digo"],
-      [/\bCodigo\b/g, "C�digo"],
-      [/\bacao\b/g, "a��o"],
-      [/\bAcoes\b/g, "A��es"],
-      [/\bacoes\b/g, "a��es"],
-      [/\bprecisao\b/g, "precis�o"],
-      [/\bPrecisao\b/g, "Precis�o"],
-      [/\bintencao\b/g, "inten��o"],
-      [/\bIntencao\b/g, "Inten��o"],
-      [/\bcartao\b/g, "cart�o"],
-      [/\bCartao\b/g, "Cart�o"],
-      [/\binvalido\b/g, "inv�lido"],
-      [/\bInvalido\b/g, "Inv�lido"],
-      [/\bobrigatorio\b/g, "obrigat�rio"],
-      [/\bObrigatorio\b/g, "Obrigat�rio"],
-      [/\bobrigatoria\b/g, "obrigat�ria"],
-      [/\bObrigatoria\b/g, "Obrigat�ria"]
+      [/\bInicio\b/g, "Inï¿½cio"],
+      [/\binicio\b/g, "inï¿½cio"],
+      [/\bComecar\b/g, "Comeï¿½ar"],
+      [/\bcomecar\b/g, "comeï¿½ar"],
+      [/\bComeca\b/g, "Comeï¿½a"],
+      [/\bcomeca\b/g, "comeï¿½a"],
+      [/\bSerie\b/g, "Sï¿½rie"],
+      [/\bserie\b/g, "sï¿½rie"],
+      [/\bSeries\b/g, "Sï¿½ries"],
+      [/\bseries\b/g, "sï¿½ries"],
+      [/\bDescricao\b/g, "Descriï¿½ï¿½o"],
+      [/\bdescricao\b/g, "descriï¿½ï¿½o"],
+      [/\bDescricoes\b/g, "Descriï¿½ï¿½es"],
+      [/\bdescricoes\b/g, "descriï¿½ï¿½es"],
+      [/\bEspecificacoes\b/g, "Especificaï¿½ï¿½es"],
+      [/\bespecificacoes\b/g, "especificaï¿½ï¿½es"],
+      [/\bSessao\b/g, "Sessï¿½o"],
+      [/\bsessao\b/g, "sessï¿½o"],
+      [/\bDefinicoes\b/g, "Definiï¿½ï¿½es"],
+      [/\bdefinicoes\b/g, "definiï¿½ï¿½es"],
+      [/\bAvaliacao\b/g, "Avaliaï¿½ï¿½o"],
+      [/\bavaliacao\b/g, "avaliaï¿½ï¿½o"],
+      [/\bAvaliacoes\b/g, "Avaliaï¿½ï¿½es"],
+      [/\bavaliacoes\b/g, "avaliaï¿½ï¿½es"],
+      [/\bAlteracoes\b/g, "Alteraï¿½ï¿½es"],
+      [/\balteracoes\b/g, "alteraï¿½ï¿½es"],
+      [/\bInformacao\b/g, "Informaï¿½ï¿½o"],
+      [/\binformacao\b/g, "informaï¿½ï¿½o"],
+      [/\bConfiguracao\b/g, "Configuraï¿½ï¿½o"],
+      [/\bconfiguracao\b/g, "configuraï¿½ï¿½o"],
+      [/\bConfiguracoes\b/g, "Configuraï¿½ï¿½es"],
+      [/\bconfiguracoes\b/g, "configuraï¿½ï¿½es"],
+      [/\bReposicao\b/g, "Reposiï¿½ï¿½o"],
+      [/\breposicao\b/g, "reposiï¿½ï¿½o"],
+      [/\bColecao\b/g, "Coleï¿½ï¿½o"],
+      [/\bcolecao\b/g, "coleï¿½ï¿½o"],
+      [/\bEletronica\b/g, "Eletrï¿½nica"],
+      [/\beletronica\b/g, "eletrï¿½nica"],
+      [/\bHistoria\b/g, "Histï¿½ria"],
+      [/\bhistoria\b/g, "histï¿½ria"],
+      [/\bMusicos\b/g, "Mï¿½sicos"],
+      [/\bmusicos\b/g, "mï¿½sicos"],
+      [/\bNao\b/g, "Nï¿½o"],
+      [/\bnao\b/g, "nï¿½o"],
+      [/\bEstao\b/g, "Estï¿½o"],
+      [/\bestao\b/g, "estï¿½o"],
+      [/\bregiao\b/g, "regiï¿½o"],
+      [/\bRegiao\b/g, "Regiï¿½o"],
+      [/\bpais\b/g, "paï¿½s"],
+      [/\bPais\b/g, "Paï¿½s"],
+      [/\bcodigo\b/g, "cï¿½digo"],
+      [/\bCodigo\b/g, "Cï¿½digo"],
+      [/\bacao\b/g, "aï¿½ï¿½o"],
+      [/\bAcoes\b/g, "Aï¿½ï¿½es"],
+      [/\bacoes\b/g, "aï¿½ï¿½es"],
+      [/\bprecisao\b/g, "precisï¿½o"],
+      [/\bPrecisao\b/g, "Precisï¿½o"],
+      [/\bintencao\b/g, "intenï¿½ï¿½o"],
+      [/\bIntencao\b/g, "Intenï¿½ï¿½o"],
+      [/\bcartao\b/g, "cartï¿½o"],
+      [/\bCartao\b/g, "Cartï¿½o"],
+      [/\binvalido\b/g, "invï¿½lido"],
+      [/\bInvalido\b/g, "Invï¿½lido"],
+      [/\bobrigatorio\b/g, "obrigatï¿½rio"],
+      [/\bObrigatorio\b/g, "Obrigatï¿½rio"],
+      [/\bobrigatoria\b/g, "obrigatï¿½ria"],
+      [/\bObrigatoria\b/g, "Obrigatï¿½ria"]
     ];
     rules.forEach(([pattern, replacement]) => {
       out = out.replace(pattern, replacement);
@@ -553,10 +553,10 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
   }
 
   // --------------------------------------------------
-  // Funo: localizeDescription
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: guitar, type = "short".
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: localizeDescription
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: guitar, type = "short".
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function localizeDescription(guitar, type = "short") {
     const model = guitar || {};
@@ -579,25 +579,25 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
   }
 
   // --------------------------------------------------
-  // Funo: shouldSkipTextNode
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: node.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: shouldSkipTextNode
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: node.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function shouldSkipTextNode(node) {
     const parent = node.parentElement;
     if (!parent) return true;
     const tag = parent.tagName;
-    if (tag === "SCRIPT" || tag === "STYLE" || tag === "NOSCRIPT" || tag === "TEXTAREA") return true;
+    if (tag === "SCRIPT" || tag === "STYLE" || tag === "NOSCRIPT" || tag === "textarea") return true;
     if (parent.closest("[data-i18n-no-translate], .gc-no-i18n")) return true;
     return false;
   }
 
   // --------------------------------------------------
-  // Funo: applyPhraseTranslations
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: root = document.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: applyPhraseTranslations
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: root = document.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function applyPhraseTranslations(root = document) {
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
@@ -617,10 +617,10 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
   }
 
   // --------------------------------------------------
-  // Funo: applyToDocument
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: root = document.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: applyToDocument
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: root = document.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function applyToDocument(root = document) {
     isApplying = true;
@@ -633,10 +633,10 @@ Este mdulo gere internacionalizao (EN/PT), traduo de texto e persistncia de idio
   });
 
   // --------------------------------------------------
-  // Funo: startObserver
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: nenhum parmetro.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: startObserver
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function startObserver() {
     if (observer) observer.disconnect();

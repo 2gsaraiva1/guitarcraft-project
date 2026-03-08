@@ -1,4 +1,4 @@
-/*
+﻿/*
 Este ficheiro expoe CRUD para as guitarras criadas no builder.
 Estas rotas guardam e editam configuracoes completas na tabela guitars.
 */

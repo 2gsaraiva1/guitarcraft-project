@@ -1,5 +1,5 @@
-/*
-Este mdulo gere o fluxo de checkout e validao de dados de pagamento.
+﻿/*
+Este modulo gere o fluxo de checkout e validacao de dados de pagamento.
 */
 
 /* global React, ReactDOM, GuitarAuth, GuitarCart */
@@ -7,10 +7,10 @@ const { AuthProvider } = GuitarAuth;
 const { CartProvider, useCart } = GuitarCart;
 
 // --------------------------------------------------
-// Funo: CheckoutView
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: CheckoutView
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function CheckoutView() {
   const { items, checkoutCartItems } = useCart();
@@ -67,20 +67,20 @@ function CheckoutView() {
   );
 
   // --------------------------------------------------
-  // Funo: onField
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: key, value.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: onField
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: key, value.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function onField(key, value) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
   // --------------------------------------------------
-  // Funo: formatExpiry
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: value.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: formatExpiry
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: value.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function formatExpiry(value) {
     const digits = String(value || "").replace(/[^\d]/g, "").slice(0, 4);
@@ -89,10 +89,10 @@ function CheckoutView() {
   }
 
   // --------------------------------------------------
-  // Funo: validate
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: nenhum parmetro.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: validate
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function validate() {
     if (!form.fullName.trim()) return "Full name is required.";
@@ -111,10 +111,10 @@ function CheckoutView() {
   }
 
   // --------------------------------------------------
-  // Funo: onCompletePurchase
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: nenhum parmetro.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: onCompletePurchase
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   async function onCompletePurchase() {
     setError("");
@@ -267,17 +267,17 @@ function CheckoutView() {
 
       <section className="cart-card checkout-note">
         <h2>Secure Checkout</h2>
-        <p className="muted">This is a demo checkout flow for GuitarCraft. No real payment is processed.</p>
+        <p className="muted">This is a demo checkout flow for GuitarCraft. No REAL payment is processed.</p>
       </section>
     </div>
   );
 }
 
 // --------------------------------------------------
-// Funo: CheckoutRoot
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: CheckoutRoot
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function CheckoutRoot() {
   return (

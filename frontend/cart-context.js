@@ -1,4 +1,4 @@
-/*
+﻿/*
 Contexto global de carrinho/builds/encomendas.
 Centraliza chamadas de API para:
 - carrinho (add/remove/quantidade/checkout)
@@ -44,12 +44,12 @@ Centraliza chamadas de API para:
   }
 
   // --------------------------------------------------
-  // Funcao: createCustomBuildPayload
+  // Funcao: CREATECustomBuildPayload
   // O que faz: executa uma parte da logica deste modulo.
   // Parametros: selections, label = "Custom Build", sourceId = "".
   // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
-  function createCustomBuildPayload(selections, label = "Custom Build", sourceId = "") {
+  function CREATECustomBuildPayload(selections, label = "Custom Build", sourceId = "") {
     // Estrutura padrao do item custom para salvar build e carrinho.
     const lines = createBreakdownLines(selections);
     const totalPrice = global.GuitarConfig.getTotalPrice(selections);
@@ -67,12 +67,12 @@ Centraliza chamadas de API para:
   }
 
   // --------------------------------------------------
-  // Funcao: createPrebuiltPayload
+  // Funcao: CREATEPrebuiltPayload
   // O que faz: executa uma parte da logica deste modulo.
   // Parametros: guitar.
   // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
-  function createPrebuiltPayload(guitar) {
+  function CREATEPrebuiltPayload(guitar) {
     // Estrutura padrao do item prebuilt para carrinho.
     const basePrice = Number(guitar.price) || 0;
     const firstImage = Array.isArray(guitar.images) && guitar.images.length
@@ -165,7 +165,7 @@ Centraliza chamadas de API para:
       // --------------------------------------------------
       async function addCustomBuildToCart(selections, imagePreview = "", label = "Custom Build", sourceId = "") {
         if (!currentUser) throw new Error("Login required.");
-        const payload = createCustomBuildPayload(selections, label, sourceId);
+        const payload = CREATECustomBuildPayload(selections, label, sourceId);
         const cartItem = {
           ...payload,
           image: String(imagePreview || ""),
@@ -188,7 +188,7 @@ Centraliza chamadas de API para:
       // --------------------------------------------------
       async function addPrebuiltToCart(guitar, quantity = 1) {
         if (!currentUser) throw new Error("Login required.");
-        const payload = createPrebuiltPayload({ ...guitar, quantity });
+        const payload = CREATEPrebuiltPayload({ ...guitar, quantity });
         const cartItem = {
           ...payload,
           cartId: `cart_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`
@@ -243,12 +243,12 @@ Centraliza chamadas de API para:
       // --------------------------------------------------
       async function saveCustomBuild(selections, imagePreview = "", label = "Custom Build", savedId = "") {
         if (!currentUser) throw new Error("Login required.");
-        const payload = createCustomBuildPayload(selections, label);
+        const payload = CREATECustomBuildPayload(selections, label);
         const build = {
           ...payload,
           savedId: String(savedId || `saved_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`),
           imagePreview: String(imagePreview || ""),
-          createdAt: new Date().toISOString()
+          CREATEdAt: new Date().toISOString()
         };
         await fetchJson(`${SAVED_API}/${encodeURIComponent(currentUser.username)}`, {
           method: "POST",
@@ -279,12 +279,12 @@ Centraliza chamadas de API para:
 
         const nextSelections = updates.selections || existing.selections || {};
         const label = String(updates.label || existing.label || "Custom Build").trim() || "Custom Build";
-        const payload = createCustomBuildPayload(nextSelections, label, savedId);
+        const payload = CREATECustomBuildPayload(nextSelections, label, savedId);
         const build = {
           ...payload,
           savedId: String(savedId),
           imagePreview: String(updates.imagePreview || existing.imagePreview || ""),
-          createdAt: existing.createdAt
+          CREATEdAt: existing.CREATEdAt
         };
 
         await fetchJson(`${SAVED_API}/${encodeURIComponent(currentUser.username)}/${encodeURIComponent(savedId)}`, {

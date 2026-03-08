@@ -1,5 +1,5 @@
-/*
-Este mdulo contm lgica auxiliar legada do builder e integrao com API.
+﻿/*
+Este modulo contm logica auxiliar legada do builder e integrao com API.
 */
 
 const API_URL = "/api/guitars";
@@ -8,10 +8,10 @@ const form = document.getElementById("builder-form");
 const guitarList = document.getElementById("builder-guitar-list");
 
 // --------------------------------------------------
-// Funo: fetchGuitars
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: fetchGuitars
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 async function fetchGuitars() {
   // Chamada  API: comunica com o backend para sincronizar estado no frontend.

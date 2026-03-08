@@ -1,4 +1,4 @@
-/*
+﻿/*
 Este ficheiro gere as builds guardadas no perfil do utilizador.
 Permite listar, guardar, editar e apagar presets do builder.
 */
@@ -97,7 +97,7 @@ router.post("/:username", async (req, res) => {
         JSON.stringify(build.priceBreakdown || []),
         Number(build.totalPrice || 0),
         String(build.imagePreview || ""),
-        String(build.createdAt || new Date().toISOString())
+        String(build.CREATEdAt || new Date().toISOString())
       ]
     );
 

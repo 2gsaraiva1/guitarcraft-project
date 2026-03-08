@@ -1,4 +1,4 @@
-/*
+﻿/*
 Modulo da pagina de produto pre-built.
 Faz load do produto por id, mostra galeria de imagens, stock,
 reviews e permite adicionar ao carrinho.
@@ -420,10 +420,10 @@ function ReviewSection({ productId, currentUser }) {
 
       <div className="review-list">
         {reviews.map((review, idx) => (
-          <div className="review-item" key={`${review.username}-${review.createdAt}-${idx}`}>
+          <div className="review-item" key={`${review.username}-${review.CREATEdAt}-${idx}`}>
             <p><strong>{review.username}</strong> <span className="review-stars">{renderStars(review.rating)}</span></p>
             <p>{review.comment}</p>
-            <p className="muted">{new Date(review.createdAt).toLocaleString()}</p>
+            <p className="muted">{new Date(review.CREATEdAt).toLocaleString()}</p>
             {currentUser && currentUser.role === "admin" ? (
               <button type="button" className="review-delete-btn" onClick={() => deleteReview(review)}>
                 Delete Review

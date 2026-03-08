@@ -1,4 +1,4 @@
-/*
+﻿/*
 Modulo da pagina Shop.
 Aqui a lista de guitarras pre-built e carregada, filtrada (serie + era),
 agrupada por categoria/serie e renderizada em cards com acoes de
@@ -184,7 +184,7 @@ function ShopView() {
   const [, setLangTick] = useState(0);
 
   const filteredGuitars = useMemo(() => {
-    // Aplica filtros em tempo real sem pedir de novo ao backend.
+    // Aplica filtros em tempo REAL sem pedir de novo ao backend.
     return (guitars || []).filter((guitar) => {
       const seriesMatch = selectedSeries === "All" || detectSeries(guitar) === selectedSeries;
       const eraMatch = selectedEra === "all" || getEra(guitar) === selectedEra;

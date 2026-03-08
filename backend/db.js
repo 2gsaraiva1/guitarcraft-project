@@ -1,4 +1,4 @@
-/*
+﻿/*
 Este ficheiro inicializa a base de dados SQLite do projeto.
 Cria tabelas, adiciona colunas novas quando necessario e faz seed de dados base.
 */

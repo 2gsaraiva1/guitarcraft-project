@@ -1,4 +1,4 @@
-/*
+﻿/*
 Este ficheiro gere a area de encomendas do utilizador.
 Permite listar historico e cancelar encomendas ativas.
 */

@@ -1,5 +1,5 @@
-/*
-Este mdulo aplica imagens dinmicas do site definidas no backend.
+﻿/*
+Este modulo aplica imagens dinamicas do site definidas no backend.
 */
 
 (function applySiteMedia() {
@@ -13,10 +13,10 @@ Este mdulo aplica imagens dinmicas do site definidas no backend.
   };
 
   // --------------------------------------------------
-  // Funo: toCssUrl
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: url.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: toCssUrl
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: url.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function toCssUrl(url) {
     return `url("${String(url).replace(/"/g, '\\"')}")`;

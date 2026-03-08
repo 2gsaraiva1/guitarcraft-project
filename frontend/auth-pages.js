@@ -1,5 +1,5 @@
-/*
-Este mdulo gere os formulrios de login e registo no frontend.
+﻿/*
+Este modulo gere os formulrios de login e registo no frontend.
 */
 
 /* global React, ReactDOM, GuitarAuth */
@@ -7,10 +7,10 @@ const { useState } = React;
 const { AuthProvider, useAuth } = GuitarAuth;
 
 // --------------------------------------------------
-// Funo: AuthForm
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: { mode }.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: AuthForm
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: { mode }.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function AuthForm({ mode }) {
   const { login, register } = useAuth();
@@ -21,10 +21,10 @@ function AuthForm({ mode }) {
   const isLogin = mode === "login";
 
   // --------------------------------------------------
-  // Funo: handleSubmit
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: e.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: handleSubmit
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: e.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   async function handleSubmit(e) {
     e.preventDefault();
@@ -64,7 +64,7 @@ function AuthForm({ mode }) {
           required
         />
 
-        <button type="submit">{isLogin ? "Login" : "Create Account"}</button>
+        <button type="submit">{isLogin ? "Login" : "CREATE Account"}</button>
       </form>
       {status ? <p className="auth-error">{status}</p> : null}
       <p className="auth-switch">
@@ -77,10 +77,10 @@ function AuthForm({ mode }) {
 }
 
 // --------------------------------------------------
-// Funo: AuthPageRoot
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: AuthPageRoot
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function AuthPageRoot() {
   const mode = document.body.getAttribute("data-auth-mode") || "login";

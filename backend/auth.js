@@ -1,5 +1,5 @@
-/*
-Este ficheiro gere a autenticao e o registo de utilizadores no backend.
+﻿/*
+Este ficheiro gere a autenticacao e o registo de utilizadores no backend.
 */
 
 const express = require("express");

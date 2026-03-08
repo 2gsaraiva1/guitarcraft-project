@@ -1,5 +1,5 @@
-/*
-Este ficheiro gere o media do site (imagens de seces como home e about).
+﻿/*
+Este ficheiro gere o media do site (imagens de secoes como home e about).
 Expoe rotas para ler e atualizar URLs de imagens e valida permissoes de administrador.
 */
 

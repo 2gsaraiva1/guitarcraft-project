@@ -1,4 +1,4 @@
-/*
+﻿/*
 Contexto global de autenticacao.
 Guarda sessao no localStorage, faz login/registo no backend
 e expoe estado do user (incluindo role admin) para toda a UI.

@@ -1,5 +1,5 @@
-/*
-Este mdulo gere a pgina de builds guardadas (editar, adicionar ao carrinho e apagar).
+﻿/*
+Este modulo gere a pagina de builds guardadas (editar, adicionar ao carrinho e apagar).
 */
 
 /* global React, ReactDOM, GuitarConfig, GuitarCart, GuitarAuth */
@@ -8,10 +8,10 @@ const { AuthProvider } = GuitarAuth;
 const BUILDER_EDIT_DRAFT_KEY = "guitarcraft_builder_edit_v1";
 
 // --------------------------------------------------
-// Funo: SavedBuildsPage
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: SavedBuildsPage
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function SavedBuildsPage() {
   const { savedBuilds, addSavedBuildToCart, removeSavedBuild, updateSavedBuild, items } = useCart();
@@ -21,10 +21,10 @@ function SavedBuildsPage() {
   const PLACEHOLDER = "/assets/placeholder-guitar.svg";
 
   // --------------------------------------------------
-  // Funo: startRename
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: build.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: startRename
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: build.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function startRename(build) {
     setEditingId(build.savedId);
@@ -33,10 +33,10 @@ function SavedBuildsPage() {
   }
 
   // --------------------------------------------------
-  // Funo: cancelRename
-  // O que faz: executa uma parte da lgica deste mdulo.
-  // Parmetros: nenhum parmetro.
-  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
+  // Funcao: cancelRename
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function cancelRename() {
     setEditingId("");
@@ -95,7 +95,7 @@ function SavedBuildsPage() {
             ) : (
               <h3>{build.label}</h3>
             )}
-            <p><strong>Saved:</strong> {new Date(build.createdAt).toLocaleString()}</p>
+            <p><strong>Saved:</strong> {new Date(build.CREATEdAt).toLocaleString()}</p>
             <p><strong>Total:</strong> ${Number(build.totalPrice || 0).toFixed(2)}</p>
 
             <div className="cart-specs">
@@ -162,10 +162,10 @@ function SavedBuildsPage() {
 }
 
 // --------------------------------------------------
-// Funo: SavedBuildsRoot
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: SavedBuildsRoot
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function SavedBuildsRoot() {
   return (

@@ -1,4 +1,4 @@
-const fs = require("fs");
+﻿const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 const zlib = require("zlib");
@@ -154,7 +154,7 @@ function build() {
     "Generated starter layered PNG pack.",
     "",
     "These are placeholder overlays so the 2D preview always renders.",
-    "Replace each PNG with your real transparent guitar art while keeping file names.",
+    "Replace each PNG with your REAL transparent guitar art while keeping file names.",
     "",
     "Generated files: " + count
   ].join("\n");

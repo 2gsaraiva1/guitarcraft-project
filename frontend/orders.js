@@ -1,5 +1,5 @@
-/*
-Este mdulo gere a UI de histrico de encomendas e cancelamento.
+﻿/*
+Este modulo gere a UI de historico de encomendas e cancelamento.
 */
 
 /* global React, ReactDOM, GuitarAuth, GuitarCart */
@@ -7,10 +7,10 @@ const { AuthProvider } = GuitarAuth;
 const { CartProvider, useCart } = GuitarCart;
 
 // --------------------------------------------------
-// Funo: OrdersPage
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: OrdersPage
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function OrdersPage() {
   const { orders, loadUserData } = useCart();
@@ -36,7 +36,7 @@ function OrdersPage() {
       {visibleOrders.map((order) => (
         <section className="cart-card" key={order.orderId} id={order.orderId}>
           <h2>Order {order.orderId}</h2>
-          <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleString()}</p>
+          <p><strong>Date:</strong> {new Date(order.CREATEdAt).toLocaleString()}</p>
           <p><strong>Status:</strong> {order.status}</p>
           <p><strong>Total:</strong> ${Number(order.totalPrice || 0).toFixed(2)}</p>
           {order.customerName ? <p><strong>Name:</strong> {order.customerName}</p> : null}
@@ -95,10 +95,10 @@ function OrdersPage() {
 }
 
 // --------------------------------------------------
-// Funo: OrdersRoot
-// O que faz: executa uma parte da lgica deste mdulo.
-// Parmetros: nenhum parmetro.
-// Retorna: o resultado da operao (ou Promise, quando aplicvel).
+// Funcao: OrdersRoot
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function OrdersRoot() {
   return (
