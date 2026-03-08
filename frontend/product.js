@@ -207,6 +207,28 @@ function ReviewSection({ productId, currentUser }) {
   const [isEditingMine, setIsEditingMine] = useState(false);
 
   // --------------------------------------------------
+  // Funcao: applyReviewPayload
+  // O que faz: aplica reviews no estado e recalcula resumo se backend nao enviar valores corretos.
+  // Parametros: data (objeto da API).
+  // Retorna: sem retorno.
+  // --------------------------------------------------
+  function applyReviewPayload(data) {
+    const nextReviews = Array.isArray(data && data.reviews) ? data.reviews : [];
+    setReviews(nextReviews);
+
+    const fallback = getReviewSummaryFromList(nextReviews);
+    const nextAverage = Number(
+      data && Number.isFinite(Number(data.averageRating)) ? data.averageRating : fallback.averageRating
+    );
+    const nextTotal = Number(
+      data && Number.isFinite(Number(data.totalReviews)) ? data.totalReviews : fallback.totalReviews
+    );
+
+    setAverageRating(Number.isFinite(nextAverage) ? nextAverage : fallback.averageRating);
+    setTotalReviews(Number.isFinite(nextTotal) ? nextTotal : fallback.totalReviews);
+  }
+
+  // --------------------------------------------------
   // Funcao: loadReviews
   // O que faz: executa uma parte da logica deste modulo.
   // Parametros: nenhum parametro.
@@ -696,20 +718,3 @@ function ProductRoot() {
 }
 
 ReactDOM.createRoot(document.getElementById("product-app")).render(<ProductRoot />);
-  // --------------------------------------------------
-  // Funcao: applyReviewPayload
-  // O que faz: aplica reviews no estado e recalcula resumo se backend nao enviar valores corretos.
-  // Parametros: data (objeto da API).
-  // Retorna: sem retorno.
-  // --------------------------------------------------
-  function applyReviewPayload(data) {
-    const nextReviews = Array.isArray(data && data.reviews) ? data.reviews : [];
-    setReviews(nextReviews);
-
-    const fallback = getReviewSummaryFromList(nextReviews);
-    const nextAverage = Number(data && Number.isFinite(Number(data.averageRating)) ? data.averageRating : fallback.averageRating);
-    const nextTotal = Number(data && Number.isFinite(Number(data.totalReviews)) ? data.totalReviews : fallback.totalReviews);
-
-    setAverageRating(Number.isFinite(nextAverage) ? nextAverage : fallback.averageRating);
-    setTotalReviews(Number.isFinite(nextTotal) ? nextTotal : fallback.totalReviews);
-  }
