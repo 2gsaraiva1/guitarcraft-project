@@ -86,7 +86,12 @@ function getReviewSummaryFromList(reviews) {
   const safe = Array.isArray(reviews) ? reviews : [];
   const totalReviews = safe.length;
   if (!totalReviews) return { averageRating: 0, totalReviews: 0 };
-  const sum = safe.reduce((acc, item) => acc + Number(item && item.rating ? item.rating : 0), 0);
+  const normalized = safe.map((item) => {
+    const raw = Number(item && item.rating ? item.rating : 0);
+    if (!Number.isFinite(raw)) return 0;
+    return Math.max(0, Math.min(5, raw));
+  });
+  const sum = normalized.reduce((acc, value) => acc + value, 0);
   const averageRating = Number((sum / totalReviews).toFixed(2));
   return { averageRating, totalReviews };
 }
@@ -217,15 +222,9 @@ function ReviewSection({ productId, currentUser }) {
     setReviews(nextReviews);
 
     const fallback = getReviewSummaryFromList(nextReviews);
-    const nextAverage = Number(
-      data && Number.isFinite(Number(data.averageRating)) ? data.averageRating : fallback.averageRating
-    );
-    const nextTotal = Number(
-      data && Number.isFinite(Number(data.totalReviews)) ? data.totalReviews : fallback.totalReviews
-    );
-
-    setAverageRating(Number.isFinite(nextAverage) ? nextAverage : fallback.averageRating);
-    setTotalReviews(Number.isFinite(nextTotal) ? nextTotal : fallback.totalReviews);
+    // Usa sempre o calculo local da lista atual para garantir sincronizacao imediata na UI.
+    setAverageRating(fallback.averageRating);
+    setTotalReviews(fallback.totalReviews);
   }
 
   // --------------------------------------------------
