@@ -77,6 +77,21 @@ function formatRatingValue(value) {
 }
 
 // --------------------------------------------------
+// Funcao: getReviewSummaryFromList
+// O que faz: calcula media e total localmente para evitar UI desatualizada.
+// Parametros: reviews (array).
+// Retorna: objeto com averageRating e totalReviews.
+// --------------------------------------------------
+function getReviewSummaryFromList(reviews) {
+  const safe = Array.isArray(reviews) ? reviews : [];
+  const totalReviews = safe.length;
+  if (!totalReviews) return { averageRating: 0, totalReviews: 0 };
+  const sum = safe.reduce((acc, item) => acc + Number(item && item.rating ? item.rating : 0), 0);
+  const averageRating = Number((sum / totalReviews).toFixed(2));
+  return { averageRating, totalReviews };
+}
+
+// --------------------------------------------------
 // Funcao: prettyCategory
 // O que faz: executa uma parte da logica deste modulo.
 // Parametros: value.
@@ -206,9 +221,7 @@ function ReviewSection({ productId, currentUser }) {
       );
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.error || "Failed to load reviews.");
-      setReviews(Array.isArray(data.reviews) ? data.reviews : []);
-      setAverageRating(Number(data.averageRating || 0));
-      setTotalReviews(Number(data.totalReviews || 0));
+      applyReviewPayload(data);
       setReviewStatus("");
     } catch (error) {
       setReviewStatus(error.message || "Failed to load reviews.");
@@ -280,12 +293,11 @@ function ReviewSection({ productId, currentUser }) {
       setIsEditingMine(false);
       setReviewStatus(hasReviewed ? "Review updated." : "Review submitted.");
       if (Array.isArray(data.reviews)) {
-        setReviews(data.reviews);
-        setAverageRating(Number(data.averageRating || 0));
-        setTotalReviews(Number(data.totalReviews || 0));
+        applyReviewPayload(data);
       } else {
         await loadReviews();
       }
+      await loadReviews();
     } catch (error) {
       setReviewStatus(error.message || "Failed to submit review.");
     }
@@ -313,12 +325,11 @@ function ReviewSection({ productId, currentUser }) {
       if (!response.ok) throw new Error(data.error || "Failed to delete review.");
       setReviewStatus("Review deleted.");
       if (Array.isArray(data.reviews)) {
-        setReviews(data.reviews);
-        setAverageRating(Number(data.averageRating || 0));
-        setTotalReviews(Number(data.totalReviews || 0));
+        applyReviewPayload(data);
       } else {
         await loadReviews();
       }
+      await loadReviews();
     } catch (error) {
       setReviewStatus(error.message || "Failed to delete review.");
     }
@@ -685,3 +696,20 @@ function ProductRoot() {
 }
 
 ReactDOM.createRoot(document.getElementById("product-app")).render(<ProductRoot />);
+  // --------------------------------------------------
+  // Funcao: applyReviewPayload
+  // O que faz: aplica reviews no estado e recalcula resumo se backend nao enviar valores corretos.
+  // Parametros: data (objeto da API).
+  // Retorna: sem retorno.
+  // --------------------------------------------------
+  function applyReviewPayload(data) {
+    const nextReviews = Array.isArray(data && data.reviews) ? data.reviews : [];
+    setReviews(nextReviews);
+
+    const fallback = getReviewSummaryFromList(nextReviews);
+    const nextAverage = Number(data && Number.isFinite(Number(data.averageRating)) ? data.averageRating : fallback.averageRating);
+    const nextTotal = Number(data && Number.isFinite(Number(data.totalReviews)) ? data.totalReviews : fallback.totalReviews);
+
+    setAverageRating(Number.isFinite(nextAverage) ? nextAverage : fallback.averageRating);
+    setTotalReviews(Number.isFinite(nextTotal) ? nextTotal : fallback.totalReviews);
+  }
