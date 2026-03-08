@@ -1,5 +1,9 @@
 /*
-Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e encomendas.
+Contexto global de carrinho/builds/encomendas.
+Centraliza chamadas de API para:
+- carrinho (add/remove/quantidade/checkout)
+- builds guardadas (save/update/delete)
+- historico de encomendas
 */
 
 /* global React, GuitarAuth */
@@ -13,13 +17,13 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
   const ORDERS_API = "/api/orders";
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: fetchJson
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: url, options.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: fetchJson
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: url, options.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   async function fetchJson(url, options) {
-    // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
+    // Helper unico para requests da UI com tratamento de erro padrao.
     const response = await fetch(url, options);
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
@@ -29,10 +33,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: createBreakdownLines
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: selections.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: createBreakdownLines
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: selections.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function createBreakdownLines(selections) {
     if (!global.GuitarConfig) return [];
@@ -40,12 +44,13 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: createCustomBuildPayload
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: selections, label = "Custom Build", sourceId = "".
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: createCustomBuildPayload
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: selections, label = "Custom Build", sourceId = "".
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function createCustomBuildPayload(selections, label = "Custom Build", sourceId = "") {
+    // Estrutura padrao do item custom para salvar build e carrinho.
     const lines = createBreakdownLines(selections);
     const totalPrice = global.GuitarConfig.getTotalPrice(selections);
     return {
@@ -62,12 +67,13 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: createPrebuiltPayload
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: guitar.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: createPrebuiltPayload
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: guitar.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function createPrebuiltPayload(guitar) {
+    // Estrutura padrao do item prebuilt para carrinho.
     const basePrice = Number(guitar.price) || 0;
     const firstImage = Array.isArray(guitar.images) && guitar.images.length
       ? guitar.images[0]
@@ -101,10 +107,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: CartProvider
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: { children }.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: CartProvider
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: { children }.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function CartProvider({ children }) {
     const { currentUser } = useAuth();
@@ -113,12 +119,13 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
     const [orders, setOrders] = useState([]);
 
     // --------------------------------------------------
-    // FunÃƒÂ§ÃƒÂ£o: loadUserData
-    // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-    // ParÃƒÂ¢metros: username.
-    // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+    // Funcao: loadUserData
+    // O que faz: executa uma parte da logica deste modulo.
+    // Parametros: username.
+    // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
     // --------------------------------------------------
     async function loadUserData(username) {
+      // Carrega todos os dados do user atual numa unica sincronizacao.
       if (!username) {
         setItems([]);
         setSavedBuilds([]);
@@ -151,10 +158,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
       }, 0);
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: addCustomBuildToCart
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: selections, imagePreview = "", label = "Custom Build", sourceId = "".
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: addCustomBuildToCart
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: selections, imagePreview = "", label = "Custom Build", sourceId = "".
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function addCustomBuildToCart(selections, imagePreview = "", label = "Custom Build", sourceId = "") {
         if (!currentUser) throw new Error("Login required.");
@@ -174,10 +181,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: addPrebuiltToCart
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: guitar, quantity = 1.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: addPrebuiltToCart
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: guitar, quantity = 1.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function addPrebuiltToCart(guitar, quantity = 1) {
         if (!currentUser) throw new Error("Login required.");
@@ -196,10 +203,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: removeFromCart
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: cartId.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: removeFromCart
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: cartId.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function removeFromCart(cartId) {
         if (!currentUser) throw new Error("Login required.");
@@ -211,10 +218,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: updateCartQuantity
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: cartId, quantity.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: updateCartQuantity
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: cartId, quantity.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function updateCartQuantity(cartId, quantity) {
         if (!currentUser) throw new Error("Login required.");
@@ -229,10 +236,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: saveCustomBuild
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: selections, imagePreview = "", label = "Custom Build", savedId = "".
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: saveCustomBuild
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: selections, imagePreview = "", label = "Custom Build", savedId = "".
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function saveCustomBuild(selections, imagePreview = "", label = "Custom Build", savedId = "") {
         if (!currentUser) throw new Error("Login required.");
@@ -252,12 +259,14 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: updateSavedBuild
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: savedId, updates = {}.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: updateSavedBuild
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: savedId, updates = {}.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function updateSavedBuild(savedId, updates = {}) {
+        // Atualiza build guardada e tenta refletir mudancas em itens do carrinho
+        // que vieram dessa build (mesmo sourceId).
         if (!currentUser) throw new Error("Login required.");
         let existing = savedBuilds.find((build) => build.savedId === savedId);
         if (!existing) {
@@ -297,10 +306,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: addSavedBuildToCart
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: savedId.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: addSavedBuildToCart
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: savedId.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function addSavedBuildToCart(savedId) {
         if (!currentUser) throw new Error("Login required.");
@@ -327,10 +336,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: removeSavedBuild
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: savedId.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: removeSavedBuild
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: savedId.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function removeSavedBuild(savedId) {
         if (!currentUser) throw new Error("Login required.");
@@ -341,10 +350,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: checkoutCartItems
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: cartIds, checkoutData = {}.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: checkoutCartItems
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: cartIds, checkoutData = {}.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function checkoutCartItems(cartIds, checkoutData = {}) {
         if (!currentUser) throw new Error("Login required.");
@@ -383,10 +392,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global do carrinho, builds guardadas e
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: useCart
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: useCart
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function useCart() {
     const value = useContext(CartContext);

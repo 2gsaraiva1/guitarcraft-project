@@ -1,5 +1,7 @@
 /*
-Este mÃƒÂ³dulo implementa o Guitar Builder (opÃƒÂ§ÃƒÂµes, preview, preÃƒÂ§o, guardar e carrinho).
+Modulo da pagina Guitar Builder.
+Controla selecoes do user, preview em camadas PNG, preco ao vivo,
+guardar build e adicionar build personalizada ao carrinho.
 */
 
 /* global React, ReactDOM, GuitarConfig, GuitarCart, GuitarAuth */
@@ -11,10 +13,10 @@ const BUILDER_EDIT_DRAFT_KEY = "guitarcraft_builder_edit_v1";
 const SAVED_API = "/api/saved-builds";
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: readBuilderEditDraft
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funcao: readBuilderEditDraft
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function readBuilderEditDraft() {
   try {
@@ -26,10 +28,10 @@ function readBuilderEditDraft() {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: getEditSavedIdFromUrl
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funcao: getEditSavedIdFromUrl
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function getEditSavedIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -41,6 +43,7 @@ function getEditSavedIdFromUrl() {
 
 /* Reducer only stores builder view + all currently selected options */
 function builderReducer(state, action) {
+  // Estado central do builder: opcoes selecionadas + lado da preview (front/back).
   if (action.type === "SET_OPTION") {
     return { ...state, selections: { ...state.selections, [action.key]: action.value } };
   }
@@ -60,6 +63,7 @@ function slug(value) {
 
 /* Builds the list of front/back layer PNGs based on selected options */
 function getLayers(view, selections) {
+  // Monta a lista de imagens de camadas para desenhar a guitarra no preview.
   const root = "assets/layers";
   const frontLayers = [
     ["body-shape", selections.model],
@@ -94,10 +98,10 @@ function getLayers(view, selections) {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: getCustomPreviewImage
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: selections.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funcao: getCustomPreviewImage
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: selections.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function getCustomPreviewImage(selections) {
   const root = "assets/layers/front/body-shape";
@@ -120,6 +124,7 @@ function SelectField({ field, value, onChange }) {
 
 /* Displays saved custom builds and lets user add/remove them */
 function SavedBuildsPanel() {
+  // Mini painel dentro do builder para reabrir builds guardadas.
   const { savedBuilds, addSavedBuildToCart, removeSavedBuild } = useCart();
   const [status, setStatus] = useState("");
 
@@ -202,10 +207,10 @@ function SavedBuildsPanel() {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: BuilderApp
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funcao: BuilderApp
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function BuilderApp() {
   const [state, dispatch] = useReducer(builderReducer, {
@@ -221,6 +226,7 @@ function BuilderApp() {
   const loadedEditRef = useRef("");
 
   function resetBuilderToDefault() {
+    // Sai do modo de edicao e volta o builder para estado inicial.
     dispatch({ type: "SET_VIEW", view: "front" });
     dispatch({ type: "LOAD_SELECTIONS", selections: { ...GuitarConfig.DEFAULT_SELECTIONS } });
     setBuildName("Custom Build");
@@ -240,15 +246,16 @@ function BuilderApp() {
   const isEditingSavedBuild = Boolean(editingSavedId);
 
   useEffect(() => {
+    // Quando abre com ?editSavedId, carrega a build guardada para editar.
     const editSavedId = requestedEditSavedId;
     if (!editSavedId) return;
     if (loadedEditRef.current === editSavedId) return;
 
     // --------------------------------------------------
-    // FunÃƒÂ§ÃƒÂ£o: applyBuild
-    // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-    // ParÃƒÂ¢metros: build.
-    // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+    // Funcao: applyBuild
+    // O que faz: executa uma parte da logica deste modulo.
+    // Parametros: build.
+    // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
     // --------------------------------------------------
     function applyBuild(build) {
       dispatch({ type: "LOAD_SELECTIONS", selections: build.selections || {} });
@@ -260,10 +267,10 @@ function BuilderApp() {
     }
 
     // --------------------------------------------------
-    // FunÃƒÂ§ÃƒÂ£o: loadEditBuild
-    // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-    // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-    // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+    // Funcao: loadEditBuild
+    // O que faz: executa uma parte da logica deste modulo.
+    // Parametros: nenhum parametro.
+    // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
     // --------------------------------------------------
     async function loadEditBuild() {
       let found = null;
@@ -279,7 +286,7 @@ function BuilderApp() {
 
       if (!found && currentUser && currentUser.username) {
         try {
-          // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
+          // Chamada  API: comunica com o backend para sincronizar estado no frontend.
           const response = await fetch(`${SAVED_API}/${encodeURIComponent(currentUser.username)}`);
           const data = await response.json().catch(() => []);
           if (response.ok && Array.isArray(data)) {
@@ -302,6 +309,8 @@ function BuilderApp() {
 
   /* Save build stores the custom build in local saved builds for later reuse */
   async function onSaveBuild() {
+    // Save Build normal cria nova build.
+    // Save Changes atualiza build existente e depois limpa modo edicao.
     try {
       const imagePreview = getCustomPreviewImage(state.selections);
       const safeLabel = String(buildName || "").trim() || "Custom Build";
@@ -332,6 +341,7 @@ function BuilderApp() {
 
   /* Add to cart creates one custom-build cart item with full breakdown */
   async function onAddToCart() {
+    // Envia o build atual para o carrinho como item custom.
     try {
       const imagePreview = getCustomPreviewImage(state.selections);
       const safeLabel = String(buildName || "").trim() || "Custom Build";
@@ -442,4 +452,3 @@ function BuilderRoot() {
 }
 
 ReactDOM.createRoot(document.getElementById("builder-app")).render(<BuilderRoot />);
-

@@ -1,5 +1,8 @@
 /*
-Este mÃƒÆ’Ã‚Â³dulo controla a loja de guitarras pre-built (filtros, stock e aÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes de carrinho).
+Modulo da pagina Shop.
+Aqui a lista de guitarras pre-built e carregada, filtrada (serie + era),
+agrupada por categoria/serie e renderizada em cards com acoes de
+"View Details" e "Add to Cart".
 */
 
 /* global React, ReactDOM, GuitarCart, GuitarAuth, GuitarPrebuilt */
@@ -10,10 +13,10 @@ const { PrebuiltProvider, usePrebuilt } = GuitarPrebuilt;
 const i18n = window.GuitarI18n;
 
 // --------------------------------------------------
-// FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: t
-// O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-// ParÃƒÆ’Ã‚Â¢metros: key, vars = {}.
-// Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+// Funcao: t
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: key, vars = {}.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function t(key, vars = {}) {
   if (i18n && typeof i18n.t === "function") return i18n.t(key, vars);
@@ -21,10 +24,10 @@ function t(key, vars = {}) {
 }
 
 // --------------------------------------------------
-// FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: localizeDescription
-// O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-// ParÃƒÆ’Ã‚Â¢metros: guitar.
-// Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+// Funcao: localizeDescription
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: guitar.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function localizeDescription(guitar) {
   if (i18n && typeof i18n.localizeDescription === "function") {
@@ -34,12 +37,14 @@ function localizeDescription(guitar) {
 }
 
 // --------------------------------------------------
-// FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: groupByCategoryAndSeries
-// O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-// ParÃƒÆ’Ã‚Â¢metros: guitars.
-// Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+// Funcao: groupByCategoryAndSeries
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: guitars.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function groupByCategoryAndSeries(guitars) {
+  // Organiza os produtos para montar as secoes visuais:
+  // Categoria -> Serie -> lista de cards.
   const grouped = {};
   guitars.forEach((guitar) => {
     const category = guitar.category || "Other";
@@ -52,12 +57,13 @@ function groupByCategoryAndSeries(guitars) {
 }
 
 // --------------------------------------------------
-// FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: detectSeries
-// O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-// ParÃƒÆ’Ã‚Â¢metros: guitar.
-// Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+// Funcao: detectSeries
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: guitar.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function detectSeries(guitar) {
+  // Detecta a serie para o filtro de UI com base em nome/descricao.
   const haystack = `${guitar.name || ""} ${guitar.shortDescription || ""} ${guitar.description || ""} ${guitar.seriesName || ""}`.toLowerCase();
   if (haystack.includes("headless")) return "Headless";
   if (haystack.includes("multi")) return "Multi";
@@ -68,10 +74,10 @@ function detectSeries(guitar) {
 }
 
 // --------------------------------------------------
-// FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: getEra
-// O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-// ParÃƒÆ’Ã‚Â¢metros: guitar.
-// Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+// Funcao: getEra
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: guitar.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function getEra(guitar) {
   const category = String(guitar.category || "").toLowerCase();
@@ -80,10 +86,10 @@ function getEra(guitar) {
 }
 
 // --------------------------------------------------
-// FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: prettyCategory
-// O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-// ParÃƒÆ’Ã‚Â¢metros: value.
-// Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+// Funcao: prettyCategory
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: value.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function prettyCategory(value) {
   const raw = String(value || "").trim().toLowerCase();
@@ -94,10 +100,10 @@ function prettyCategory(value) {
 }
 
 // --------------------------------------------------
-// FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: prettySeries
-// O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-// ParÃƒÆ’Ã‚Â¢metros: value.
-// Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+// Funcao: prettySeries
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: value.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function prettySeries(value) {
   const raw = String(value || "").trim();
@@ -106,12 +112,14 @@ function prettySeries(value) {
 }
 
 // --------------------------------------------------
-// FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: getShopStockMeta
-// O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-// ParÃƒÆ’Ã‚Â¢metros: guitar.
-// Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+// Funcao: getShopStockMeta
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: guitar.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function getShopStockMeta(guitar) {
+  // Converte estado de stock da BD para o que a UI precisa:
+  // badge, texto, restock e se pode adicionar ao carrinho.
   const status = String(guitar.stockStatus || "in_stock");
   const qty = Math.max(0, Number(guitar.stockQuantity || 0));
   const restock = guitar.estimatedRestockDate ? String(guitar.estimatedRestockDate).slice(0, 10) : "";
@@ -161,10 +169,10 @@ function getShopStockMeta(guitar) {
 }
 
 // --------------------------------------------------
-// FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: ShopView
-// O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-// ParÃƒÆ’Ã‚Â¢metros: nenhum parÃƒÆ’Ã‚Â¢metro.
-// Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+// Funcao: ShopView
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function ShopView() {
   const { guitars } = usePrebuilt();
@@ -176,6 +184,7 @@ function ShopView() {
   const [, setLangTick] = useState(0);
 
   const filteredGuitars = useMemo(() => {
+    // Aplica filtros em tempo real sem pedir de novo ao backend.
     return (guitars || []).filter((guitar) => {
       const seriesMatch = selectedSeries === "All" || detectSeries(guitar) === selectedSeries;
       const eraMatch = selectedEra === "all" || getEra(guitar) === selectedEra;
@@ -187,6 +196,7 @@ function ShopView() {
   const categories = Object.keys(grouped);
 
   useEffect(() => {
+    // Se vier hash na URL (ex: #modern), faz scroll para essa secao.
     if (!guitars.length) return;
     const hash = String(window.location.hash || "").replace("#", "").trim().toLowerCase();
     if (!hash) return;
@@ -197,12 +207,13 @@ function ShopView() {
   }, [guitars]);
 
   // --------------------------------------------------
-  // FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: onAddToCart
-  // O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-  // ParÃƒÆ’Ã‚Â¢metros: guitar.
-  // Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+  // Funcao: onAddToCart
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: guitar.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   async function onAddToCart(guitar) {
+    // So adiciona se stock permitir; depois mostra feedback para o user.
     const stockMeta = getShopStockMeta(guitar);
     if (!stockMeta.canAdd) {
       setStatus(`"${guitar.name}" is currently unavailable.`);
@@ -218,12 +229,13 @@ function ShopView() {
   }
 
   // --------------------------------------------------
-  // FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: toProductUrl
-  // O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-  // ParÃƒÆ’Ã‚Â¢metros: id.
-  // Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+  // Funcao: toProductUrl
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: id.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function toProductUrl(id) {
+    // Em deploy estatico usamos query param para evitar erro em /product/:id.
     return `/product/?id=${encodeURIComponent(id)}`;
   }
 
@@ -324,10 +336,10 @@ function ShopView() {
 }
 
 // --------------------------------------------------
-// FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o: ShopRoot
-// O que faz: executa uma parte da lÃƒÆ’Ã‚Â³gica deste mÃƒÆ’Ã‚Â³dulo.
-// ParÃƒÆ’Ã‚Â¢metros: nenhum parÃƒÆ’Ã‚Â¢metro.
-// Retorna: o resultado da operaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o (ou Promise, quando aplicÃƒÆ’Ã‚Â¡vel).
+// Funcao: ShopRoot
+// O que faz: executa uma parte da logica deste modulo.
+// Parametros: nenhum parametro.
+// Retorna: o resultado da operacao (ou Promise, quando aplicavel).
 // --------------------------------------------------
 function ShopRoot() {
   return (

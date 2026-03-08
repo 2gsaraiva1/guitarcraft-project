@@ -1,5 +1,5 @@
 /*
-Este mÃƒÂ³dulo controla a home page (reveal, destaque de produtos e estado de stock).
+Este mdulo controla a home page (reveal, destaque de produtos e estado de stock).
 */
 
 const PREBUILT_API = "/api/prebuilt";
@@ -7,20 +7,20 @@ const PLACEHOLDER_IMAGE = "/assets/placeholder-guitar.svg";
 let lastFeaturedData = [];
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: getI18n
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: getI18n
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function getI18n() {
   return window.GuitarI18n || null;
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: setupScrollReveal
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: setupScrollReveal
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function setupScrollReveal() {
   const nodes = document.querySelectorAll(".reveal");
@@ -42,20 +42,20 @@ function setupScrollReveal() {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: formatMoney
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: value.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: formatMoney
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: value.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function formatMoney(value) {
   return Number(value || 0).toFixed(2);
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: pickRandomGuitars
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: guitars, count = 4.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: pickRandomGuitars
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: guitars, count = 4.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function pickRandomGuitars(guitars, count = 4) {
   const list = Array.isArray(guitars) ? guitars : [];
@@ -65,10 +65,10 @@ function pickRandomGuitars(guitars, count = 4) {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: getHomeStockMeta
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: guitar.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: getHomeStockMeta
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: guitar.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function getHomeStockMeta(guitar) {
   const status = String(guitar.stockStatus || "in_stock");
@@ -128,10 +128,10 @@ function getHomeStockMeta(guitar) {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: renderFeaturedGuitars
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: guitars.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: renderFeaturedGuitars
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: guitars.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function renderFeaturedGuitars(guitars) {
   const host = document.getElementById("featured-guitars");
@@ -171,17 +171,17 @@ function renderFeaturedGuitars(guitars) {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: loadFeaturedGuitars
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: loadFeaturedGuitars
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 async function loadFeaturedGuitars() {
   const host = document.getElementById("featured-guitars");
   if (!host) return;
 
   try {
-    // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
+    // Chamada  API: comunica com o backend para sincronizar estado no frontend.
     const response = await fetch(PREBUILT_API);
     if (!response.ok) {
       throw new Error("Unable to load guitars.");

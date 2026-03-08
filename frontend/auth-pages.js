@@ -1,5 +1,5 @@
 /*
-Este mÃƒÂ³dulo gere os formulÃƒÂ¡rios de login e registo no frontend.
+Este mdulo gere os formulrios de login e registo no frontend.
 */
 
 /* global React, ReactDOM, GuitarAuth */
@@ -7,10 +7,10 @@ const { useState } = React;
 const { AuthProvider, useAuth } = GuitarAuth;
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: AuthForm
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: { mode }.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: AuthForm
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: { mode }.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function AuthForm({ mode }) {
   const { login, register } = useAuth();
@@ -21,10 +21,10 @@ function AuthForm({ mode }) {
   const isLogin = mode === "login";
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: handleSubmit
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: e.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: handleSubmit
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: e.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   async function handleSubmit(e) {
     e.preventDefault();
@@ -77,10 +77,10 @@ function AuthForm({ mode }) {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: AuthPageRoot
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: AuthPageRoot
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function AuthPageRoot() {
   const mode = document.body.getAttribute("data-auth-mode") || "login";

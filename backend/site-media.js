@@ -1,6 +1,6 @@
 /*
-Este ficheiro gere o media do site (imagens de secções como home e about).
-Expõe rotas para ler e atualizar URLs de imagens e valida permissões de administrador.
+Este ficheiro gere o media do site (imagens de seces como home e about).
+Expoe rotas para ler e atualizar URLs de imagens e valida permissoes de administrador.
 */
 
 const express = require("express");
@@ -17,14 +17,14 @@ const ALLOWED_KEYS = new Set([
 ]);
 
 // --------------------------------------------------
-// Função: getUser
-// O que faz: obtém um utilizador da base de dados pelo username.
-// Parâmetros: username (string).
-// Retorna: Promise com o registo do utilizador ou null.
+// Funcao: getUser
+// O que faz: le utilizador por username para validar permissao admin.
+// Parametros: username (string).
+// Retorna: Promise com user ou null.
 // --------------------------------------------------
 function getUser(username) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: leitura de utilizador para validação de permissões.
+    // Query DB: leitura do user para validar permissoes.
     db.get("SELECT * FROM users WHERE username = ?", [username], (err, row) => {
       if (err) return reject(err);
       resolve(row || null);
@@ -33,14 +33,14 @@ function getUser(username) {
 }
 
 // --------------------------------------------------
-// Função: allSql
-// O que faz: executa queries de leitura que devolvem múltiplas linhas.
-// Parâmetros: sql (string), params (array opcional).
-// Retorna: Promise com array de linhas.
+// Funcao: allSql
+// O que faz: leitura de varias linhas da tabela site_media.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com rows.
 // --------------------------------------------------
 function allSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: leitura genérica de múltiplos registos.
+    // Query DB: listagem de media configurado no site.
     db.all(sql, params, (err, rows) => {
       if (err) return reject(err);
       resolve(rows || []);
@@ -49,14 +49,14 @@ function allSql(sql, params = []) {
 }
 
 // --------------------------------------------------
-// Função: runSql
-// O que faz: executa queries de escrita (insert/update/delete).
-// Parâmetros: sql (string), params (array opcional).
-// Retorna: Promise com o contexto de execução da query.
+// Funcao: runSql
+// O que faz: escrita de URLs de media (insert/update).
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com resultado da query.
 // --------------------------------------------------
 function runSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: escrita de dados de media no armazenamento.
+    // Query DB: grava URLs de imagens usadas na home/about.
     db.run(sql, params, function onRun(err) {
       if (err) return reject(err);
       resolve(this);
@@ -65,9 +65,9 @@ function runSql(sql, params = []) {
 }
 
 // --------------------------------------------------
-// Função: requireAdmin
-// O que faz: valida se o utilizador fornecido tem role de administrador.
-// Parâmetros: actorUsername (string).
+// Funcao: requireAdmin
+// O que faz: confirma se o actor tem role admin antes de editar media.
+// Parametros: actorUsername (string).
 // Retorna: Promise<boolean>.
 // --------------------------------------------------
 async function requireAdmin(actorUsername) {
@@ -76,7 +76,7 @@ async function requireAdmin(actorUsername) {
   return Boolean(user && user.role === "admin");
 }
 
-// Rota API (GET): devolve todas as chaves/URLs de media do site.
+// Rota API (GET /): devolve mapa de imagens configuraveis do site.
 router.get("/", async (req, res) => {
   try {
     // Query de base de dados: leitura das URLs atuais de media.
@@ -91,7 +91,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Rota API (PUT): atualiza URLs de media permitidas (apenas admin).
+// Rota API (PUT /): atualiza URLs permitidas em site_media (so admin).
 router.put("/", async (req, res) => {
   try {
     const actorUsername = String(req.body.actorUsername || "").trim();
@@ -105,7 +105,7 @@ router.put("/", async (req, res) => {
     for (const [key, url] of entries) {
       const nextUrl = String(url || "").trim();
       if (!nextUrl) return res.status(400).json({ error: `URL is required for ${key}.` });
-      // Query de base de dados: upsert da URL para cada chave de media.
+      // Query DB: upsert da URL para cada chave permitida.
       await runSql(
         `INSERT INTO site_media (media_key, media_url) VALUES (?, ?)
          ON CONFLICT(media_key) DO UPDATE SET media_url = excluded.media_url`,

@@ -1,5 +1,5 @@
-﻿/*
-Este ficheiro gere a autenticação e o registo de utilizadores no backend.
+/*
+Este ficheiro gere a autenticao e o registo de utilizadores no backend.
 */
 
 const express = require("express");
@@ -8,14 +8,14 @@ const db = require("./db");
 const router = express.Router();
 
 // --------------------------------------------------
-// Função: getUserByUsername
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: username.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: getUserByUsername
+// O que faz: procura um utilizador pelo username para login, registo e sessao.
+// Parametros: username (string).
+// Retorna: Promise com o utilizador encontrado ou null.
 // --------------------------------------------------
 function getUserByUsername(username) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: le dados da tabela users para validar credenciais.
     db.get("SELECT id, username, role, password FROM users WHERE username = ?", [username], (err, row) => {
       if (err) return reject(err);
       resolve(row || null);
@@ -24,14 +24,14 @@ function getUserByUsername(username) {
 }
 
 // --------------------------------------------------
-// Função: runSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: runSql
+// O que faz: executa queries de escrita (INSERT/UPDATE) neste modulo.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com o resultado da execucao da query.
 // --------------------------------------------------
 function runSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: grava alteracoes de conta (registo e settings).
     db.run(sql, params, function onRun(err) {
       if (err) return reject(err);
       resolve(this);
@@ -39,7 +39,7 @@ function runSql(sql, params = []) {
   });
 }
 
-// Rota API (POST): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (POST /register): cria conta nova se username ainda nao existir.
 router.post("/register", async (req, res) => {
   try {
     const username = String(req.body.username || "").trim();
@@ -58,7 +58,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Rota API (POST): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (POST /login): valida credenciais e devolve dados da sessao.
 router.post("/login", async (req, res) => {
   try {
     const username = String(req.body.username || "").trim();
@@ -78,7 +78,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Rota API (PUT): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (PUT /settings): altera username/password do utilizador autenticado.
 router.put("/settings", async (req, res) => {
   try {
     const actorUsername = String(req.body.actorUsername || "").trim();
@@ -120,7 +120,7 @@ router.put("/settings", async (req, res) => {
   }
 });
 
-// Rota API (GET): valida se o utilizador existe em base de dados e devolve dados de sessão.
+// Rota API (GET /session/:username): confirma se o user da sessao ainda existe.
 router.get("/session/:username", async (req, res) => {
   try {
     const username = String(req.params.username || "").trim();

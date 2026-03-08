@@ -1,5 +1,5 @@
-﻿/*
-Este ficheiro gere as operações do carrinho no backend (adicionar, atualizar, remover e listar).
+/*
+Este ficheiro gere as operacoes do carrinho no backend (adicionar, atualizar, remover e listar).
 */
 
 const express = require("express");
@@ -8,14 +8,14 @@ const db = require("./db");
 const router = express.Router();
 
 // --------------------------------------------------
-// Função: getUser
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: username.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: getUser
+// O que faz: procura o utilizador dono do carrinho antes de qualquer operacao.
+// Parametros: username (string).
+// Retorna: Promise com o utilizador ou null.
 // --------------------------------------------------
 function getUser(username) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: le a tabela users para validar ownership.
     db.get("SELECT * FROM users WHERE username = ?", [username], (err, row) => {
       if (err) return reject(err);
       resolve(row || null);
@@ -24,14 +24,14 @@ function getUser(username) {
 }
 
 // --------------------------------------------------
-// Função: allSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: allSql
+// O que faz: executa queries de leitura que devolvem varias linhas.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com lista de rows.
 // --------------------------------------------------
 function allSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: usado para listar itens de carrinho e selecoes de checkout.
     db.all(sql, params, (err, rows) => {
       if (err) return reject(err);
       resolve(rows || []);
@@ -40,14 +40,14 @@ function allSql(sql, params = []) {
 }
 
 // --------------------------------------------------
-// Função: runSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: runSql
+// O que faz: executa queries de escrita no carrinho e encomendas.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com metadata da query.
 // --------------------------------------------------
 function runSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: insert, update e delete de itens/cart e checkout.
     db.run(sql, params, function onRun(err) {
       if (err) return reject(err);
       resolve(this);
@@ -56,14 +56,14 @@ function runSql(sql, params = []) {
 }
 
 // --------------------------------------------------
-// Função: getSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: getSql
+// O que faz: executa leitura de uma unica row.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com row ou null.
 // --------------------------------------------------
 function getSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: usado para procurar item especifico no carrinho.
     db.get(sql, params, (err, row) => {
       if (err) return reject(err);
       resolve(row || null);
@@ -72,16 +72,16 @@ function getSql(sql, params = []) {
 }
 
 // --------------------------------------------------
-// Função: createOrderId
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: nenhum parâmetro.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: createOrderId
+// O que faz: cria id unico para cada checkout finalizado.
+// Parametros: nenhum.
+// Retorna: string com prefixo ord_.
 // --------------------------------------------------
 function createOrderId() {
   return `ord_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 }
 
-// Rota API (GET): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (GET /:username): devolve carrinho completo do utilizador.
 router.get("/:username", async (req, res) => {
   try {
     const user = await getUser(req.params.username);
@@ -107,7 +107,7 @@ router.get("/:username", async (req, res) => {
   }
 });
 
-// Rota API (POST): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (POST /:username): adiciona item ao carrinho (prebuilt/custom) e faz merge quando necessario.
 router.post("/:username", async (req, res) => {
   try {
     const user = await getUser(req.params.username);
@@ -243,7 +243,7 @@ router.post("/:username", async (req, res) => {
   }
 });
 
-// Rota API (PUT): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (PUT /:username/saved-build/:savedId): sincroniza item custom do carrinho apos editar build guardada.
 router.put("/:username/saved-build/:savedId", async (req, res) => {
   try {
     const user = await getUser(req.params.username);
@@ -282,7 +282,7 @@ router.put("/:username/saved-build/:savedId", async (req, res) => {
   }
 });
 
-// Rota API (DELETE): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (DELETE /:username/:cartId): remove item do carrinho.
 router.delete("/:username/:cartId", async (req, res) => {
   try {
     const user = await getUser(req.params.username);
@@ -295,7 +295,7 @@ router.delete("/:username/:cartId", async (req, res) => {
   }
 });
 
-// Rota API (PUT): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (PUT /:username/:cartId): altera quantidade e recalcula total do item.
 router.put("/:username/:cartId", async (req, res) => {
   try {
     const user = await getUser(req.params.username);
@@ -319,7 +319,7 @@ router.put("/:username/:cartId", async (req, res) => {
   }
 });
 
-// Rota API (POST): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (POST /:username/checkout): cria encomenda a partir dos itens selecionados e limpa esses itens do carrinho.
 router.post("/:username/checkout", async (req, res) => {
   try {
     const user = await getUser(req.params.username);

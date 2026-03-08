@@ -1,5 +1,5 @@
-﻿/*
-Este ficheiro gere as guitarras pre-built, reviews e respetivas validações.
+/*
+Este ficheiro gere as guitarras pre-built, reviews e respetivas validaes.
 */
 
 const express = require("express");
@@ -10,14 +10,14 @@ const router = express.Router();
 const STOCK_ENUM = ["in_stock", "low_stock", "out_of_stock", "preorder", "backorder"];
 
 // --------------------------------------------------
-// Função: getUser
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: username.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: getUser
+// O que faz: procura utilizador para validar login/admin nas rotas de reviews e admin.
+// Parametros: username (string).
+// Retorna: Promise com user ou null.
 // --------------------------------------------------
 function getUser(username) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: leitura do user para permissao.
     db.get("SELECT * FROM users WHERE username = ?", [username], (err, row) => {
       if (err) return reject(err);
       resolve(row || null);
@@ -26,14 +26,14 @@ function getUser(username) {
 }
 
 // --------------------------------------------------
-// Função: runSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: runSql
+// O que faz: executa queries de escrita em prebuilt_guitars.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com resultado da query.
 // --------------------------------------------------
 function runSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: insert/update/delete de produtos e reviews.
     db.run(sql, params, function onRun(err) {
       if (err) return reject(err);
       resolve(this);
@@ -42,14 +42,14 @@ function runSql(sql, params = []) {
 }
 
 // --------------------------------------------------
-// Função: allSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: allSql
+// O que faz: executa listagens de prebuilt.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com rows.
 // --------------------------------------------------
 function allSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: leitura de multiplas guitarras.
     db.all(sql, params, (err, rows) => {
       if (err) return reject(err);
       resolve(rows || []);
@@ -58,14 +58,14 @@ function allSql(sql, params = []) {
 }
 
 // --------------------------------------------------
-// Função: getSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: getSql
+// O que faz: leitura de uma guitarra especifica.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com row ou null.
 // --------------------------------------------------
 function getSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: usado em detalhe de produto e validacoes.
     db.get(sql, params, (err, row) => {
       if (err) return reject(err);
       resolve(row || null);
@@ -74,10 +74,10 @@ function getSql(sql, params = []) {
 }
 
 // --------------------------------------------------
-// Função: normalizeCategory
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: input.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: normalizeCategory
+// O que faz: normaliza categoria para classic/modern antes de guardar/devolver.
+// Parametros: input (string).
+// Retorna: categoria normalizada.
 // --------------------------------------------------
 function normalizeCategory(input) {
   const raw = String(input || "").trim().toLowerCase();
@@ -86,10 +86,10 @@ function normalizeCategory(input) {
 }
 
 // --------------------------------------------------
-// Função: normalizeStatusDisplay
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: input.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: normalizeStatusDisplay
+// O que faz: converte status interno para texto de UI consistente.
+// Parametros: input (string).
+// Retorna: status para mostrar no frontend.
 // --------------------------------------------------
 function normalizeStatusDisplay(input) {
   const raw = String(input || "").trim();
@@ -99,10 +99,10 @@ function normalizeStatusDisplay(input) {
 }
 
 // --------------------------------------------------
-// Função: normalizeStockStatus
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: input.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: normalizeStockStatus
+// O que faz: converte variacoes de texto para enum oficial de stock.
+// Parametros: input (string).
+// Retorna: valor valido de STOCK_ENUM.
 // --------------------------------------------------
 function normalizeStockStatus(input) {
   const raw = String(input || "").trim().toLowerCase();
@@ -116,10 +116,10 @@ function normalizeStockStatus(input) {
 }
 
 // --------------------------------------------------
-// Função: parseArrayJson
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: jsonText, fallback = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: parseArrayJson
+// O que faz: faz parse seguro de campos JSON array vindos da DB.
+// Parametros: jsonText (string), fallback (array opcional).
+// Retorna: array valido.
 // --------------------------------------------------
 function parseArrayJson(jsonText, fallback = []) {
   try {
@@ -131,10 +131,10 @@ function parseArrayJson(jsonText, fallback = []) {
 }
 
 // --------------------------------------------------
-// Função: parseObjectJson
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: jsonText, fallback = {}.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: parseObjectJson
+// O que faz: faz parse seguro de campos JSON objeto vindos da DB.
+// Parametros: jsonText (string), fallback (objeto opcional).
+// Retorna: objeto valido.
 // --------------------------------------------------
 function parseObjectJson(jsonText, fallback = {}) {
   try {
@@ -147,10 +147,10 @@ function parseObjectJson(jsonText, fallback = {}) {
 }
 
 // --------------------------------------------------
-// Função: normalizeI18nMap
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: input.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: normalizeI18nMap
+// O que faz: limpa mapa de traducoes e remove entradas vazias.
+// Parametros: input (objeto).
+// Retorna: objeto com pares lingua->texto.
 // --------------------------------------------------
 function normalizeI18nMap(input) {
   if (!input || typeof input !== "object" || Array.isArray(input)) return {};
@@ -165,10 +165,10 @@ function normalizeI18nMap(input) {
 }
 
 // --------------------------------------------------
-// Função: getReviewSummary
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: reviews.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: getReviewSummary
+// O que faz: calcula media e total de reviews para cards e pagina produto.
+// Parametros: reviews (array).
+// Retorna: objeto com totalReviews e averageRating.
 // --------------------------------------------------
 function getReviewSummary(reviews) {
   const totalReviews = reviews.length;
@@ -179,10 +179,10 @@ function getReviewSummary(reviews) {
 }
 
 // --------------------------------------------------
-// Função: toApiModel
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: row.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: toApiModel
+// O que faz: converte row SQLite no formato usado pelo frontend.
+// Parametros: row (objeto da DB).
+// Retorna: objeto de produto pronto para API.
 // --------------------------------------------------
 function toApiModel(row) {
   const fallbackDescription = row.description || "";
@@ -232,10 +232,10 @@ function toApiModel(row) {
 }
 
 // --------------------------------------------------
-// Função: validateGuitar
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: input.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: validateGuitar
+// O que faz: valida payload de criar/editar produto no admin.
+// Parametros: input (objeto).
+// Retorna: string de erro ou null.
 // --------------------------------------------------
 function validateGuitar(input) {
   const required = ["id", "name", "description", "price", "specs", "image", "category", "seriesName"];
@@ -271,10 +271,10 @@ function validateGuitar(input) {
 }
 
 // --------------------------------------------------
-// Função: requireAdmin
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: actorUsername.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: requireAdmin
+// O que faz: verifica se o utilizador da acao tem role admin.
+// Parametros: actorUsername (string).
+// Retorna: Promise<boolean>.
 // --------------------------------------------------
 async function requireAdmin(actorUsername) {
   if (!actorUsername) return false;
@@ -282,7 +282,7 @@ async function requireAdmin(actorUsername) {
   return Boolean(user && user.role === "admin");
 }
 
-// Rota API (GET): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (GET /): lista catalogo prebuilt para home/shop/admin.
 router.get("/", async (req, res) => {
   try {
     const rows = await allSql("SELECT * FROM prebuilt_guitars ORDER BY category, series_name, name");
@@ -292,7 +292,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Rota API (GET): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (GET /:id/reviews): devolve reviews ordenadas por data e respetivo resumo.
 router.get("/:id/reviews", async (req, res) => {
   try {
     const row = await getSql("SELECT * FROM prebuilt_guitars WHERE id = ?", [String(req.params.id)]);
@@ -308,7 +308,7 @@ router.get("/:id/reviews", async (req, res) => {
   }
 });
 
-// Rota API (POST): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (POST /:id/review): adiciona review de user autenticado (1 por produto).
 router.post("/:id/review", async (req, res) => {
   try {
     const actorUsername = String(req.body.actorUsername || "").trim();
@@ -354,7 +354,7 @@ router.post("/:id/review", async (req, res) => {
   }
 });
 
-// Rota API (PUT): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (PUT /:id/review): edita a review do proprio user.
 router.put("/:id/review", async (req, res) => {
   try {
     const actorUsername = String(req.body.actorUsername || "").trim();
@@ -403,7 +403,7 @@ router.put("/:id/review", async (req, res) => {
   }
 });
 
-// Rota API (DELETE): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (DELETE /:id/review/:reviewUserId): admin remove review de um produto.
 router.delete("/:id/review/:reviewUserId", async (req, res) => {
   try {
     const actorUsername = String(req.body.actorUsername || req.query.actorUsername || "").trim();
@@ -444,7 +444,7 @@ router.delete("/:id/review/:reviewUserId", async (req, res) => {
   }
 });
 
-// Rota API (GET): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (GET /:id): devolve detalhe completo da guitarra prebuilt.
 router.get("/:id", async (req, res) => {
   try {
     const row = await getSql("SELECT * FROM prebuilt_guitars WHERE id = ?", [String(req.params.id)]);
@@ -455,7 +455,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Rota API (POST): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (POST /): admin cria guitarra prebuilt nova.
 router.post("/", async (req, res) => {
   try {
     const actorUsername = req.body.actorUsername;
@@ -509,7 +509,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Rota API (PUT): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (PUT /:id): admin atualiza dados de guitarra prebuilt.
 router.put("/:id", async (req, res) => {
   try {
     const actorUsername = req.body.actorUsername;
@@ -569,7 +569,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Rota API (DELETE): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (DELETE /:id): admin apaga guitarra prebuilt.
 router.delete("/:id", async (req, res) => {
   try {
     const actorUsername = req.body.actorUsername || req.query.actorUsername;

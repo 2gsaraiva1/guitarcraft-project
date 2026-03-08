@@ -1,5 +1,6 @@
-﻿/*
-Este ficheiro configura a base de dados SQLite, cria tabelas e aplica migrações iniciais.
+/*
+Este ficheiro inicializa a base de dados SQLite do projeto.
+Cria tabelas, adiciona colunas novas quando necessario e faz seed de dados base.
 */
 
 const path = require("path");
@@ -10,13 +11,13 @@ const db = new sqlite3.Database(dbPath);
 
 db.serialize(() => {
   // --------------------------------------------------
-  // Função: seedAdminUser
-  // O que faz: executa uma parte da lógica deste módulo.
-  // Parâmetros: nenhum parâmetro.
-  // Retorna: o resultado da operação (ou Promise, quando aplicável).
+  // Funcao: seedAdminUser
+  // O que faz: garante que existe uma conta admin minima para acesso ao painel.
+  // Parametros: nenhum.
+  // Retorna: sem retorno (side effect na DB).
   // --------------------------------------------------
   function seedAdminUser() {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: cria admin default apenas se ainda nao existir.
     db.run(
       "INSERT OR IGNORE INTO users (username, password, role) VALUES (?, ?, ?)",
       ["admin", "admin123", "admin"],
@@ -24,7 +25,7 @@ db.serialize(() => {
     );
   }
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: cria tabela de utilizadores.
   db.run(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,12 +35,12 @@ db.serialize(() => {
     )
   `);
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: verifica schema da tabela users para migracao de role.
   db.all("PRAGMA table_info(users)", [], (err, rows) => {
     if (err) return seedAdminUser();
     const hasRole = rows.some((row) => row.name === "role");
     if (!hasRole) {
-      // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+      // Query DB: adiciona coluna role em instalacoes antigas.
       db.run("ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'user'", [], () => {
         seedAdminUser();
       });
@@ -48,7 +49,7 @@ db.serialize(() => {
     seedAdminUser();
   });
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: cria tabela de guitarras custom do builder.
   db.run(`
     CREATE TABLE IF NOT EXISTS guitars (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -94,7 +95,7 @@ db.serialize(() => {
     )
   `);
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: cria tabela principal de guitarras prebuilt da loja.
   db.run(`
     CREATE TABLE IF NOT EXISTS prebuilt_guitars (
       id TEXT PRIMARY KEY,
@@ -120,7 +121,7 @@ db.serialize(() => {
     )
   `);
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: verifica colunas e aplica migracoes incrementais em prebuilt_guitars.
   db.all("PRAGMA table_info(prebuilt_guitars)", [], (err, rows) => {
     if (err) return;
     const hasShortDescription = rows.some((row) => row.name === "short_description");
@@ -143,12 +144,12 @@ db.serialize(() => {
     if (!hasEstimatedRestockDate) db.run("ALTER TABLE prebuilt_guitars ADD COLUMN estimated_restock_date TEXT");
     if (!hasReviewsJson) db.run("ALTER TABLE prebuilt_guitars ADD COLUMN reviews_json TEXT NOT NULL DEFAULT '[]'");
     if (!hasFeaturedOnHome) {
-      // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+      // Query DB: adiciona flag de destaque para home quando faltar.
       db.run("ALTER TABLE prebuilt_guitars ADD COLUMN featured_on_home INTEGER NOT NULL DEFAULT 0");
     }
   });
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: seed inicial de prebuilt 1.
   db.run(
     `INSERT OR IGNORE INTO prebuilt_guitars
     (id, name, description, price, specs_json, image, category, series_name, stock_status, stock_quantity, estimated_restock_date, featured_on_home)
@@ -168,7 +169,7 @@ db.serialize(() => {
       1
     ]
   );
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: seed inicial de prebuilt 2.
   db.run(
     `INSERT OR IGNORE INTO prebuilt_guitars
     (id, name, description, price, specs_json, image, category, series_name, stock_status, stock_quantity, estimated_restock_date, featured_on_home)
@@ -188,7 +189,7 @@ db.serialize(() => {
       0
     ]
   );
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: seed inicial de prebuilt 3.
   db.run(
     `INSERT OR IGNORE INTO prebuilt_guitars
     (id, name, description, price, specs_json, image, category, series_name, stock_status, stock_quantity, estimated_restock_date, featured_on_home)
@@ -209,16 +210,16 @@ db.serialize(() => {
     ]
   );
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: normaliza stock do prebuilt 1.
   db.run("UPDATE prebuilt_guitars SET stock_status = 'in_stock', stock_quantity = 14, estimated_restock_date = NULL WHERE id = 'pb_1'");
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: normaliza stock do prebuilt 2.
   db.run("UPDATE prebuilt_guitars SET stock_status = 'out_of_stock', stock_quantity = 0, estimated_restock_date = '2026-03-24' WHERE id = 'pb_2'");
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: normaliza stock do prebuilt 3.
   db.run("UPDATE prebuilt_guitars SET stock_status = 'low_stock', stock_quantity = 3, estimated_restock_date = NULL WHERE id = 'pb_3'");
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: migra series antigas Classic -> Vintage.
   db.run("UPDATE prebuilt_guitars SET series_name = 'Vintage Series' WHERE lower(series_name) = 'classic series'");
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: cria tabela de builds guardadas pelo user.
   db.run(`
     CREATE TABLE IF NOT EXISTS saved_builds (
       id TEXT PRIMARY KEY,
@@ -233,17 +234,17 @@ db.serialize(() => {
     )
   `);
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: verifica se saved_builds ja tem campo de preview de imagem.
   db.all("PRAGMA table_info(saved_builds)", [], (err, rows) => {
     if (err) return;
     const hasImagePreview = rows.some((row) => row.name === "image_preview");
     if (!hasImagePreview) {
-      // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+      // Query DB: adiciona coluna image_preview em bases antigas.
       db.run("ALTER TABLE saved_builds ADD COLUMN image_preview TEXT");
     }
   });
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: cria tabela de itens do carrinho.
   db.run(`
     CREATE TABLE IF NOT EXISTS cart_items (
       id TEXT PRIMARY KEY,
@@ -262,7 +263,7 @@ db.serialize(() => {
     )
   `);
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: aplica migracao de quantidade/preco unitario no carrinho.
   db.all("PRAGMA table_info(cart_items)", [], (err, rows) => {
     if (err) return;
     const hasQuantity = rows.some((row) => row.name === "quantity");
@@ -271,7 +272,7 @@ db.serialize(() => {
     if (!hasUnitPrice) db.run("ALTER TABLE cart_items ADD COLUMN unit_price REAL NOT NULL DEFAULT 0");
   });
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: cria tabela de encomendas.
   db.run(`
     CREATE TABLE IF NOT EXISTS orders (
       id TEXT PRIMARY KEY,
@@ -287,7 +288,7 @@ db.serialize(() => {
     )
   `);
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: aplica colunas de checkout em encomendas antigas.
   db.all("PRAGMA table_info(orders)", [], (err, rows) => {
     if (err) return;
     const hasCustomerName = rows.some((row) => row.name === "customer_name");
@@ -298,7 +299,7 @@ db.serialize(() => {
     if (!hasAddressJson) db.run("ALTER TABLE orders ADD COLUMN address_json TEXT");
   });
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: cria tabela de imagens configuraveis do site (home/about).
   db.run(`
     CREATE TABLE IF NOT EXISTS site_media (
       media_key TEXT PRIMARY KEY,
@@ -315,7 +316,7 @@ db.serialize(() => {
   ];
 
   defaultMedia.forEach(([key, url]) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: insere media default sem sobreescrever URLs ja editadas no admin.
     db.run("INSERT OR IGNORE INTO site_media (media_key, media_url) VALUES (?, ?)", [key, url]);
   });
 

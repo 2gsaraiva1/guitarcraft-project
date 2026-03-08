@@ -1,5 +1,6 @@
-﻿/*
-Este ficheiro gere o sistema de builds guardadas por utilizador.
+/*
+Este ficheiro gere as builds guardadas no perfil do utilizador.
+Permite listar, guardar, editar e apagar presets do builder.
 */
 
 const express = require("express");
@@ -8,14 +9,14 @@ const db = require("./db");
 const router = express.Router();
 
 // --------------------------------------------------
-// Função: getUser
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: username.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: getUser
+// O que faz: valida o dono das builds guardadas.
+// Parametros: username (string).
+// Retorna: Promise com user ou null.
 // --------------------------------------------------
 function getUser(username) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: lookup do utilizador para ownership.
     db.get("SELECT * FROM users WHERE username = ?", [username], (err, row) => {
       if (err) return reject(err);
       resolve(row || null);
@@ -24,14 +25,14 @@ function getUser(username) {
 }
 
 // --------------------------------------------------
-// Função: allSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: allSql
+// O que faz: executa listagens de builds guardadas.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com rows.
 // --------------------------------------------------
 function allSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: leitura de saved_builds por utilizador.
     db.all(sql, params, (err, rows) => {
       if (err) return reject(err);
       resolve(rows || []);
@@ -40,14 +41,14 @@ function allSql(sql, params = []) {
 }
 
 // --------------------------------------------------
-// Função: runSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: runSql
+// O que faz: grava alteracoes em builds guardadas.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com resultado da query.
 // --------------------------------------------------
 function runSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: insert/update/delete de saved_builds.
     db.run(sql, params, function onRun(err) {
       if (err) return reject(err);
       resolve(this);
@@ -55,7 +56,7 @@ function runSql(sql, params = []) {
   });
 }
 
-// Rota API (GET): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (GET /:username): lista todas as builds guardadas do user.
 router.get("/:username", async (req, res) => {
   try {
     const user = await getUser(req.params.username);
@@ -76,7 +77,7 @@ router.get("/:username", async (req, res) => {
   }
 });
 
-// Rota API (POST): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (POST /:username): guarda build nova (ou substitui por savedId).
 router.post("/:username", async (req, res) => {
   try {
     const user = await getUser(req.params.username);
@@ -106,7 +107,7 @@ router.post("/:username", async (req, res) => {
   }
 });
 
-// Rota API (PUT): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (PUT /:username/:savedId): atualiza uma build guardada existente.
 router.put("/:username/:savedId", async (req, res) => {
   try {
     const user = await getUser(req.params.username);
@@ -136,7 +137,7 @@ router.put("/:username/:savedId", async (req, res) => {
   }
 });
 
-// Rota API (DELETE): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (DELETE /:username/:savedId): remove build guardada.
 router.delete("/:username/:savedId", async (req, res) => {
   try {
     const user = await getUser(req.params.username);

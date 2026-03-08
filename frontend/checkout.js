@@ -1,5 +1,5 @@
 /*
-Este mÃƒÂ³dulo gere o fluxo de checkout e validaÃƒÂ§ÃƒÂ£o de dados de pagamento.
+Este mdulo gere o fluxo de checkout e validao de dados de pagamento.
 */
 
 /* global React, ReactDOM, GuitarAuth, GuitarCart */
@@ -7,10 +7,10 @@ const { AuthProvider } = GuitarAuth;
 const { CartProvider, useCart } = GuitarCart;
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: CheckoutView
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: CheckoutView
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function CheckoutView() {
   const { items, checkoutCartItems } = useCart();
@@ -67,20 +67,20 @@ function CheckoutView() {
   );
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: onField
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: key, value.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: onField
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: key, value.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function onField(key, value) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: formatExpiry
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: value.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: formatExpiry
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: value.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function formatExpiry(value) {
     const digits = String(value || "").replace(/[^\d]/g, "").slice(0, 4);
@@ -89,10 +89,10 @@ function CheckoutView() {
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: validate
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: validate
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: nenhum parmetro.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function validate() {
     if (!form.fullName.trim()) return "Full name is required.";
@@ -111,10 +111,10 @@ function CheckoutView() {
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: onCompletePurchase
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: onCompletePurchase
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: nenhum parmetro.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   async function onCompletePurchase() {
     setError("");
@@ -274,10 +274,10 @@ function CheckoutView() {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: CheckoutRoot
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: CheckoutRoot
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function CheckoutRoot() {
   return (

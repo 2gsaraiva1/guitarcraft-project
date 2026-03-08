@@ -1,5 +1,5 @@
 /*
-Este mÃƒÂ³dulo gere a UI de histÃƒÂ³rico de encomendas e cancelamento.
+Este mdulo gere a UI de histrico de encomendas e cancelamento.
 */
 
 /* global React, ReactDOM, GuitarAuth, GuitarCart */
@@ -7,10 +7,10 @@ const { AuthProvider } = GuitarAuth;
 const { CartProvider, useCart } = GuitarCart;
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: OrdersPage
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: OrdersPage
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function OrdersPage() {
   const { orders, loadUserData } = useCart();
@@ -70,7 +70,7 @@ function OrdersPage() {
               <button
                 onClick={async () => {
                   try {
-                    // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
+                    // Chamada  API: comunica com o backend para sincronizar estado no frontend.
                     const response = await fetch(`/api/orders/${encodeURIComponent(username)}/${encodeURIComponent(order.orderId)}/cancel`, {
                       method: "PUT"
                     });
@@ -95,10 +95,10 @@ function OrdersPage() {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: OrdersRoot
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: OrdersRoot
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function OrdersRoot() {
   return (

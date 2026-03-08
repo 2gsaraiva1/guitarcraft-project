@@ -1,5 +1,6 @@
-﻿/*
-Este ficheiro expõe rotas CRUD para guitarras personalizadas.
+/*
+Este ficheiro expoe CRUD para as guitarras criadas no builder.
+Estas rotas guardam e editam configuracoes completas na tabela guitars.
 */
 
 const express = require("express");
@@ -45,16 +46,16 @@ const requiredFields = [
   "cavity_cover_color"
 ];
 
-// Rota API (GET): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (GET /): lista todas as configuracoes custom gravadas.
 router.get("/", (req, res) => {
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: leitura total das guitarras custom.
   db.all("SELECT * FROM guitars", [], (err, rows) => {
     if (err) return res.status(500).json({ error: "Failed to fetch guitars" });
     res.json(rows);
   });
 });
 
-// Rota API (POST): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (POST /): cria guitarra custom nova com todos os campos obrigatorios.
 router.post("/", (req, res) => {
   const missing = requiredFields.filter((f) => !req.body[f]);
   if (missing.length) {
@@ -64,7 +65,7 @@ router.post("/", (req, res) => {
   const values = requiredFields.map((f) => req.body[f]);
   const placeholders = requiredFields.map(() => "?").join(", ");
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: insert da configuracao completa do builder.
   db.run(
     `INSERT INTO guitars (${requiredFields.join(", ")}) VALUES (${placeholders})`,
     values,
@@ -75,7 +76,7 @@ router.post("/", (req, res) => {
   );
 });
 
-// Rota API (PUT): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (PUT /:id): atualiza uma guitarra custom existente.
 router.put("/:id", (req, res) => {
   const { id } = req.params;
 
@@ -87,7 +88,7 @@ router.put("/:id", (req, res) => {
   const setClause = requiredFields.map((f) => `${f} = ?`).join(", ");
   const values = [...requiredFields.map((f) => req.body[f]), id];
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: update completo dos atributos da guitarra.
   db.run(
     `UPDATE guitars SET ${setClause} WHERE id = ?`,
     values,
@@ -99,11 +100,11 @@ router.put("/:id", (req, res) => {
   );
 });
 
-// Rota API (DELETE): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (DELETE /:id): apaga uma guitarra custom por id.
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
 
-  // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+  // Query DB: delete da guitarra selecionada.
   db.run("DELETE FROM guitars WHERE id = ?", [id], function (err) {
     if (err) return res.status(500).json({ error: "Failed to delete guitar" });
     if (this.changes === 0) return res.status(404).json({ error: "Guitar not found" });

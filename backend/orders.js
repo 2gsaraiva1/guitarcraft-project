@@ -1,5 +1,6 @@
-﻿/*
-Este ficheiro gere criação, listagem e atualização de encomendas.
+/*
+Este ficheiro gere a area de encomendas do utilizador.
+Permite listar historico e cancelar encomendas ativas.
 */
 
 const express = require("express");
@@ -8,14 +9,14 @@ const db = require("./db");
 const router = express.Router();
 
 // --------------------------------------------------
-// Função: getUser
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: username.
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: getUser
+// O que faz: valida o utilizador antes de ler/editar encomendas.
+// Parametros: username (string).
+// Retorna: Promise com user ou null.
 // --------------------------------------------------
 function getUser(username) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: leitura do user dono das encomendas.
     db.get("SELECT * FROM users WHERE username = ?", [username], (err, row) => {
       if (err) return reject(err);
       resolve(row || null);
@@ -24,14 +25,14 @@ function getUser(username) {
 }
 
 // --------------------------------------------------
-// Função: allSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: allSql
+// O que faz: executa queries de leitura com varias linhas.
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com rows.
 // --------------------------------------------------
 function allSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: listagem de encomendas do utilizador.
     db.all(sql, params, (err, rows) => {
       if (err) return reject(err);
       resolve(rows || []);
@@ -40,14 +41,14 @@ function allSql(sql, params = []) {
 }
 
 // --------------------------------------------------
-// Função: runSql
-// O que faz: executa uma parte da lógica deste módulo.
-// Parâmetros: sql, params = [].
-// Retorna: o resultado da operação (ou Promise, quando aplicável).
+// Funcao: runSql
+// O que faz: executa alteracoes em encomendas (ex.: cancelar).
+// Parametros: sql (string), params (array opcional).
+// Retorna: Promise com resultado da query.
 // --------------------------------------------------
 function runSql(sql, params = []) {
   return new Promise((resolve, reject) => {
-    // Query de base de dados: executa leitura/escrita na SQLite para suportar esta operação.
+    // Query DB: escrita de status da encomenda.
     db.run(sql, params, function onRun(err) {
       if (err) return reject(err);
       resolve(this);
@@ -55,7 +56,7 @@ function runSql(sql, params = []) {
   });
 }
 
-// Rota API (GET): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (GET /:username): devolve historico de encomendas nao canceladas.
 router.get("/:username", async (req, res) => {
   try {
     const user = await getUser(req.params.username);
@@ -81,7 +82,7 @@ router.get("/:username", async (req, res) => {
   }
 });
 
-// Rota API (PUT): recebe pedido HTTP, valida dados e devolve resposta adequada.
+// Rota API (PUT /:username/:orderId/cancel): marca encomenda como Cancelled.
 router.put("/:username/:orderId/cancel", async (req, res) => {
   try {
     const user = await getUser(req.params.username);

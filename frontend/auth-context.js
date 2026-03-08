@@ -1,5 +1,7 @@
 /*
-Este mÃƒÂ³dulo mantÃƒÂ©m o estado global de autenticaÃƒÂ§ÃƒÂ£o no frontend.
+Contexto global de autenticacao.
+Guarda sessao no localStorage, faz login/registo no backend
+e expoe estado do user (incluindo role admin) para toda a UI.
 */
 
 /* global React */
@@ -11,12 +13,13 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global de autenticaÃƒÂ§ÃƒÂ£o n
   const AuthContext = createContext(null);
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: readSession
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: readSession
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function readSession() {
+    // Recupera sessao local para manter login entre refreshes.
     try {
       const raw = localStorage.getItem(SESSION_KEY);
       return raw ? JSON.parse(raw) : null;
@@ -26,23 +29,23 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global de autenticaÃƒÂ§ÃƒÂ£o n
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: writeSession
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: session.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: writeSession
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: session.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function writeSession(session) {
     localStorage.setItem(SESSION_KEY, JSON.stringify(session));
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: apiRequest
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: path, payload, method = "POST".
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: apiRequest
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: path, payload, method = "POST".
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   async function apiRequest(path, payload, method = "POST") {
-    // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
+    // Todas as operacoes de auth passam por este helper.
     const response = await fetch(`${API_BASE}${path}`, {
       method,
       headers: { "Content-Type": "application/json" },
@@ -56,18 +59,19 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global de autenticaÃƒÂ§ÃƒÂ£o n
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: AuthProvider
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: { children }.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: AuthProvider
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: { children }.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(() => readSession());
 
     React.useEffect(() => {
+      // Valida no backend se a sessao local ainda existe/esta valida.
       if (!currentUser || !currentUser.username) return;
 
-      // Sincroniza a sessÃƒÂ£o local com a base de dados para evitar sessÃƒÂ£o invÃƒÂ¡lida no cliente.
+      // Sincroniza a sessao local com a base de dados para evitar sessao invlida no cliente.
       (async () => {
         try {
           const response = await fetch(`${API_BASE}/session/${encodeURIComponent(currentUser.username)}`);
@@ -95,12 +99,13 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global de autenticaÃƒÂ§ÃƒÂ£o n
 
     const value = useMemo(() => {
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: register
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: { username, password }.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: register
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: { username, password }.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function register({ username, password }) {
+        // Cria conta e abre sessao automaticamente.
         const data = await apiRequest("/register", { username, password });
         const session = { username: data.username, role: data.role || "user" };
         writeSession(session);
@@ -109,12 +114,13 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global de autenticaÃƒÂ§ÃƒÂ£o n
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: login
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: { username, password }.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: login
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: { username, password }.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function login({ username, password }) {
+        // Login normal e persistencia de sessao.
         const data = await apiRequest("/login", { username, password });
         const session = { username: data.username, role: data.role || "user" };
         writeSession(session);
@@ -123,12 +129,13 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global de autenticaÃƒÂ§ÃƒÂ£o n
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: updateSettings
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: { currentPassword, newUsername, newPassword }.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: updateSettings
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: { currentPassword, newUsername, newPassword }.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       async function updateSettings({ currentPassword, newUsername, newPassword }) {
+        // Atualiza dados da conta e sincroniza sessao local.
         if (!currentUser || !currentUser.username) throw new Error("Login required.");
         const data = await apiRequest(
           "/settings",
@@ -148,10 +155,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global de autenticaÃƒÂ§ÃƒÂ£o n
       }
 
       // --------------------------------------------------
-      // FunÃƒÂ§ÃƒÂ£o: logout
-      // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-      // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-      // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+      // Funcao: logout
+      // O que faz: executa uma parte da logica deste modulo.
+      // Parametros: nenhum parametro.
+      // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
       // --------------------------------------------------
       function logout() {
         localStorage.removeItem(SESSION_KEY);
@@ -173,10 +180,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global de autenticaÃƒÂ§ÃƒÂ£o n
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: useAuth
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: useAuth
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function useAuth() {
     const value = useContext(AuthContext);
@@ -185,10 +192,10 @@ Este mÃƒÂ³dulo mantÃƒÂ©m o estado global de autenticaÃƒÂ§ÃƒÂ£o n
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: getSessionUser
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funcao: getSessionUser
+  // O que faz: executa uma parte da logica deste modulo.
+  // Parametros: nenhum parametro.
+  // Retorna: o resultado da operacao (ou Promise, quando aplicavel).
   // --------------------------------------------------
   function getSessionUser() {
     return readSession();

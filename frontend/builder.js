@@ -1,5 +1,5 @@
 /*
-Este mÃƒÂ³dulo contÃƒÂ©m lÃƒÂ³gica auxiliar legada do builder e integraÃƒÂ§ÃƒÂ£o com API.
+Este mdulo contm lgica auxiliar legada do builder e integrao com API.
 */
 
 const API_URL = "/api/guitars";
@@ -8,13 +8,13 @@ const form = document.getElementById("builder-form");
 const guitarList = document.getElementById("builder-guitar-list");
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: fetchGuitars
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: fetchGuitars
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 async function fetchGuitars() {
-  // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
+  // Chamada  API: comunica com o backend para sincronizar estado no frontend.
   const response = await fetch(API_URL);
   const guitars = await response.json();
 
@@ -59,7 +59,7 @@ form.addEventListener("submit", async (e) => {
     bridge_style: document.getElementById("bridge_style").value
   };
 
-  // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
+  // Chamada  API: comunica com o backend para sincronizar estado no frontend.
   await fetch(API_URL, {
     method: "POST",
     headers: {

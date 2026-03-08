@@ -1,5 +1,5 @@
 /*
-Este mÃƒÂ³dulo valida no cliente se a rota atual exige utilizador autenticado.
+Este mdulo valida no cliente se a rota atual exige utilizador autenticado.
 */
 
 (function protectPage() {
@@ -17,7 +17,7 @@ Este mÃƒÂ³dulo valida no cliente se a rota atual exige utilizador autenticad
     return;
   }
 
-  // ValidaÃƒÂ§ÃƒÂ£o no backend para garantir que o utilizador da sessÃƒÂ£o existe na base de dados.
+  // Validao no backend para garantir que o utilizador da sesso existe na base de dados.
   (async () => {
     try {
       const response = await fetch(`${API_BASE}/session/${encodeURIComponent(session.username)}`);

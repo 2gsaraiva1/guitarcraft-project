@@ -1,5 +1,5 @@
 /*
-Este mÃƒÂ³dulo gere a UI da pÃƒÂ¡gina do carrinho e aÃƒÂ§ÃƒÂµes de quantidade/remoÃƒÂ§ÃƒÂ£o/checkout.
+Este mdulo gere a UI da pgina do carrinho e aes de quantidade/remoo/checkout.
 */
 
 /* global React, ReactDOM, GuitarConfig, GuitarCart, GuitarAuth */
@@ -7,10 +7,10 @@ const { CartProvider, useCart } = GuitarCart;
 const { AuthProvider, useAuth } = GuitarAuth;
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: CartApp
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: CartApp
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function CartApp() {
   const { items, cartTotal, removeFromCart, updateCartQuantity } = useCart();
@@ -42,10 +42,10 @@ function CartApp() {
   );
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: toggleSelected
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: cartId, checked.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: toggleSelected
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: cartId, checked.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function toggleSelected(cartId, checked) {
     setSelected((prev) => ({ ...prev, [cartId]: checked }));
@@ -209,10 +209,10 @@ function CartApp() {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: CartRoot
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: CartRoot
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function CartRoot() {
   return (

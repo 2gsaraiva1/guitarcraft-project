@@ -1,5 +1,5 @@
 /*
-Este mÃƒÂ³dulo gere a pÃƒÂ¡gina de builds guardadas (editar, adicionar ao carrinho e apagar).
+Este mdulo gere a pgina de builds guardadas (editar, adicionar ao carrinho e apagar).
 */
 
 /* global React, ReactDOM, GuitarConfig, GuitarCart, GuitarAuth */
@@ -8,10 +8,10 @@ const { AuthProvider } = GuitarAuth;
 const BUILDER_EDIT_DRAFT_KEY = "guitarcraft_builder_edit_v1";
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: SavedBuildsPage
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: SavedBuildsPage
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function SavedBuildsPage() {
   const { savedBuilds, addSavedBuildToCart, removeSavedBuild, updateSavedBuild, items } = useCart();
@@ -21,10 +21,10 @@ function SavedBuildsPage() {
   const PLACEHOLDER = "/assets/placeholder-guitar.svg";
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: startRename
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: build.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: startRename
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: build.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function startRename(build) {
     setEditingId(build.savedId);
@@ -33,10 +33,10 @@ function SavedBuildsPage() {
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: cancelRename
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: cancelRename
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: nenhum parmetro.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function cancelRename() {
     setEditingId("");
@@ -162,10 +162,10 @@ function SavedBuildsPage() {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: SavedBuildsRoot
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: SavedBuildsRoot
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function SavedBuildsRoot() {
   return (

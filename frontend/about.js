@@ -1,24 +1,24 @@
 /*
-Este mÃƒÂ³dulo controla o comportamento visual da pÃƒÂ¡gina About.
-Aplica animaÃƒÂ§ÃƒÂ£o de entrada (reveal) quando as secÃƒÂ§ÃƒÂµes ficam visÃƒÂ­veis no ecrÃƒÂ£.
+Este mdulo controla o comportamento visual da pgina About.
+Aplica animao de entrada (reveal) quando as seces ficam visveis no ecr.
 */
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: setupAboutReveal
-// O que faz: observa elementos com classe "reveal" e ativa animaÃƒÂ§ÃƒÂ£o quando entram no viewport.
-// ParÃƒÂ¢metros: nenhum.
+// Funo: setupAboutReveal
+// O que faz: observa elementos com classe "reveal" e ativa animao quando entram no viewport.
+// Parmetros: nenhum.
 // Retorna: nada (void).
 // --------------------------------------------------
 function setupAboutReveal() {
   const nodes = document.querySelectorAll(".reveal");
   if (!nodes.length) return;
 
-  // LÃƒÂ³gica de UI: observer para transiÃƒÂ§ÃƒÂ£o suave quando o utilizador faz scroll.
+  // Lgica de UI: observer para transio suave quando o utilizador faz scroll.
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // UI update: adiciona classe visual e deixa de observar esse nÃƒÂ³.
+          // UI update: adiciona classe visual e deixa de observar esse n.
           entry.target.classList.add("reveal-in");
           observer.unobserve(entry.target);
         }
@@ -30,5 +30,5 @@ function setupAboutReveal() {
   nodes.forEach((node) => observer.observe(node));
 }
 
-// InicializaÃƒÂ§ÃƒÂ£o do mÃƒÂ³dulo na carga da pÃƒÂ¡gina About.
+// Inicializao do mdulo na carga da pgina About.
 setupAboutReveal();

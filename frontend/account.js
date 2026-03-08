@@ -1,5 +1,5 @@
 /*
-Este mÃƒÂ³dulo controla a pÃƒÂ¡gina de conta, dados do utilizador e definiÃƒÂ§ÃƒÂµes de perfil.
+Este mdulo controla a pgina de conta, dados do utilizador e definies de perfil.
 */
 
 /* global React, ReactDOM, GuitarAuth, GuitarCart */
@@ -7,10 +7,10 @@ const { AuthProvider, useAuth } = GuitarAuth;
 const { CartProvider, useCart } = GuitarCart;
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: AccountView
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: AccountView
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function AccountView() {
   const { currentUser, updateSettings } = useAuth();
@@ -30,20 +30,20 @@ function AccountView() {
   const email = `${String(currentUser.username).toLowerCase()}@guitarcrafttone.com`;
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: onSettingsField
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: key, value.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: onSettingsField
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: key, value.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function onSettingsField(key, value) {
     setSettingsForm((prev) => ({ ...prev, [key]: value }));
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: onSaveSettings
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: e.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: onSaveSettings
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: e.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   async function onSaveSettings(e) {
     e.preventDefault();
@@ -167,10 +167,10 @@ function AccountView() {
 }
 
 // --------------------------------------------------
-// FunÃƒÂ§ÃƒÂ£o: AccountRoot
-// O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-// ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-// Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+// Funo: AccountRoot
+// O que faz: executa uma parte da lgica deste mdulo.
+// Parmetros: nenhum parmetro.
+// Retorna: o resultado da operao (ou Promise, quando aplicvel).
 // --------------------------------------------------
 function AccountRoot() {
   return (

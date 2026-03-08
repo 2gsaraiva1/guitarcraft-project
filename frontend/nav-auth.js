@@ -1,5 +1,5 @@
 /*
-Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de sessÃƒÂ£o/carrinho.
+Este mdulo renderiza a navbar dinmica, dropdowns e estado de sesso/carrinho.
 */
 
 (function renderNav() {
@@ -34,10 +34,10 @@ Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de ses
   };
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: t
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: key, vars.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: t
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: key, vars.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function t(key, vars) {
     if (i18n && typeof i18n.t === "function") return i18n.t(key, vars);
@@ -47,10 +47,10 @@ Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de ses
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: readSession
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: readSession
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: nenhum parmetro.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function readSession() {
     try {
@@ -62,10 +62,10 @@ Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de ses
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: ensureLucide
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: ensureLucide
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: nenhum parmetro.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   async function ensureLucide() {
     if (window.lucide) return;
@@ -79,10 +79,10 @@ Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de ses
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: totalFromItems
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: items.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: totalFromItems
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: items.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function totalFromItems(items) {
     return (items || []).reduce((sum, item) => {
@@ -95,10 +95,10 @@ Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de ses
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: itemPrice
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: item.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: itemPrice
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: item.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function itemPrice(item) {
     const type = item.type || item.itemType;
@@ -109,10 +109,10 @@ Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de ses
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: createDropdown
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: title, items.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: createDropdown
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: title, items.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   function createDropdown(title, items) {
     const wrap = document.createElement("div");
@@ -147,15 +147,15 @@ Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de ses
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: loadCartPreview
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: username.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: loadCartPreview
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: username.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   async function loadCartPreview(username) {
     if (!username) return [];
     try {
-      // Chamada ÃƒÂ  API: comunica com o backend para sincronizar estado no frontend.
+      // Chamada  API: comunica com o backend para sincronizar estado no frontend.
       const response = await fetch(`${CART_API}/${encodeURIComponent(username)}`);
       if (!response.ok) return [];
       const data = await response.json();
@@ -166,10 +166,10 @@ Este mÃƒÂ³dulo renderiza a navbar dinÃƒÂ¢mica, dropdowns e estado de ses
   }
 
   // --------------------------------------------------
-  // FunÃƒÂ§ÃƒÂ£o: render
-  // O que faz: executa uma parte da lÃƒÂ³gica deste mÃƒÂ³dulo.
-  // ParÃƒÂ¢metros: nenhum parÃƒÂ¢metro.
-  // Retorna: o resultado da operaÃƒÂ§ÃƒÂ£o (ou Promise, quando aplicÃƒÂ¡vel).
+  // Funo: render
+  // O que faz: executa uma parte da lgica deste mdulo.
+  // Parmetros: nenhum parmetro.
+  // Retorna: o resultado da operao (ou Promise, quando aplicvel).
   // --------------------------------------------------
   async function render() {
     const session = readSession();

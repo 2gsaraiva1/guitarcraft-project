@@ -1,4 +1,4 @@
-﻿/*
+/*
 Este ficheiro inicia o servidor Express e liga todas as rotas da API.
 */
 
@@ -23,7 +23,7 @@ const frontendPath = path.join(__dirname, "../frontend");
 app.use(cors());
 app.use(express.json());
 
-// Serve os ficheiros estáticos do frontend em produção/deploy.
+// Serve todos os ficheiros estaticos do frontend (HTML/CSS/JS/assets).
 app.use(express.static(frontendPath));
 
 app.use("/api/guitars", guitarRoutes);
