@@ -204,12 +204,13 @@ function ReviewSection({ productId, currentUser }) {
   // Bloco de reviews: lista, media de estrelas, formulario e acoes.
   const [loading, setLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
-  const [averageRating, setAverageRating] = useState(0);
-  const [totalReviews, setTotalReviews] = useState(0);
   const [reviewStatus, setReviewStatus] = useState("");
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
   const [isEditingMine, setIsEditingMine] = useState(false);
+  const reviewSummary = useMemo(() => getReviewSummaryFromList(reviews), [reviews]);
+  const averageRating = reviewSummary.averageRating;
+  const totalReviews = reviewSummary.totalReviews;
 
   // --------------------------------------------------
   // Funcao: applyReviewPayload
@@ -220,11 +221,6 @@ function ReviewSection({ productId, currentUser }) {
   function applyReviewPayload(data) {
     const nextReviews = Array.isArray(data && data.reviews) ? data.reviews : [];
     setReviews(nextReviews);
-
-    const fallback = getReviewSummaryFromList(nextReviews);
-    // Usa sempre o calculo local da lista atual para garantir sincronizacao imediata na UI.
-    setAverageRating(fallback.averageRating);
-    setTotalReviews(fallback.totalReviews);
   }
 
   // --------------------------------------------------
