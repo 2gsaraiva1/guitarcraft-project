@@ -152,7 +152,7 @@ function SavedBuildsPanel() {
               />
               <p><strong>{build.label}</strong></p>
               <p className="muted">{new Date(build.CREATEdAt).toLocaleString()}</p>
-              <p className="muted">Total: ${build.totalPrice.toFixed(2)}</p>
+              <p className="muted">Total: €{build.totalPrice.toFixed(2)}</p>
             </div>
             <div className="saved-actions">
               <button
@@ -411,14 +411,14 @@ function BuilderApp() {
           </div>
 
           <div className="price-title">Price breakdown</div>
-          <div className="price-line"><span>Base Guitar</span><span>${GuitarConfig.BASE_PRICE.toFixed(2)}</span></div>
+          <div className="price-line"><span>Base Guitar</span><span>€{GuitarConfig.BASE_PRICE.toFixed(2)}</span></div>
           {priceLines.filter((line) => line.amount > 0).map((line) => (
             <div className="price-line" key={line.key}>
               <span>{line.label} ({line.selected})</span>
-              <span>+${line.amount.toFixed(2)}</span>
+              <span>+€{line.amount.toFixed(2)}</span>
             </div>
           ))}
-          <div className="price-total"><span>Total</span><span>${totalPrice.toFixed(2)}</span></div>
+          <div className="price-total"><span>Total</span><span>€{totalPrice.toFixed(2)}</span></div>
 
           <div className="builder-action-row">
             <button className="toggle-btn active" onClick={onSaveBuild}>

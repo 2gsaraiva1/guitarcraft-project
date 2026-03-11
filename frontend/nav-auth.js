@@ -245,7 +245,7 @@ Este modulo renderiza a navbar dinmica, dropdowns e estado de sessao/carrinho.
           <img src="${item.image || item.imagePreview || PLACEHOLDER}" alt="${item.label}" />
           <div>
             <p class="gc-cart-item-name">${item.label}</p>
-            <p class="gc-cart-item-meta">${t("cart.qty")} ${Number(item.quantity || 1)} &middot; $${itemPrice(item).toFixed(2)}</p>
+            <p class="gc-cart-item-meta">${t("cart.qty")} ${Number(item.quantity || 1)} &middot; €${itemPrice(item).toFixed(2)}</p>
           </div>
         `;
         row.querySelector("img").addEventListener("error", (e) => {
@@ -256,7 +256,7 @@ Este modulo renderiza a navbar dinmica, dropdowns e estado de sessao/carrinho.
 
       const subtotal = document.createElement("div");
       subtotal.className = "gc-cart-subtotal";
-      subtotal.innerHTML = `<span>${t("nav.subtotal")}</span><strong>$${cartSubtotal.toFixed(2)}</strong>`;
+      subtotal.innerHTML = `<span>${t("nav.subtotal")}</span><strong>€${cartSubtotal.toFixed(2)}</strong>`;
       cartDrop.appendChild(subtotal);
 
       const actions = document.createElement("div");

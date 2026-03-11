@@ -395,7 +395,7 @@ function AdminDashboard() {
             ) : null}
             <h3>{guitar.name}</h3>
             <p>{localizeDescription(guitar, "short")}</p>
-            <p><strong>Price:</strong> ${Number(guitar.price).toFixed(2)}</p>
+            <p><strong>Price:</strong> €{Number(guitar.price).toFixed(2)}</p>
             <p><strong>Category:</strong> {prettyCategory(guitar.category)}</p>
             <p><strong>Series:</strong> {prettySeries(guitar.seriesName)}</p>
             <p><strong>Status:</strong> {guitar.stockStatus}</p>
@@ -516,4 +516,3 @@ function AdminRoot() {
 }
 
 ReactDOM.createRoot(document.getElementById("admin-app")).render(<AdminRoot />);
-

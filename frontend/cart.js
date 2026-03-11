@@ -122,7 +122,7 @@ function CartApp() {
 
             {(item.type || item.itemType) === "prebuilt" ? (
               <>
-                <p><strong>Item Total:</strong> ${(Number(item.unitPrice || item.totalPrice || 0) * Number(item.quantity || 1)).toFixed(2)}</p>
+                <p><strong>Item Total:</strong> €{(Number(item.unitPrice || item.totalPrice || 0) * Number(item.quantity || 1)).toFixed(2)}</p>
                 <div className="cart-specs">
                   <p><strong>Selected Specs</strong></p>
                   <p>
@@ -138,16 +138,16 @@ function CartApp() {
                     .filter((line) => Number(line.amount) > 0)
                     .map((line) => (
                       <p key={line.key || `${line.label}-${line.selected}`}>
-                        {line.label} ({line.selected}): +${Number(line.amount).toFixed(2)}
+                        {line.label} ({line.selected}): +€{Number(line.amount).toFixed(2)}
                       </p>
                     ))}
                   <p><strong>Quantity:</strong> {Number(item.quantity || 1)}</p>
-                  <p><strong>Total:</strong> ${(Number(item.unitPrice || item.totalPrice || 0) * Number(item.quantity || 1)).toFixed(2)}</p>
+                  <p><strong>Total:</strong> €{(Number(item.unitPrice || item.totalPrice || 0) * Number(item.quantity || 1)).toFixed(2)}</p>
                 </div>
               </>
             ) : (
               <>
-                <p><strong>Item Total:</strong> ${(Number(item.unitPrice || item.totalPrice || 0) * Number(item.quantity || 1)).toFixed(2)}</p>
+                <p><strong>Item Total:</strong> €{(Number(item.unitPrice || item.totalPrice || 0) * Number(item.quantity || 1)).toFixed(2)}</p>
                 <div className="cart-specs">
                   <p><strong>Selected Specs</strong></p>
                   <p>
@@ -159,12 +159,12 @@ function CartApp() {
 
                 <div className="cart-breakdown">
                   <p><strong>Price breakdown</strong></p>
-                  <p>Base Guitar: ${GuitarConfig.BASE_PRICE.toFixed(2)}</p>
+                  <p>Base Guitar: €{GuitarConfig.BASE_PRICE.toFixed(2)}</p>
                   {(item.priceBreakdown || [])
                     .filter((line) => Number(line.amount) > 0)
                     .map((line) => (
                       <p key={line.key || `${line.label}-${line.selected}`}>
-                        {line.label} ({line.selected}): +${Number(line.amount).toFixed(2)}
+                        {line.label} ({line.selected}): +€{Number(line.amount).toFixed(2)}
                       </p>
                     ))}
                 </div>
@@ -188,9 +188,9 @@ function CartApp() {
       </div>
 
       <div className="cart-total-box">
-        <div className="cart-summary-line"><span>All Items Total</span><strong>${cartTotal.toFixed(2)}</strong></div>
-        <div className="cart-summary-line"><span>Selected Items Total</span><strong>${selectedTotal.toFixed(2)}</strong></div>
-        <h2>Checkout Total: ${selectedTotal.toFixed(2)}</h2>
+        <div className="cart-summary-line"><span>All Items Total</span><strong>€{cartTotal.toFixed(2)}</strong></div>
+        <div className="cart-summary-line"><span>Selected Items Total</span><strong>€{selectedTotal.toFixed(2)}</strong></div>
+        <h2>Checkout Total: €{selectedTotal.toFixed(2)}</h2>
         <div className="site-media-actions">
           <button
             onClick={() => {

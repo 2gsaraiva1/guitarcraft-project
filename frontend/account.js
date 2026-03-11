@@ -153,7 +153,7 @@ function AccountView() {
             {visibleOrders.slice(0, 8).map((order) => (
               <p key={order.orderId}>
                 <strong>{order.orderId}</strong>
-                {" "} - {new Date(order.CREATEdAt).toLocaleString()} - ${Number(order.totalPrice || 0).toFixed(2)} - {order.status}
+                {" "} - {new Date(order.CREATEdAt).toLocaleString()} - €{Number(order.totalPrice || 0).toFixed(2)} - {order.status}
               </p>
             ))}
             <p style={{ marginTop: "10px" }}>

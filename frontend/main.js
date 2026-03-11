@@ -159,7 +159,7 @@ function renderFeaturedGuitars(guitars) {
         <img class="shop-image" src="${safeImage}" alt="${safeName}" onerror="this.src='${PLACEHOLDER_IMAGE}'" />
         <h3>${safeName}</h3>
         <p>${safeDescription}</p>
-        <p><strong>Price:</strong> $${formatMoney(guitar.price)}</p>
+        <p><strong>Price:</strong> €${formatMoney(guitar.price)}</p>
         <p><strong>Status:</strong> <span class="${stock.className}">${stock.label}</span></p>
         ${stock.restockText ? `<p class="muted">${stock.restockText}</p>` : ""}
         <div class="feature-actions">

@@ -150,7 +150,7 @@ function CheckoutView() {
         <h2>Order Confirmed</h2>
         <p><strong>Order:</strong> {confirmedOrder.orderId}</p>
         <p><strong>Items:</strong> {confirmedOrder.items}</p>
-        <p><strong>Total Paid:</strong> ${Number(confirmedOrder.total).toFixed(2)}</p>
+        <p><strong>Total Paid:</strong> €{Number(confirmedOrder.total).toFixed(2)}</p>
         <p className="muted">{status}</p>
         <div className="gc-cart-actions">
           <a href="/orders/" className="gc-mini-btn gc-mini-btn-primary">View Orders</a>
@@ -253,10 +253,10 @@ function CheckoutView() {
               checked={Boolean(selected[item.cartId])}
               onChange={(e) => setSelected((prev) => ({ ...prev, [item.cartId]: e.target.checked }))}
             />
-            <span>{item.label} - Qty {Number(item.quantity || 1)} - ${(Number(item.unitPrice || item.totalPrice || 0) * Number(item.quantity || 1)).toFixed(2)}</span>
+            <span>{item.label} - Qty {Number(item.quantity || 1)} - €{(Number(item.unitPrice || item.totalPrice || 0) * Number(item.quantity || 1)).toFixed(2)}</span>
           </label>
         ))}
-        <h2>Total: ${total.toFixed(2)}</h2>
+        <h2>Total: €{total.toFixed(2)}</h2>
         <button onClick={onCompletePurchase} disabled={processing}>
           {processing ? "Processing..." : "Complete Purchase"}
         </button>

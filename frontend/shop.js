@@ -303,7 +303,7 @@ function ShopView() {
                         ) : null}
                         <h3>{guitar.name}</h3>
                         <p>{localizeDescription(guitar)}</p>
-                        <p><strong>{i18n ? i18n.translateText("Price:") : "Price:"}</strong> ${Number(guitar.price).toFixed(2)}</p>
+                        <p><strong>{i18n ? i18n.translateText("Price:") : "Price:"}</strong> €{Number(guitar.price).toFixed(2)}</p>
                         <p>
                           <strong>{i18n ? i18n.translateText("Status:") : "Status:"}</strong>{" "}
                           <span className={stockMeta.className}>{stockMeta.label}</span>

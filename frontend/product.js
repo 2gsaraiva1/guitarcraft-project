@@ -622,7 +622,7 @@ function ProductPage() {
             <strong>{i18n ? i18n.translateText("Series:") : "Series:"}</strong> {prettySeries(guitar.seriesName)}
           </p>
           <p className="product-price">
-            ${Number(guitar.price).toFixed(2)} <StockBadge guitar={guitar} />
+            €{Number(guitar.price).toFixed(2)} <StockBadge guitar={guitar} />
           </p>
 
           <div className="qty-wrap">

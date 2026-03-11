@@ -96,7 +96,7 @@ function SavedBuildsPage() {
               <h3>{build.label}</h3>
             )}
             <p><strong>Saved:</strong> {new Date(build.CREATEdAt).toLocaleString()}</p>
-            <p><strong>Total:</strong> ${Number(build.totalPrice || 0).toFixed(2)}</p>
+            <p><strong>Total:</strong> €{Number(build.totalPrice || 0).toFixed(2)}</p>
 
             <div className="cart-specs">
               <p><strong>Selected Specs</strong></p>

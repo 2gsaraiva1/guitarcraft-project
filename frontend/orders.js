@@ -38,7 +38,7 @@ function OrdersPage() {
           <h2>Order {order.orderId}</h2>
           <p><strong>Date:</strong> {new Date(order.CREATEdAt).toLocaleString()}</p>
           <p><strong>Status:</strong> {order.status}</p>
-          <p><strong>Total:</strong> ${Number(order.totalPrice || 0).toFixed(2)}</p>
+          <p><strong>Total:</strong> €{Number(order.totalPrice || 0).toFixed(2)}</p>
           {order.customerName ? <p><strong>Name:</strong> {order.customerName}</p> : null}
           {order.customerEmail ? <p><strong>Email:</strong> {order.customerEmail}</p> : null}
           {order.address && (order.address.line1 || order.address.city) ? (
@@ -61,7 +61,7 @@ function OrdersPage() {
                 />
                 <h3>{item.label}</h3>
                 <p><strong>Qty:</strong> {Number(item.quantity || 1)}</p>
-                <p><strong>Total:</strong> ${Number(item.totalPrice || 0).toFixed(2)}</p>
+                <p><strong>Total:</strong> €{Number(item.totalPrice || 0).toFixed(2)}</p>
               </article>
             ))}
           </div>
