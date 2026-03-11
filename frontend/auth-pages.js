@@ -71,7 +71,6 @@ function AuthForm({ mode }) {
         {isLogin ? "Need an account?" : "Already have an account?"}{" "}
         <a href={isLogin ? "/register/" : "/login/"}>{isLogin ? "Register" : "Login"}</a>
       </p>
-      <p className="muted">Admin demo: username `admin`, password `admin123`</p>
     </div>
   );
 }
